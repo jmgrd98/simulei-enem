@@ -1,17 +1,24 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"; // Import Shadcn Select components
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import { useUserScore } from "@/context/UserScoreContext";
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 export default function Home() {
+  const { score, incrementScore, resetScore } = useUserScore();
+
+  useEffect(() => {
+    console.log(score);
+  }, [score]);
+
   const [question, setQuestion] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
-  const [selectedYear, setSelectedYear] = useState<number>(2023); // Default year
+  const [selectedYear, setSelectedYear] = useState<number>(2023);
 
   const fetchQuestion = async (index: number, year: number) => {
     setLoading(true);
@@ -33,6 +40,13 @@ export default function Home() {
 
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
+
+    // Check if the selected answer is correct
+    const correctAnswer = question.alternatives.find((alt: any) => alt.isCorrect);
+    if (correctAnswer && correctAnswer.letter === letter) {
+      // If correct, increment the score
+      incrementScore();
+    }
   };
 
   const handleNextQuestion = () => {
