@@ -23,7 +23,7 @@ export default function SimuladoPage() {
   const [question, setQuestion] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(1);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string | null>>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
@@ -31,14 +31,13 @@ export default function SimuladoPage() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    fetchQuestion(currentIndex, selectedYear);
+    fetchQuestion(currentQuestionIndex, selectedYear);
     setTimeLeft(selectedTime * 60);
   }, [selectedYear, selectedTime]);
 
-  // Update useEffect to listen for currentIndex changes
   useEffect(() => {
-    fetchQuestion(currentIndex, selectedYear);
-  }, [currentIndex, selectedYear]);
+    fetchQuestion(currentQuestionIndex, selectedYear);
+  }, [currentQuestionIndex, selectedYear]);
 
   const fetchQuestion = async (index: number, year: number) => {
     setLoading(true);
@@ -79,7 +78,7 @@ export default function SimuladoPage() {
 
     setSelectedAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [currentIndex]: letter,
+      [currentQuestionIndex]: letter,
     }));
 
     const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
@@ -89,11 +88,15 @@ export default function SimuladoPage() {
   };
 
   const handleNextQuestion = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
 
   const handlePreviousQuestion = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 1));
+    setCurrentQuestionIndex((prevIndex) => Math.max(prevIndex - 1, 1));
+  };
+
+  const handleQuestionSelect = (value: string) => {
+    setCurrentQuestionIndex(Number(value));
   };
 
   const resetTimer = () => {
@@ -102,6 +105,10 @@ export default function SimuladoPage() {
     setTimeout(() => {
       setIsAnimating(false);
     }, 1000);
+  };
+
+  const finishExam = () => {
+    console.log(score);
   };
 
   return (
@@ -115,9 +122,23 @@ export default function SimuladoPage() {
         <div className="flex flex-col gap-5 items-center">
 
           <div className="flex gap-2 items-center">
-            <Button variant="secondary" onClick={handlePreviousQuestion} disabled={loading || currentIndex === 1}>
+            <Button variant="secondary" onClick={handlePreviousQuestion} disabled={loading || currentQuestionIndex === 1}>
               <FaArrowLeft />
             </Button>
+
+            {/* Question Select Dropdown */}
+            <Select onValueChange={handleQuestionSelect} defaultValue={currentQuestionIndex.toString()}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Selecione a questão" />
+              </SelectTrigger>
+              <SelectContent>
+                {Array.from({ length: 180 }, (_, i) => i + 1).map((index) => (
+                  <SelectItem key={index} value={index.toString()}>
+                    Questão {index}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
             <Button variant="secondary" onClick={handleNextQuestion} disabled={loading}>
               <FaArrowRight />
@@ -140,12 +161,14 @@ export default function SimuladoPage() {
                 </SelectContent>
               </Select>
             ) : (
-              <div className="border rounded px-3 py-2">
+              <div className="border rounded px-3 py-2 flex items-center justify-between items-center">
                 {timeLeft > 0 && (
                   <div className="text-md font-semibold self-start">
                     Tempo: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
                   </div>
                 )}
+
+                {currentQuestionIndex === 180 && <Button variant={'secondary'} onClick={finishExam} className="self-end font-semibold text-lg">Finalizar prova</Button>}
               </div>
             )}
 
