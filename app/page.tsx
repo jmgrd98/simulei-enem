@@ -139,7 +139,14 @@ export default function Home() {
 
           </div>
 
-          <Button variant={'secondary'} size={'xl'}>Gerar Simulado</Button>
+          <Button 
+            variant="secondary" 
+            size="xl" 
+            onClick={() => router.push(`/simulado?year=${selectedYear}&time=${selectedTime}`)}
+          >
+            Gerar Simulado
+          </Button>
+
 
         </div>
       </main>

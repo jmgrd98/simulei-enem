@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useUserScore } from "@/context/UserScoreContext";
+import { useSearchParams } from 'next/navigation';
 import { UserButton, useUser } from "@clerk/nextjs";
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
@@ -12,6 +13,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function SimuladoPage() {
+  const searchParams = useSearchParams();
+  const selectedYear = Number(searchParams.get('year')) || 2023; // Default to 2023 if no year is provided
+  const selectedTime = Number(searchParams.get('time')) || 0;    // Default to 0 if no time is provided
+
   const { score, incrementScore, decrementScore, resetScore } = useUserScore();
   const router = useRouter();
   const { isSignedIn } = useUser();
@@ -20,13 +25,17 @@ export default function SimuladoPage() {
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
-  const [selectedYear, setSelectedYear] = useState<number>(2023);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string | null>>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
-  const [selectedTime, setSelectedTime] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Fetch the question and set the timer using the selectedYear and selectedTime from query
+  useEffect(() => {
+    fetchQuestion(currentIndex, selectedYear);
+    setTimeLeft(selectedTime * 60); // Set the timer based on selected time in minutes
+  }, [selectedYear, selectedTime]);
 
   const fetchQuestion = async (index: number, year: number) => {
     setLoading(true);
@@ -40,10 +49,6 @@ export default function SimuladoPage() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchQuestion(currentIndex, selectedYear);
-  }, [currentIndex, selectedYear]);
 
   useEffect(() => {
     if (timeLeft > 0 && timerRef.current === null) {
@@ -88,16 +93,6 @@ export default function SimuladoPage() {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 1));
   };
 
-  const handleLoginClick = () => {
-    router.push('/sign-in');
-  };
-
-  const handleTimeSelection = (value: string) => {
-    const selectedMinutes = Number(value);
-    setSelectedTime(selectedMinutes);
-    setTimeLeft(selectedMinutes * 60);
-  };
-
   const resetTimer = () => {
     setTimeLeft(0);
     setIsAnimating(true);
@@ -110,12 +105,12 @@ export default function SimuladoPage() {
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 className="text-3xl font-bold mb-10">Gere seu simulado do ENEM gratuito!</h1>
-          {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button onClick={handleLoginClick}>Login</Button>}
+          <h1 className="text-3xl font-bold mb-10">Simulado ENEM - Página 2</h1>
+          {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
         <div className="flex flex-col gap-5 items-center">
-          <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
+          <Select onValueChange={(value) => router.push(`/simulado?page=2&year=${value}`)} defaultValue={selectedYear.toString()}>
             <SelectTrigger className="w-48">
               <SelectValue placeholder="Selecione o ano" />
             </SelectTrigger>
@@ -127,7 +122,7 @@ export default function SimuladoPage() {
                     {year}
                   </SelectItem>
                 );
-              })}
+              })} 
             </SelectContent>
           </Select>
 
@@ -143,19 +138,19 @@ export default function SimuladoPage() {
 
           <div className="flex gap-5 w-full justify-start items-center">
             {!timeLeft ? (
-              <Select onValueChange={handleTimeSelection} value={selectedTime > 0 ? selectedTime.toString() : undefined}>
-              <SelectTrigger className="w-48">
-                <SelectValue placeholder="Selecione o tempo" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="15">15 minutos</SelectItem>
-                <SelectItem value="30">30 minutos</SelectItem>
-                <SelectItem value="45">45 minutos</SelectItem>
-                <SelectItem value="60">1 hora</SelectItem>
-                <SelectItem value="120">2 horas</SelectItem>
-                <SelectItem value="240">4 horas</SelectItem>
-              </SelectContent>
-            </Select>            
+              <Select onValueChange={(value) => router.push(`/simulado?page=2&time=${value}`)} defaultValue={selectedTime.toString()}>
+                <SelectTrigger className="w-48">
+                  <SelectValue placeholder="Selecione o tempo" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="15">15 minutos</SelectItem>
+                  <SelectItem value="30">30 minutos</SelectItem>
+                  <SelectItem value="45">45 minutos</SelectItem>
+                  <SelectItem value="60">1 hora</SelectItem>
+                  <SelectItem value="120">2 horas</SelectItem>
+                  <SelectItem value="240">4 horas</SelectItem>
+                </SelectContent>
+              </Select>
             ) : (
               <div className="border rounded px-3 py-2">
                 {timeLeft > 0 && (
