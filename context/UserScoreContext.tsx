@@ -5,6 +5,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 interface UserScoreContextType {
   score: number;
   incrementScore: () => void;
+  decrementScore: () => void;
   resetScore: () => void;
 }
 
@@ -23,10 +24,12 @@ export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
 
   const incrementScore = () => setScore((prevScore) => prevScore + 1);
 
+  const decrementScore = () => setScore((prevScore) => prevScore - 1);
+
   const resetScore = () => setScore(0);
 
   return (
-    <UserScoreContext.Provider value={{ score, incrementScore, resetScore }}>
+    <UserScoreContext.Provider value={{ score, incrementScore, decrementScore, resetScore }}>
       {children}
     </UserScoreContext.Provider>
   );

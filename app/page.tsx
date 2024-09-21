@@ -10,22 +10,19 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 export default function Home() {
   const { score, incrementScore, resetScore } = useUserScore();
 
-  useEffect(() => {
-    console.log(score);
-  }, [score]);
-
   const [question, setQuestion] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [selectedYear, setSelectedYear] = useState<number>(2023);
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string | null>>({});
 
   const fetchQuestion = async (index: number, year: number) => {
     setLoading(true);
-    setSelectedAnswer(null);
     try {
       const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions/${index}`);
       setQuestion(response.data);
+      setSelectedAnswer(selectedAnswers[index] || null);
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -38,13 +35,22 @@ export default function Home() {
     fetchQuestion(currentIndex, selectedYear);
   }, [currentIndex, selectedYear]);
 
+  useEffect(() => {
+    if (selectedAnswers[currentIndex]) {
+      console.log('Selected answer:', selectedAnswers[currentIndex]);
+    }
+  }, [selectedAnswers, currentIndex]);
+
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
 
-    // Check if the selected answer is correct
-    const correctAnswer = question.alternatives.find((alt: any) => alt.isCorrect);
+    setSelectedAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [currentIndex]: letter,
+    }));
+
+    const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
     if (correctAnswer && correctAnswer.letter === letter) {
-      // If correct, increment the score
       incrementScore();
     }
   };
@@ -63,7 +69,6 @@ export default function Home() {
         <h1 className="text-3xl font-bold mb-10">Gerador de Questão Enem</h1>
 
         <div className="flex flex-col gap-5 items-center">
-          
           <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
             <SelectTrigger className="w-48">
               <SelectValue placeholder="Selecione o ano" />
@@ -103,25 +108,13 @@ export default function Home() {
               <div className="mt-4 flex flex-col gap-3 w-full">
                 <h3 className="text-lg font-semibold">Alternativas:</h3>
                 {question.alternatives.map((alt: any) => {
-                  let buttonVariant = 'outline';
-                  let additionalClasses = '';
-
-                  if (selectedAnswer) {
-                    if (alt.letter === selectedAnswer) {
-                      buttonVariant = alt.isCorrect ? 'success' : 'destructive';
-                    }
-                    if (alt.isCorrect) {
-                      additionalClasses = 'bg-green-600';
-                    }
-                  }
+                  const buttonVariant = selectedAnswer === alt.letter ? '' : 'outline';
 
                   return (
                     <Button
                       key={alt.letter}
                       variant={buttonVariant}
-                      className={`${additionalClasses} ${selectedAnswer === alt.letter && !alt.isCorrect ? 'bg-red-600' : ''}`}
                       onClick={() => handleAnswerClick(alt.letter)}
-                      disabled={!!selectedAnswer}
                     >
                       {alt.letter}: {alt.text}
                     </Button>
