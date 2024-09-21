@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useUserScore } from "@/context/UserScoreContext";
+import { UserButton } from "@clerk/nextjs";
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
@@ -35,12 +36,6 @@ export default function Home() {
     fetchQuestion(currentIndex, selectedYear);
   }, [currentIndex, selectedYear]);
 
-  useEffect(() => {
-    if (selectedAnswers[currentIndex]) {
-      console.log('Selected answer:', selectedAnswers[currentIndex]);
-    }
-  }, [selectedAnswers, currentIndex]);
-
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
 
@@ -66,7 +61,10 @@ export default function Home() {
   return (
     <>
       <main className="flex flex-col items-center p-12">
-        <h1 className="text-3xl font-bold mb-10">Gerador de Questão Enem</h1>
+        <div className="w-full flex items-center justify-between">
+          <h1 className="text-3xl font-bold mb-10">Gerador de Questão Enem</h1>
+          <UserButton afterSignOutUrl="/" />
+        </div>
 
         <div className="flex flex-col gap-5 items-center">
           <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
@@ -108,12 +106,11 @@ export default function Home() {
               <div className="mt-4 flex flex-col gap-3 w-full">
                 <h3 className="text-lg font-semibold">Alternativas:</h3>
                 {question.alternatives.map((alt: any) => {
-                  const buttonVariant = selectedAnswer === alt.letter ? '' : 'outline';
 
                   return (
                     <Button
                       key={alt.letter}
-                      variant={buttonVariant}
+                      variant={selectedAnswer === alt.letter ? 'secondary' : 'outline'}
                       onClick={() => handleAnswerClick(alt.letter)}
                     >
                       {alt.letter}: {alt.text}
