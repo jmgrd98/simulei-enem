@@ -50,7 +50,6 @@ export default function Home() {
 
         <div className="flex flex-col gap-5 items-center">
           
-          {/* Year selection with Shadcn Select */}
           <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
             <SelectTrigger className="w-48">
               <SelectValue placeholder="Selecione o ano" />
@@ -79,7 +78,7 @@ export default function Home() {
 
           {question && (
             <>
-              <div className="mt-8 p-4 border rounded shadow w-full">
+              <div className="mt-8 p-4 border rounded shadow w-full flex flex-col gap-3">
                 <h2 className="text-xl font-semibold">Questão {question.index}</h2>
                 <p className="font-bold">Ano: {question.year.toString()}</p>
                 <p className="font-bold">Disciplina: {question.discipline}</p>
