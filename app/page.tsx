@@ -3,13 +3,17 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useUserScore } from "@/context/UserScoreContext";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs"; // Import useUser from Clerk
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { useRouter } from 'next/navigation'; // Import useRouter from next/navigation
 
 export default function Home() {
   const { score, incrementScore, resetScore } = useUserScore();
+  const router = useRouter(); // Initialize the useRouter hook
+
+  const { isSignedIn } = useUser(); // Use Clerk's useUser to check authentication state
 
   const [question, setQuestion] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -17,7 +21,7 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [selectedYear, setSelectedYear] = useState<number>(2023);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string | null>>({});
-
+  
   const fetchQuestion = async (index: number, year: number) => {
     setLoading(true);
     try {
@@ -58,12 +62,16 @@ export default function Home() {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 1));
   };
 
+  const handleLoginClick = () => {
+    router.push('/sign-in'); // Redirect to the /sign-in page
+  };
+
   return (
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
           <h1 className="text-3xl font-bold mb-10">Gerador de Questão Enem</h1>
-          <UserButton afterSignOutUrl="/" />
+          {isSignedIn ? <UserButton /> : <Button onClick={handleLoginClick}>Login</Button>}
         </div>
 
         <div className="flex flex-col gap-5 items-center">
