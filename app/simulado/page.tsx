@@ -8,8 +8,10 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function Home() {
+export default function SimuladoPage() {
   const { score, incrementScore, decrementScore, resetScore } = useUserScore();
   const router = useRouter();
   const { isSignedIn } = useUser();
@@ -25,6 +27,23 @@ export default function Home() {
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const fetchQuestion = async (index: number, year: number) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions/${index}`);
+      setQuestion(response.data);
+      setSelectedAnswer(selectedAnswers[index] || null);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuestion(currentIndex, selectedYear);
+  }, [currentIndex, selectedYear]);
 
   useEffect(() => {
     if (timeLeft > 0 && timerRef.current === null) {
@@ -84,18 +103,16 @@ export default function Home() {
     setIsAnimating(true);
     setTimeout(() => {
       setIsAnimating(false);
-    }, 500);
+    }, 1000);
   };
 
   return (
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 className="text-6xl font-bold mb-10 w-1/2">Gere seu simulado do ENEM gratuito!</h1>
-          {isSignedIn ? <UserButton /> : <Button onClick={handleLoginClick}>Login</Button>}
+          <h1 className="text-3xl font-bold mb-10">Gere seu simulado do ENEM gratuito!</h1>
+          {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button onClick={handleLoginClick}>Login</Button>}
         </div>
-        
-        <h2 className="w-full text-3xl font-semibold w-full my-2">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>
 
         <div className="flex flex-col gap-5 items-center">
           <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
@@ -114,19 +131,31 @@ export default function Home() {
             </SelectContent>
           </Select>
 
+          <div className="flex gap-2 items-center">
+            <Button variant="secondary" onClick={handlePreviousQuestion} disabled={loading || currentIndex === 1}>
+              <FaArrowLeft />
+            </Button>
+
+            <Button variant="secondary" onClick={handleNextQuestion} disabled={loading}>
+              <FaArrowRight />
+            </Button>
+          </div>
+
           <div className="flex gap-5 w-full justify-start items-center">
             {!timeLeft ? (
               <Select onValueChange={handleTimeSelection} value={selectedTime > 0 ? selectedTime.toString() : undefined}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Selecione o tempo" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="15">15 minutes</SelectItem>
-                  <SelectItem value="30">30 minutes</SelectItem>
-                  <SelectItem value="45">45 minutes</SelectItem>
-                  <SelectItem value="60">1 hour</SelectItem>
-                </SelectContent>
-              </Select>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Selecione o tempo" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="15">15 minutos</SelectItem>
+                <SelectItem value="30">30 minutos</SelectItem>
+                <SelectItem value="45">45 minutos</SelectItem>
+                <SelectItem value="60">1 hora</SelectItem>
+                <SelectItem value="120">2 horas</SelectItem>
+                <SelectItem value="240">4 horas</SelectItem>
+              </SelectContent>
+            </Select>            
             ) : (
               <div className="border rounded px-3 py-2">
                 {timeLeft > 0 && (
@@ -137,10 +166,39 @@ export default function Home() {
               </div>
             )}
 
+            <FaRedo
+              className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`}
+              onClick={resetTimer}
+              style={{ transition: 'transform 0.5s' }}
+            />
           </div>
 
-          <Button variant={'secondary'} size={'xl'}>Gerar Simulado</Button>
+          {question && (
+            <>
+              <div className="mt-8 p-4 border rounded shadow w-full flex flex-col gap-3">
+                <h2 className="text-xl font-semibold">Questão {question.index}</h2>
+                <p className="font-bold">Ano: {question.year.toString()}</p>
+                <p className="font-bold">Disciplina: {question.discipline}</p>
+                <p>{question.alternativesIntroduction}</p>
+                <p>{question.context}</p>
+              </div>
 
+              <div className="mt-4 flex flex-col gap-3 w-full">
+                <h3 className="text-lg font-semibold">Alternativas:</h3>
+                {question.alternatives.map((alt: any) => {
+                  return (
+                    <Button
+                      key={alt.letter}
+                      variant={selectedAnswer === alt.letter ? 'secondary' : 'outline'}
+                      onClick={() => handleAnswerClick(alt.letter)}
+                    >
+                      {alt.letter}: {alt.text}
+                    </Button>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
       </main>
     </>
