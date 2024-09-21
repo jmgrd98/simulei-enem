@@ -9,13 +9,12 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Loader from "@/components/Loader/Loader";
 
 export default function SimuladoPage() {
   const searchParams = useSearchParams();
-  const selectedYear = Number(searchParams.get('year')) || 2023; // Default to 2023 if no year is provided
-  const selectedTime = Number(searchParams.get('time')) || 0;    // Default to 0 if no time is provided
+  const selectedYear = Number(searchParams.get('year')) || 2023;
+  const selectedTime = Number(searchParams.get('time')) || 0;
 
   const { score, incrementScore, decrementScore, resetScore } = useUserScore();
   const router = useRouter();
@@ -31,11 +30,15 @@ export default function SimuladoPage() {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Fetch the question and set the timer using the selectedYear and selectedTime from query
   useEffect(() => {
     fetchQuestion(currentIndex, selectedYear);
-    setTimeLeft(selectedTime * 60); // Set the timer based on selected time in minutes
+    setTimeLeft(selectedTime * 60);
   }, [selectedYear, selectedTime]);
+
+  // Update useEffect to listen for currentIndex changes
+  useEffect(() => {
+    fetchQuestion(currentIndex, selectedYear);
+  }, [currentIndex, selectedYear]);
 
   const fetchQuestion = async (index: number, year: number) => {
     setLoading(true);
@@ -105,26 +108,11 @@ export default function SimuladoPage() {
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 className="text-3xl font-bold mb-10">Simulado ENEM - Página 2</h1>
+          <h1 className="text-3xl font-bold mb-10">Simulado ENEM</h1>
           {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
         <div className="flex flex-col gap-5 items-center">
-          <Select onValueChange={(value) => router.push(`/simulado?page=2&year=${value}`)} defaultValue={selectedYear.toString()}>
-            <SelectTrigger className="w-48">
-              <SelectValue placeholder="Selecione o ano" />
-            </SelectTrigger>
-            <SelectContent>
-              {[...Array(2024 - 2009 + 1)].map((_, i) => {
-                const year = 2024 - i;
-                return (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year}
-                  </SelectItem>
-                );
-              })} 
-            </SelectContent>
-          </Select>
 
           <div className="flex gap-2 items-center">
             <Button variant="secondary" onClick={handlePreviousQuestion} disabled={loading || currentIndex === 1}>
@@ -136,7 +124,7 @@ export default function SimuladoPage() {
             </Button>
           </div>
 
-          <div className="flex gap-5 w-full justify-start items-center">
+          <div className={loading ? "hidden" : "flex gap-5 w-full justify-start items-center"}>
             {!timeLeft ? (
               <Select onValueChange={(value) => router.push(`/simulado?page=2&time=${value}`)} defaultValue={selectedTime.toString()}>
                 <SelectTrigger className="w-48">
@@ -168,12 +156,16 @@ export default function SimuladoPage() {
             />
           </div>
 
-          {question && (
+          {loading ? (
+            <div className="absolute m-auto flex justify-center items-center min-h-[50vh]">
+              <Loader />
+            </div>
+          ) : question && (
             <>
               <div className="mt-8 p-4 border rounded shadow w-full flex flex-col gap-3">
                 <h2 className="text-xl font-semibold">Questão {question.index}</h2>
                 <p className="font-bold">Ano: {question.year.toString()}</p>
-                <p className="font-bold">Disciplina: {question.discipline}</p>
+                <p className="font-bold">Disciplina: {question.discipline.split(' ').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}</p>
                 <p>{question.alternativesIntroduction}</p>
                 <p>{question.context}</p>
               </div>

@@ -2,27 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-import { useUserScore } from "@/context/UserScoreContext";
 import { UserButton, useUser } from "@clerk/nextjs";
-import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
-import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const { score, incrementScore, decrementScore, resetScore } = useUserScore();
   const router = useRouter();
   const { isSignedIn } = useUser();
-
-  const [question, setQuestion] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(1);
   const [selectedYear, setSelectedYear] = useState<number>(2023);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string | null>>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<number>(0);
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -47,28 +36,6 @@ export default function Home() {
     };
   }, [timeLeft]);
 
-  const handleAnswerClick = (letter: string) => {
-    setSelectedAnswer(letter);
-
-    setSelectedAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [currentIndex]: letter,
-    }));
-
-    const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
-    if (correctAnswer && correctAnswer.letter === letter) {
-      incrementScore();
-    }
-  };
-
-  const handleNextQuestion = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
-  };
-
-  const handlePreviousQuestion = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 1));
-  };
-
   const handleLoginClick = () => {
     router.push('/sign-in');
   };
@@ -76,28 +43,19 @@ export default function Home() {
   const handleTimeSelection = (value: string) => {
     const selectedMinutes = Number(value);
     setSelectedTime(selectedMinutes);
-    setTimeLeft(selectedMinutes * 60);
-  };
-
-  const resetTimer = () => {
-    setTimeLeft(0);
-    setIsAnimating(true);
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 500);
   };
 
   return (
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 className="text-6xl font-bold mb-10 w-1/2">Gere seu simulado do ENEM gratuito!</h1>
-          {isSignedIn ? <UserButton /> : <Button onClick={handleLoginClick}>Login</Button>}
+          <h1 className="text-6xl font-bold mb-10 w-1/2">Gere simulados do ENEM gratuitos!</h1>
+          {isSignedIn ? <UserButton /> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={handleLoginClick}>Login</Button>}
         </div>
         
-        <h2 className="w-full text-3xl font-semibold w-full my-2">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>
+        <h2 className="w-full text-2xl text-center font-semibold w-full my-2">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>
 
-        <div className="flex flex-col gap-5 items-center">
+        <div className="flex flex-col gap-5 items-center mt-20">
           <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
             <SelectTrigger className="w-48">
               <SelectValue placeholder="Selecione o ano" />
@@ -114,7 +72,7 @@ export default function Home() {
             </SelectContent>
           </Select>
 
-          <div className="flex gap-5 w-full justify-start items-center">
+          <div className="flex gap-5 w-full justify-center items-center">
             {!timeLeft ? (
               <Select onValueChange={handleTimeSelection} value={selectedTime > 0 ? selectedTime.toString() : undefined}>
                 <SelectTrigger className="w-48">
@@ -139,9 +97,10 @@ export default function Home() {
 
           </div>
 
-          <Button 
+          <Button
+            className="text-xl font-semibold w-72 mt-5"
             variant="secondary" 
-            size="xl" 
+            size="xxl" 
             onClick={() => router.push(`/simulado?year=${selectedYear}&time=${selectedTime}`)}
           >
             Gerar Simulado
@@ -149,6 +108,7 @@ export default function Home() {
 
 
         </div>
+        <a className="mt-48 text-white text-center font-extralight hover:text-blue-500 cursor-pointer" href="https://github.com/jmgrd98" target="_blank">Desenvolvido por João Marcelo Dantas</a>
       </main>
     </>
   );
