@@ -19,13 +19,20 @@ export default function ResultadoPage() {
   const [questions, setQuestions] = useState<any[]>([]);
 
   const searchParams = useSearchParams();
-  const timeLeft = Number(searchParams.get('timeLeft')) || 0;
-
+  const timeLeftParam = searchParams.get('timeLeft');
+  console.log("Time left from URL:", timeLeftParam);
+  
+  const timeLeft = Number(timeLeftParam) || 0;
   const timeSpent = Math.max(totalTestTime - timeLeft, 0); 
-
+  
+  console.log("Time spent in seconds:", timeSpent);
+  
   const hoursSpent = Math.floor(timeSpent / 3600);
   const minutesSpent = Math.floor((timeSpent % 3600) / 60);
   const secondsSpent = timeSpent % 60;
+  
+  console.log("Time spent:", { hoursSpent, minutesSpent, secondsSpent });
+  
   
 
   const totalQuestions = 180;

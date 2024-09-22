@@ -5,7 +5,6 @@ import { createContext, useContext, useState, ReactNode } from "react";
 type UserScoreContextType = {
   score: number
   selectedAnswers: { index: number, answer: string }[]
-  totalTestTime: number
   incrementScore: () => void
   decrementScore: () => void
   resetScore: () => void
@@ -26,7 +25,7 @@ export const useUserScore = () => {
 export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
   const [score, setScore] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<{ index: number, answer: string }[]>([]);
-  const [totalTestTime, setTotalTestTime] = useState<number>(0);
+  const [testTime, setTestTime] = useState<number>(0);
 
   const incrementScore = () => setScore((prevScore) => prevScore + 1);
 
@@ -45,8 +44,7 @@ export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
         decrementScore,
         resetScore,
         selectedAnswers,
-        setSelectedAnswers,
-        totalTestTime,
+        setSelectedAnswers
         }}
       >
       {children}
