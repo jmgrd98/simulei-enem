@@ -11,6 +11,7 @@ import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import Loader from "@/components/Loader/Loader";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
+import { useExamTime } from "@/context/ExameTimeContext";
 
 export default function SimuladoPage() {
   const searchParams = useSearchParams();
@@ -18,6 +19,7 @@ export default function SimuladoPage() {
   const selectedTime = Number(searchParams.get('time')) || 0;
 
   const { selectedAnswers, setSelectedAnswers, score, incrementScore, decrementScore, resetScore } = useUserScore();
+  const { timeLeft, setTimeLeft, startTimer, resetTimer } = useExamTime();
 
   const router = useRouter();
   const { isSignedIn } = useUser();
@@ -26,14 +28,11 @@ export default function SimuladoPage() {
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
-  const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
   useEffect(() => {
-    setTimeLeft(selectedTime * 60);
-  }, [selectedYear, selectedTime]);
+    setTimeLeft(selectedTime * 60); // Initialize the timer in seconds
+  }, [selectedTime, setTimeLeft]);
 
   useEffect(() => {
     fetchQuestion(currentQuestionIndex, selectedYear);
@@ -53,87 +52,53 @@ export default function SimuladoPage() {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
-    if (timeLeft > 0 && timerRef.current === null) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    }
-  
-    if (timeLeft === 0 && timerRef.current !== null) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
+    if (timeLeft > 0) {
+      startTimer();
+    } else if (timeLeft === 0) {
       alert("Time's up!");
     }
-  
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [timeLeft]);
-  
+  }, [timeLeft, startTimer]);
 
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
-    
+
     const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
-    
     if (correctAnswer && correctAnswer.letter === letter) {
       incrementScore();
     } else {
       decrementScore();
     }
-  
-    if (setSelectedAnswers) {
-      setSelectedAnswers((prevAnswers: { index: number, answer: string }[]) => {
-        const updatedAnswers = [...prevAnswers];
-        const existingAnswerIndex = updatedAnswers.findIndex(answer => answer.index === currentQuestionIndex);
-    
-        if (existingAnswerIndex !== -1) {
-          // Update existing answer
-          updatedAnswers[existingAnswerIndex].answer = letter;
-        } else {
-          // Add new answer
-          updatedAnswers.push({ index: currentQuestionIndex, answer: letter });
-        }
-        console.log(selectedAnswers);
-        console.log(updatedAnswers);
-        return updatedAnswers;
-      });  
-    }
-    
+
+    setSelectedAnswers((prevAnswers: { index: number, answer: string }[]) => {
+      const updatedAnswers = [...prevAnswers];
+      const existingAnswerIndex = updatedAnswers.findIndex(answer => answer.index === currentQuestionIndex);
+
+      if (existingAnswerIndex !== -1) {
+        updatedAnswers[existingAnswerIndex].answer = letter;
+      } else {
+        updatedAnswers.push({ index: currentQuestionIndex, answer: letter });
+      }
+      return updatedAnswers;
+    });
   };
-  
+
   const handleQuestionSelect = (value: string) => {
     setCurrentQuestionIndex(Number(value));
   };
-  
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
-  
+
   const handlePreviousQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(prevIndex - 1, 1));
-  };  
-  
-
-  const resetTimer = () => {
-    setTimeLeft(0);
-    setIsAnimating(true);
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 1000);
   };
 
   const finishExam = () => {
     router.push(`/resultado?timeLeft=${timeLeft}`);
   };
-  
 
   return (
     <>
@@ -144,7 +109,6 @@ export default function SimuladoPage() {
         </div>
 
         <div className="flex flex-col gap-5 items-center">
-
           {!loading && <div className="w-full flex gap-2 items-center justify-between">
             <Button variant="secondary" onClick={handlePreviousQuestion} disabled={loading || currentQuestionIndex === 1}>
               <FaArrowLeft />
@@ -167,57 +131,39 @@ export default function SimuladoPage() {
               <FaArrowRight />
             </Button>
           </div>}
-  
-          <div className={loading ? "hidden" : "flex gap-5 w-full justify-start items-center"}>
-            {!timeLeft ? (
-              <Select onValueChange={(value) => router.push(`/simulado?page=2&time=${value}`)} defaultValue={selectedTime.toString()}>
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Selecione o tempo" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="15">15 minutos</SelectItem>
-                  <SelectItem value="30">30 minutos</SelectItem>
-                  <SelectItem value="45">45 minutos</SelectItem>
-                  <SelectItem value="60">1 hora</SelectItem>
-                  <SelectItem value="120">2 horas</SelectItem>
-                  <SelectItem value="240">4 horas</SelectItem>
-                </SelectContent>
-              </Select>
-            ) : (
-              <div className="flex items-center gap-3 px-3 py-2 flex w-full">
-                {timeLeft > 0 && (
-                  <div className="text-md font-semibold self-start">
-                    Tempo: {Math.floor(timeLeft / 3600)}:
-                    {(Math.floor((timeLeft % 3600) / 60)).toString().padStart(2, '0')}:
-                    {(timeLeft % 60).toString().padStart(2, '0')}
-                  </div>
-                )}
 
-                <FaRedo
-                  className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`}
-                  onClick={resetTimer}
-                  style={{ transition: 'transform 0.5s' }}
-                />
+          <div className="flex items-center gap-3 px-3 py-2 w-full">
+            {timeLeft > 0 && (
+              <div className="text-md font-semibold">
+                Tempo: {Math.floor(timeLeft / 3600)}:
+                {(Math.floor((timeLeft % 3600) / 60)).toString().padStart(2, '0')}:
+                {(timeLeft % 60).toString().padStart(2, '0')}
               </div>
             )}
 
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant={'secondary'}
-                onClick={finishExam}
-                className="self-end font-semibold text-lg justify-self-end"
-              >
-                Finalizar prova
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="top" align="center" className="bg-gray-800 text-white text-sm p-2 rounded-md shadow-md">
-              Revise todas as questões antes de finalizar!
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+            <FaRedo
+              className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`}
+              onClick={() => resetTimer()}
+              style={{ transition: 'transform 0.5s' }}
+            />
           </div>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={'secondary'}
+                  onClick={finishExam}
+                  className="self-end font-semibold text-lg justify-self-end"
+                >
+                  Finalizar prova
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top" align="center" className="bg-gray-800 text-white text-sm p-2 rounded-md shadow-md">
+                Revise todas as questões antes de finalizar!
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
           {loading ? (
             <div className="absolute m-auto flex justify-center items-center min-h-[50vh]">

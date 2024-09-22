@@ -10,9 +10,11 @@ import Loader from "@/components/Loader/Loader";
 import { Pie, PieChart, Label } from "recharts";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSearchParams } from 'next/navigation';
+import { useExamTime } from "@/context/ExameTimeContext";
 
 export default function ResultadoPage() {
-  const { score, selectedAnswers, resetScore, totalTestTime } = useUserScore();
+  const { score, selectedAnswers, resetScore } = useUserScore();
+  const { totalTestTime } = useExamTime()
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [loading, setLoading] = useState(true);

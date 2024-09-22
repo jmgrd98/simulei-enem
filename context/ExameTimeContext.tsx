@@ -1,62 +1,30 @@
-'use client';
+import { createContext, useContext, useState, useEffect } from 'react';
 
-import { createContext, useContext, useState, ReactNode, useRef, useEffect } from "react";
-
-type ExamTimeContextType = {
+interface ExamTimeContextProps {
   timeLeft: number;
-  setTimeLeft: (timeLeft: number) => void;
+  setTimeLeft: (time: number) => void;
   startTimer: () => void;
   resetTimer: () => void;
-};
+}
 
-const ExamTimeContext = createContext<ExamTimeContextType | undefined>(undefined);
+const ExamTimeContext = createContext<ExamTimeContextProps | undefined>(undefined);
 
-export const useExamTime = () => {
-  const context = useContext(ExamTimeContext);
-  if (!context) {
-    throw new Error("useExamTime must be used within an ExamTimeProvider");
-  }
-  return context;
-};
-
-export const ExamTimeProvider = ({ children }: { children: ReactNode }) => {
+export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) => {
   const [timeLeft, setTimeLeft] = useState<number>(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
 
   useEffect(() => {
-    if (timeLeft > 0 && timerRef.current === null) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
+    let timer: NodeJS.Timeout;
+    if (isTimerRunning && timeLeft > 0) {
+      timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
     }
+    return () => clearTimeout(timer);
+  }, [isTimerRunning, timeLeft]);
 
-    if (timeLeft === 0 && timerRef.current !== null) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [timeLeft]);
-
-  const startTimer = () => {
-    if (timerRef.current === null) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    }
-  };
-
+  const startTimer = () => setIsTimerRunning(true);
   const resetTimer = () => {
     setTimeLeft(0);
-    if (timerRef.current !== null) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
+    setIsTimerRunning(false);
   };
 
   return (
@@ -64,4 +32,12 @@ export const ExamTimeProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </ExamTimeContext.Provider>
   );
+};
+
+export const useExamTime = () => {
+  const context = useContext(ExamTimeContext);
+  if (!context) {
+    throw new Error("useExamTime must be used within an ExamTimeProvider");
+  }
+  return context;
 };
