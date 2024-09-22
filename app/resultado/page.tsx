@@ -47,7 +47,7 @@ export default function ResultadoPage() {
   useEffect(() => {
     fetchQuestions(2023);
     console.log(selectedAnswers);
-  }, []);
+  }, [selectedAnswers]);
 
   const fetchQuestions = async (year: number) => {
     try {

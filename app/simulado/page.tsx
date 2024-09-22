@@ -29,9 +29,10 @@ export default function SimuladoPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [prevAnswers, setPrevAnswers] = useState<{ index: number, answer: string }[]>([]);
 
   useEffect(() => {
-    setTimeLeft(selectedTime * 60); // Initialize the timer in seconds
+    setTimeLeft(selectedTime * 60);
   }, [selectedTime, setTimeLeft]);
 
   useEffect(() => {
@@ -63,26 +64,21 @@ export default function SimuladoPage() {
 
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
-
+    
     const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
     if (correctAnswer && correctAnswer.letter === letter) {
       incrementScore();
     } else {
       decrementScore();
     }
-
-    setSelectedAnswers((prevAnswers: { index: number, answer: string }[]) => {
-      const updatedAnswers = [...prevAnswers];
-      const existingAnswerIndex = updatedAnswers.findIndex(answer => answer.index === currentQuestionIndex);
-
-      if (existingAnswerIndex !== -1) {
-        updatedAnswers[existingAnswerIndex].answer = letter;
-      } else {
-        updatedAnswers.push({ index: currentQuestionIndex, answer: letter });
-      }
-      return updatedAnswers;
-    });
+  
+    setSelectedAnswers(
+      prevAnswers.map((answer, index) =>
+        answer.index === currentQuestionIndex ? { ...answer, answer: letter } : answer
+      )
+    );
   };
+  
 
   const handleQuestionSelect = (value: string) => {
     setCurrentQuestionIndex(Number(value));
