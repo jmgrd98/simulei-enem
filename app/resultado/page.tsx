@@ -14,7 +14,7 @@ import { useExamTime } from "@/context/ExameTimeContext";
 
 export default function ResultadoPage() {
   const { score, selectedAnswers, resetScore } = useUserScore();
-  const { totalTestTime } = useExamTime()
+  const { selectedTime } = useExamTime()
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ export default function ResultadoPage() {
   console.log("Time left from URL:", timeLeftParam);
   
   const timeLeft = Number(timeLeftParam) || 0;
-  const timeSpent = Math.max(totalTestTime - timeLeft, 0); 
+  const timeSpent = Math.max(selectedTime - timeLeft, 0); 
   
   console.log("Time spent in seconds:", timeSpent);
   
