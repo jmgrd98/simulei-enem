@@ -45,7 +45,7 @@ export default function Home() {
           {isSignedIn ? <UserButton /> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={handleLoginClick}>Login</Button>}
         </div>
         
-        <h2 className="w-full text-2xl text-center font-semibold w-full my-2">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>
+        <h2 className="text-2xl text-center font-semibold w-full my-2">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>
 
         <div className="flex flex-col gap-5 items-center mt-20">
           <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
