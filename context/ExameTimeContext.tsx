@@ -26,31 +26,43 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
     if (isTimerRunning && timeLeft > 0) {
       timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
     }
+    else if (timeLeft === 0 && isTimerRunning) {
+      alert('Time\'s up!');
+      resetTimer();
+    }
+
     return () => clearTimeout(timer);
   }, [isTimerRunning, timeLeft]);
 
-  const startTimer = () => setIsTimerRunning(true);
+  const startTimer = () => {
+    if (timeLeft > 0) {
+      setIsTimerRunning(true);
+    }
+  };
+
   const resetTimer = () => {
     setTimeLeft(0);
     setIsTimerRunning(false);
     setIsAnimating(true);
+
     setTimeout(() => {
-        setIsAnimating(false);
-      }, 1000);
+      setIsAnimating(false);
+    }, 1000);
   };
 
   return (
-    <ExamTimeContext.Provider 
-        value={{
-            selectedTime,
-            setSelectedTime,
-            timeLeft,
-            setTimeLeft,
-            startTimer,
-            resetTimer,
-            isAnimating,
-            setIsAnimating
-        }}>
+    <ExamTimeContext.Provider
+      value={{
+        selectedTime,
+        setSelectedTime,
+        timeLeft,
+        setTimeLeft,
+        startTimer,
+        resetTimer,
+        isAnimating,
+        setIsAnimating,
+      }}
+    >
       {children}
     </ExamTimeContext.Provider>
   );
@@ -59,7 +71,7 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
 export const useExamTime = () => {
   const context = useContext(ExamTimeContext);
   if (!context) {
-    throw new Error("useExamTime must be used within an ExamTimeProvider");
+    throw new Error('useExamTime must be used within an ExamTimeProvider');
   }
   return context;
 };

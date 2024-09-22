@@ -95,15 +95,12 @@ export default function ResultadoPage() {
               </div>
             ) : (
               questions.map((question, index) => {
-                // Find the selected answer for the current question
                 const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
                 
                 let colorClass = 'bg-gray-400';
                 if (selectedAnswer) {
                   colorClass = selectedAnswer === question.correctAlternative ? 'bg-green-500' : 'bg-red-500';
-                  console.log(colorClass);
                 }
-
                 return (
                   <div key={index} className={`w-10 h-10 flex items-center justify-center ${colorClass} text-white`}>
                     {index + 1}

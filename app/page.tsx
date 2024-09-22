@@ -5,11 +5,15 @@ import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useExamTime } from "@/context/ExameTimeContext";
 
 export default function Home() {
+  const { startTimer } = useExamTime();
   const router = useRouter();
   const { isSignedIn } = useUser();
+
   const [selectedYear, setSelectedYear] = useState<number>(2023);
+  const [timeLeft, setTimeLeft] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<number>(0);
 
 
@@ -21,6 +25,17 @@ export default function Home() {
     const selectedMinutes = Number(value);
     setSelectedTime(selectedMinutes);
   };
+
+  const generateExam = (selectedYear: number, selectedTime: number) => {
+    if (selectedTime > 0) {
+      setTimeLeft(selectedTime * 60);
+      startTimer();
+      router.push(`/simulado?year=${selectedYear}&time=${selectedTime}`);
+    } else {
+      alert("Please select a valid exam time");
+    }
+  };
+  
 
   return (
     <>
@@ -50,7 +65,7 @@ export default function Home() {
           </Select>
 
           <div className="flex gap-5 w-full justify-center items-center">
-            {selectedTime && (
+            {!timeLeft ? (
               <Select onValueChange={handleTimeSelection} value={selectedTime > 0 ? selectedTime.toString() : undefined}>
                 <SelectTrigger className="w-48">
                   <SelectValue placeholder="Selecione o tempo" />
@@ -64,20 +79,25 @@ export default function Home() {
                   <SelectItem value="480">4 hours</SelectItem>
                 </SelectContent>
               </Select>
+            ) : (
+              <div className="border rounded px-3 py-2">
+                {timeLeft > 0 && (
+                  <div className="text-md font-semibold self-start">
+                    Tempo: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+                  </div>
+                )}
+              </div>
             )}
-
           </div>
 
           <Button
             className="text-xl font-semibold w-72 mt-5"
             variant="secondary" 
-            size="xxl" 
-            onClick={() => router.push(`/simulado?year=${selectedYear}&time=${selectedTime}`)}
+            size="xxl"
+            onClick={() => generateExam(selectedYear, selectedTime)}
           >
             Gerar Simulado
           </Button>
-
-
         </div>
         <a className="mt-48 text-white text-center font-extralight hover:text-blue-500 cursor-pointer" href="https://github.com/jmgrd98" target="_blank">Desenvolvido por João Marcelo Dantas</a>
       </main>
