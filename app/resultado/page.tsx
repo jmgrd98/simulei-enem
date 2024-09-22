@@ -22,18 +22,13 @@ export default function ResultadoPage() {
 
   const searchParams = useSearchParams();
   const timeLeftParam = searchParams.get('timeLeft');
-  console.log("Time left from URL:", timeLeftParam);
   
   const timeLeft = Number(timeLeftParam) || 0;
   const timeSpent = Math.max(selectedTime - timeLeft, 0); 
   
-  console.log("Time spent in seconds:", timeSpent);
-  
   const hoursSpent = Math.floor(timeSpent / 3600);
   const minutesSpent = Math.floor((timeSpent % 3600) / 60);
   const secondsSpent = timeSpent % 60;
-  
-  console.log("Time spent:", { hoursSpent, minutesSpent, secondsSpent });
 
   const totalQuestions = 180;
 
@@ -96,22 +91,28 @@ export default function ResultadoPage() {
           <div className="flex items-center gap-2 flex-wrap pl-5">
             {loading ? (
               <div className="flex justify-center items-center h-[50vh] w-full m-auto">
-                  <Loader />
+                <Loader />
               </div>
             ) : (
               questions.map((question, index) => {
-                  const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
-                  const isCorrect = selectedAnswer === question.correctAlternative;
-                  const colorClass = isCorrect ? 'bg-green-500' : 'bg-red-500';
+                // Find the selected answer for the current question
+                const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
+                
+                let colorClass = 'bg-gray-400';
+                if (selectedAnswer) {
+                  colorClass = selectedAnswer === question.correctAlternative ? 'bg-green-500' : 'bg-red-500';
+                  console.log(colorClass);
+                }
 
-                  return (
+                return (
                   <div key={index} className={`w-10 h-10 flex items-center justify-center ${colorClass} text-white`}>
-                      {index + 1}
+                    {index + 1}
                   </div>
-                  );
+                );
               })
             )}
           </div>
+
 
           <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">

@@ -13,28 +13,6 @@ export default function Home() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<number>(0);
 
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    if (timeLeft > 0 && timerRef.current === null) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    }
-
-    if (timeLeft === 0 && timerRef.current !== null) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-      alert("Time's up!");
-    }
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [timeLeft]);
 
   const handleLoginClick = () => {
     router.push('/sign-in');
