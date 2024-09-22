@@ -2,18 +2,34 @@
 
 import { Button } from "@/components/ui/button";
 import { useUserScore } from "@/context/UserScoreContext";
-import { useSearchParams } from 'next/navigation';
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import Loader from "@/components/Loader/Loader";
+import { Pie, PieChart, Label } from "recharts";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { TrendingUp } from "lucide-react";
+import {
+    ChartConfig,
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
+  } from "@/components/ui/chart";
 
 export default function ResultadoPage() {
-  const { score, selectedAnswers } = useUserScore();
+  const { score, selectedAnswers, resetScore } = useUserScore();
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<any[]>([]);
+
+  const totalQuestions = 180;
+
+  const chartData = [
+    { label: "Corretas", value: score, fill: "#22C55E" },
+    { label: "Erradas", value: totalQuestions - score, fill: "#EF4444" }
+  ];
 
   useEffect(() => {
     fetchQuestions(2023);
@@ -23,17 +39,14 @@ export default function ResultadoPage() {
   const fetchQuestions = async (year: number) => {
     try {
       let allQuestions: any[] = [];
-      const limit = 50; // The API limit per request
-      const totalQuestions = 180;
+      const limit = 50;
       const totalRequests = Math.ceil(totalQuestions / limit);
 
-      // Make multiple requests to get all 180 questions
       for (let i = 0; i < totalRequests; i++) {
         const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions?limit=${limit}&offset=${i * limit}`);
         allQuestions = [...allQuestions, ...response.data.questions];
       }
 
-      // Ensure you only have 180 questions (in case you fetched extra)
       setQuestions(allQuestions.slice(0, totalQuestions));
     } catch (error) {
       console.error(error);
@@ -43,6 +56,7 @@ export default function ResultadoPage() {
   };
 
   const handleBackToHome = () => {
+    resetScore();
     router.push('/');
   };
 
@@ -51,32 +65,87 @@ export default function ResultadoPage() {
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
           <h1 onClick={() => router.push('/')} className="text-3xl font-bold mb-10 cursor-pointer">Simulado ENEM</h1>
-          {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button onClick={() => router.push('/sign-in')}>Login</Button>}
+          {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
         <div className="flex flex-col gap-5 items-center">
           <h1 className="text-xl font-semibold">Esse foi o seu resultado:</h1>
-          <h2 className="text-lg">Score: {score} / 180</h2>
-          <h3 className="text-lg text-green-600">Questões Corretas: {score}</h3>
-          <h3 className="text-lg text-red-600">Questões Erradas: {180 - score}</h3>
+          <div className="flex items-center justify-center gap-2">
+            <p className="text-lg text-green-600">Questões Corretas: {score}</p>
+            <p className="text-lg text-red-600">Questões Erradas: {totalQuestions - score}</p>
+          </div>
 
-          <div className="grid grid-cols-12 gap-2 mt-4">
+          <div className="flex items-center gap-2 flex-wrap pl-5">
             {loading ? (
-              <p>Loading...</p>
+              <div className="flex justify-center items-center h-[50vh] w-full m-auto">
+                  <Loader />
+              </div>
             ) : (
               questions.map((question, index) => {
-                const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
-                const isCorrect = selectedAnswer === question.correctAlternative;
-                const colorClass = isCorrect ? 'bg-green-500' : 'bg-red-500';
+                  const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
+                  const isCorrect = selectedAnswer === question.correctAlternative;
+                  const colorClass = isCorrect ? 'bg-green-500' : 'bg-red-500';
 
-                return (
+                  return (
                   <div key={index} className={`w-10 h-10 flex items-center justify-center ${colorClass} text-white`}>
-                    {index + 1}
+                      {index + 1}
                   </div>
-                );
+                  );
               })
             )}
           </div>
+
+          <Card className="flex flex-col">
+            <CardHeader className="items-center pb-0">
+                <CardTitle>Respostas - Corretas vs Erradas</CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1 pb-0">
+                <div className="mx-auto max-h-[250px]">
+                <PieChart width={250} height={250}>
+                    <Pie
+                    data={chartData}
+                    dataKey="value"
+                    nameKey="label"
+                    innerRadius={60}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    strokeWidth={5}
+                    >
+                    <Label
+                        content={({ viewBox }) => {
+                        if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                            return (
+                            <text
+                                x={viewBox.cx}
+                                y={viewBox.cy}
+                                textAnchor="middle"
+                                dominantBaseline="middle"
+                            >
+                                <tspan
+                                x={viewBox.cx}
+                                y={viewBox.cy}
+                                className="fill-foreground text-3xl font-bold"
+                                >
+                                {totalQuestions}
+                                </tspan>
+                                <tspan
+                                x={viewBox.cx}
+                                y={(viewBox.cy || 0) + 24}
+                                className="fill-muted-foreground"
+                                >
+                                Total
+                                </tspan>
+                            </text>
+                            );
+                        }
+                        }}
+                    />
+                    </Pie>
+                </PieChart>
+                </div>
+            </CardContent>
+            </Card>
+
 
           <Button variant={'secondary'} size={'xl'} onClick={handleBackToHome}>Voltar ao Início</Button>
         </div>

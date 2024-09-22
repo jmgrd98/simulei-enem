@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from 'react';
 import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import Loader from "@/components/Loader/Loader";
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 
 export default function SimuladoPage() {
   const searchParams = useSearchParams();
@@ -77,7 +78,7 @@ export default function SimuladoPage() {
   
 
   const handleAnswerClick = (letter: string) => {
-    setSelectedAnswer(letter); // Set the selected answer
+    setSelectedAnswer(letter);
     
     const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
     
@@ -137,8 +138,8 @@ export default function SimuladoPage() {
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 onClick={() => router.push('/')} className="text-3xl font-bold mb-10 cursor-pointer">Simulado ENEM</h1>
-          {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button onClick={() => router.push('/sign-in')}>Login</Button>}
+          <h1 onClick={() => router.push('/')} className="text-6xl font-bold mb-10 cursor-pointer">Simulado ENEM</h1>
+          {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
         <div className="flex flex-col gap-5 items-center">
@@ -207,14 +208,22 @@ export default function SimuladoPage() {
                   </Button>
                 )} */}
 
-                  <Button
-                    variant={'secondary'}
-                    onClick={finishExam}
-                    className="self-end font-semibold text-lg justify-self-end"
-                  >
-                    Finalizar prova
-                  </Button>
-
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant={'secondary'}
+                onClick={finishExam}
+                className="self-end font-semibold text-lg justify-self-end"
+              >
+                Finalizar prova
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top" align="center" className="bg-gray-800 text-white text-sm p-2 rounded-md shadow-md">
+              Revise todas as questões antes de finalizar!
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
           </div>
 
           {loading ? (
