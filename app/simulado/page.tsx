@@ -16,7 +16,7 @@ export default function SimuladoPage() {
   const selectedYear = Number(searchParams.get('year')) || 2023;
   const selectedTime = Number(searchParams.get('time')) || 0;
 
-  const { score, incrementScore, decrementScore, resetScore } = useUserScore();
+  const { selectedAnswers, setSelectedAnswers, score, incrementScore, decrementScore, resetScore } = useUserScore();
   const router = useRouter();
   const { isSignedIn } = useUser();
 
@@ -24,7 +24,6 @@ export default function SimuladoPage() {
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string | null>>({});
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
@@ -44,13 +43,16 @@ export default function SimuladoPage() {
     try {
       const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions/${index}`);
       setQuestion(response.data);
-      setSelectedAnswer(selectedAnswers[index] || null);
+
+      const savedAnswer = selectedAnswers.find(answer => answer.index === index)?.answer;
+      setSelectedAnswer(savedAnswer || null);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     if (timeLeft > 0 && timerRef.current === null) {
@@ -58,13 +60,13 @@ export default function SimuladoPage() {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
     }
-
+  
     if (timeLeft === 0 && timerRef.current !== null) {
       clearInterval(timerRef.current);
       timerRef.current = null;
       alert("Time's up!");
     }
-
+  
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -72,32 +74,52 @@ export default function SimuladoPage() {
       }
     };
   }, [timeLeft]);
+  
 
   const handleAnswerClick = (letter: string) => {
-    setSelectedAnswer(letter);
-
-    setSelectedAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [currentQuestionIndex]: letter,
-    }));
-
+    setSelectedAnswer(letter); // Set the selected answer
+    
     const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
+    
     if (correctAnswer && correctAnswer.letter === letter) {
       incrementScore();
+    } else {
+      decrementScore();
     }
+  
+    if (setSelectedAnswers) {
+      setSelectedAnswers((prevAnswers: { index: number, answer: string }[]) => {
+        const updatedAnswers = [...prevAnswers];
+        const existingAnswerIndex = updatedAnswers.findIndex(answer => answer.index === currentQuestionIndex);
+    
+        if (existingAnswerIndex !== -1) {
+          // Update existing answer
+          updatedAnswers[existingAnswerIndex].answer = letter;
+        } else {
+          // Add new answer
+          updatedAnswers.push({ index: currentQuestionIndex, answer: letter });
+        }
+        console.log(selectedAnswers);
+        console.log(updatedAnswers);
+        return updatedAnswers;
+      });  
+    }
+    
   };
+  
+  const handleQuestionSelect = (value: string) => {
+    setCurrentQuestionIndex(Number(value));
+  };
+  
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
-
+  
   const handlePreviousQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(prevIndex - 1, 1));
-  };
-
-  const handleQuestionSelect = (value: string) => {
-    setCurrentQuestionIndex(Number(value));
-  };
+  };  
+  
 
   const resetTimer = () => {
     setTimeLeft(0);
@@ -108,25 +130,24 @@ export default function SimuladoPage() {
   };
 
   const finishExam = () => {
-    console.log(score);
+    router.push('/resultado');
   };
 
   return (
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 className="text-3xl font-bold mb-10">Simulado ENEM</h1>
+          <h1 onClick={() => router.push('/')} className="text-3xl font-bold mb-10 cursor-pointer">Simulado ENEM</h1>
           {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
         <div className="flex flex-col gap-5 items-center">
 
-          <div className="flex gap-2 items-center">
+          {!loading && <div className="w-full flex gap-2 items-center justify-between">
             <Button variant="secondary" onClick={handlePreviousQuestion} disabled={loading || currentQuestionIndex === 1}>
               <FaArrowLeft />
             </Button>
 
-            {/* Question Select Dropdown */}
             <Select onValueChange={handleQuestionSelect} defaultValue={currentQuestionIndex.toString()}>
               <SelectTrigger className="w-48">
                 <SelectValue placeholder="Selecione a questão" />
@@ -143,8 +164,8 @@ export default function SimuladoPage() {
             <Button variant="secondary" onClick={handleNextQuestion} disabled={loading}>
               <FaArrowRight />
             </Button>
-          </div>
-
+          </div>}
+  
           <div className={loading ? "hidden" : "flex gap-5 w-full justify-start items-center"}>
             {!timeLeft ? (
               <Select onValueChange={(value) => router.push(`/simulado?page=2&time=${value}`)} defaultValue={selectedTime.toString()}>
@@ -161,22 +182,39 @@ export default function SimuladoPage() {
                 </SelectContent>
               </Select>
             ) : (
-              <div className="border rounded px-3 py-2 flex items-center justify-between items-center">
+              <div className="flex items-center gap-3  px-3 py-2 flex w-full">
                 {timeLeft > 0 && (
                   <div className="text-md font-semibold self-start">
                     Tempo: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
                   </div>
                 )}
 
-                {currentQuestionIndex === 180 && <Button variant={'secondary'} onClick={finishExam} className="self-end font-semibold text-lg">Finalizar prova</Button>}
-              </div>
+              <FaRedo
+                className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`}
+                onClick={resetTimer}
+                style={{ transition: 'transform 0.5s' }}
+              />
+            </div>
             )}
 
-            <FaRedo
-              className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`}
-              onClick={resetTimer}
-              style={{ transition: 'transform 0.5s' }}
-            />
+                {/* {currentQuestionIndex === 180 && (
+                  <Button
+                    variant={'secondary'}
+                    onClick={finishExam}
+                    className="self-end font-semibold text-lg justify-self-end"
+                  >
+                    Finalizar prova
+                  </Button>
+                )} */}
+
+                  <Button
+                    variant={'secondary'}
+                    onClick={finishExam}
+                    className="self-end font-semibold text-lg justify-self-end"
+                  >
+                    Finalizar prova
+                  </Button>
+
           </div>
 
           {loading ? (
