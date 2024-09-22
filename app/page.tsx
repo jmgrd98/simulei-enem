@@ -49,7 +49,7 @@ export default function Home() {
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 className="text-6xl font-bold mb-10 w-1/2">Gere simulados do ENEM gratuitos!</h1>
+          <h1 className="text-6xl font-bold mb-10 w-2/3">Gere simulados do ENEM gratuitos e meça seus resultados!</h1>
           {isSignedIn ? <UserButton /> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={handleLoginClick}>Login</Button>}
         </div>
         

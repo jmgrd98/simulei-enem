@@ -22,10 +22,19 @@ export default function ResultadoPage() {
 
   const fetchQuestions = async (year: number) => {
     try {
-      const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions?limit=50`);
-      console.log(response.data);
-      
-      setQuestions(response.data.questions || []);
+      let allQuestions: any[] = [];
+      const limit = 50; // The API limit per request
+      const totalQuestions = 180;
+      const totalRequests = Math.ceil(totalQuestions / limit);
+
+      // Make multiple requests to get all 180 questions
+      for (let i = 0; i < totalRequests; i++) {
+        const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions?limit=${limit}&offset=${i * limit}`);
+        allQuestions = [...allQuestions, ...response.data.questions];
+      }
+
+      // Ensure you only have 180 questions (in case you fetched extra)
+      setQuestions(allQuestions.slice(0, totalQuestions));
     } catch (error) {
       console.error(error);
     } finally {
@@ -56,9 +65,7 @@ export default function ResultadoPage() {
               <p>Loading...</p>
             ) : (
               questions.map((question, index) => {
-                // Find the user's selected answer for the current question
                 const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
-                // Compare selectedAnswer with the correct alternative from the question
                 const isCorrect = selectedAnswer === question.correctAlternative;
                 const colorClass = isCorrect ? 'bg-green-500' : 'bg-red-500';
 
