@@ -1,15 +1,20 @@
+'use client';
+
 import { createContext, useContext, useState, useEffect } from 'react';
 
 interface ExamTimeContextProps {
-  timeLeft: number;
-  setTimeLeft: (time: number) => void;
-  startTimer: () => void;
-  resetTimer: () => void;
+    selectedTime: number;
+    setSelectedTime: (time: number) => void;
+    timeLeft: number;
+    setTimeLeft: (time: number) => void;
+    startTimer: () => void;
+    resetTimer: () => void;
 }
 
 const ExamTimeContext = createContext<ExamTimeContextProps | undefined>(undefined);
 
 export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [selectedTime, setSelectedTime] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
 
@@ -28,7 +33,15 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
   };
 
   return (
-    <ExamTimeContext.Provider value={{ timeLeft, setTimeLeft, startTimer, resetTimer }}>
+    <ExamTimeContext.Provider 
+        value={{
+            selectedTime,
+            setSelectedTime,
+            timeLeft,
+            setTimeLeft,
+            startTimer,
+            resetTimer
+        }}>
       {children}
     </ExamTimeContext.Provider>
   );
