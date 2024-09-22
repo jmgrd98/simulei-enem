@@ -3,14 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [selectedYear, setSelectedYear] = useState<number>(2023);
-  const [timeLeft, setTimeLeft] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<number>(0);
 
 
@@ -51,7 +50,7 @@ export default function Home() {
           </Select>
 
           <div className="flex gap-5 w-full justify-center items-center">
-            {!timeLeft ? (
+            {selectedTime && (
               <Select onValueChange={handleTimeSelection} value={selectedTime > 0 ? selectedTime.toString() : undefined}>
                 <SelectTrigger className="w-48">
                   <SelectValue placeholder="Selecione o tempo" />
@@ -65,14 +64,6 @@ export default function Home() {
                   <SelectItem value="480">4 hours</SelectItem>
                 </SelectContent>
               </Select>
-            ) : (
-              <div className="border rounded px-3 py-2">
-                {timeLeft > 0 && (
-                  <div className="text-md font-semibold self-start">
-                    Tempo: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
-                  </div>
-                )}
-              </div>
             )}
 
           </div>
