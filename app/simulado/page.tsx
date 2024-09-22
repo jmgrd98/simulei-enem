@@ -18,8 +18,8 @@ export default function SimuladoPage() {
   const selectedYear = Number(searchParams.get('year')) || 2023;
   const selectedTime = Number(searchParams.get('time')) || 0;
 
-  const { selectedAnswers, setSelectedAnswers, score, incrementScore, decrementScore, resetScore } = useUserScore();
-  const { timeLeft, setTimeLeft, startTimer, resetTimer } = useExamTime();
+  const { selectedAnswers, setSelectedAnswers, incrementScore, decrementScore } = useUserScore();
+  const { timeLeft, setTimeLeft, startTimer, resetTimer, isAnimating, setIsAnimating } = useExamTime();
 
   const router = useRouter();
   const { isSignedIn } = useUser();
@@ -28,7 +28,6 @@ export default function SimuladoPage() {
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [prevAnswers, setPrevAnswers] = useState<{ index: number, answer: string }[]>([]);
 
   useEffect(() => {

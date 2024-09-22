@@ -9,6 +9,8 @@ interface ExamTimeContextProps {
     setTimeLeft: (time: number) => void;
     startTimer: () => void;
     resetTimer: () => void;
+    isAnimating: boolean;
+    setIsAnimating: (isAnimating: boolean) => void;
 }
 
 const ExamTimeContext = createContext<ExamTimeContextProps | undefined>(undefined);
@@ -17,6 +19,7 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
   const [selectedTime, setSelectedTime] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -30,6 +33,10 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
   const resetTimer = () => {
     setTimeLeft(0);
     setIsTimerRunning(false);
+    setIsAnimating(true);
+    setTimeout(() => {
+        setIsAnimating(false);
+      }, 1000);
   };
 
   return (
@@ -40,7 +47,9 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
             timeLeft,
             setTimeLeft,
             startTimer,
-            resetTimer
+            resetTimer,
+            isAnimating,
+            setIsAnimating
         }}>
       {children}
     </ExamTimeContext.Provider>
