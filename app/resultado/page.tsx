@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import Loader from "@/components/Loader/Loader";
 import { Pie, PieChart, Label } from "recharts";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSearchParams } from 'next/navigation';
 import { useExamTime } from "@/context/ExameTimeContext";
 

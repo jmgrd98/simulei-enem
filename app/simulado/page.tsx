@@ -6,7 +6,7 @@ import { useUserScore } from "@/context/UserScoreContext";
 import { useSearchParams } from 'next/navigation';
 import { UserButton, useUser } from "@clerk/nextjs";
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import Loader from "@/components/Loader/Loader";
