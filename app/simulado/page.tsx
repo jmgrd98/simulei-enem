@@ -18,6 +18,7 @@ export default function SimuladoPage() {
   const selectedTime = Number(searchParams.get('time')) || 0;
 
   const { selectedAnswers, setSelectedAnswers, score, incrementScore, decrementScore, resetScore } = useUserScore();
+
   const router = useRouter();
   const { isSignedIn } = useUser();
 
@@ -31,7 +32,6 @@ export default function SimuladoPage() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    fetchQuestion(currentQuestionIndex, selectedYear);
     setTimeLeft(selectedTime * 60);
   }, [selectedYear, selectedTime]);
 
@@ -131,8 +131,9 @@ export default function SimuladoPage() {
   };
 
   const finishExam = () => {
-    router.push('/resultado');
+    router.push(`/resultado?timeLeft=${timeLeft}`);
   };
+  
 
   return (
     <>
@@ -183,30 +184,22 @@ export default function SimuladoPage() {
                 </SelectContent>
               </Select>
             ) : (
-              <div className="flex items-center gap-3  px-3 py-2 flex w-full">
+              <div className="flex items-center gap-3 px-3 py-2 flex w-full">
                 {timeLeft > 0 && (
                   <div className="text-md font-semibold self-start">
-                    Tempo: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+                    Tempo: {Math.floor(timeLeft / 3600)}:
+                    {(Math.floor((timeLeft % 3600) / 60)).toString().padStart(2, '0')}:
+                    {(timeLeft % 60).toString().padStart(2, '0')}
                   </div>
                 )}
 
-              <FaRedo
-                className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`}
-                onClick={resetTimer}
-                style={{ transition: 'transform 0.5s' }}
-              />
-            </div>
+                <FaRedo
+                  className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`}
+                  onClick={resetTimer}
+                  style={{ transition: 'transform 0.5s' }}
+                />
+              </div>
             )}
-
-                {/* {currentQuestionIndex === 180 && (
-                  <Button
-                    variant={'secondary'}
-                    onClick={finishExam}
-                    className="self-end font-semibold text-lg justify-self-end"
-                  >
-                    Finalizar prova
-                  </Button>
-                )} */}
 
         <TooltipProvider>
           <Tooltip>

@@ -83,6 +83,8 @@ export default function Home() {
                   <SelectItem value="30">30 minutes</SelectItem>
                   <SelectItem value="45">45 minutes</SelectItem>
                   <SelectItem value="60">1 hour</SelectItem>
+                  <SelectItem value="120">2 hours</SelectItem>
+                  <SelectItem value="480">4 hours</SelectItem>
                 </SelectContent>
               </Select>
             ) : (

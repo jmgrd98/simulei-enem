@@ -13,3 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Simulado {
+  id String @id @default (cuid())
+  userId String @unique
+  totalQuestions String[]
+  correctedAnswers String[]
+  incorrectedAnswers String[]
+  score Int
+}

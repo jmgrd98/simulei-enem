@@ -9,20 +9,24 @@ import axios from "axios";
 import Loader from "@/components/Loader/Loader";
 import { Pie, PieChart, Label } from "recharts";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp } from "lucide-react";
-import {
-    ChartConfig,
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-  } from "@/components/ui/chart";
+import { useSearchParams } from 'next/navigation';
 
 export default function ResultadoPage() {
-  const { score, selectedAnswers, resetScore } = useUserScore();
+  const { score, selectedAnswers, resetScore, totalTestTime } = useUserScore();
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<any[]>([]);
+
+  const searchParams = useSearchParams();
+  const timeLeft = Number(searchParams.get('timeLeft')) || 0;
+
+  const timeSpent = Math.max(totalTestTime - timeLeft, 0); 
+
+  const hoursSpent = Math.floor(timeSpent / 3600);
+  const minutesSpent = Math.floor((timeSpent % 3600) / 60);
+  const secondsSpent = timeSpent % 60;
+  
 
   const totalQuestions = 180;
 
@@ -73,6 +77,12 @@ export default function ResultadoPage() {
           <div className="flex items-center justify-center gap-2">
             <p className="text-lg text-green-600">Questões Corretas: {score}</p>
             <p className="text-lg text-red-600">Questões Erradas: {totalQuestions - score}</p>
+          </div>
+
+          <div className="flex items-center justify-center gap-2">
+            <p className="text-lg text-blue-600">
+              Teste feito em {hoursSpent} horas, {minutesSpent} minutos e {secondsSpent} segundos
+            </p>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap pl-5">
