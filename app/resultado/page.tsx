@@ -34,8 +34,6 @@ export default function ResultadoPage() {
   const secondsSpent = timeSpent % 60;
   
   console.log("Time spent:", { hoursSpent, minutesSpent, secondsSpent });
-  
-  
 
   const totalQuestions = 180;
 
@@ -47,6 +45,7 @@ export default function ResultadoPage() {
   useEffect(() => {
     fetchQuestions(2023);
     console.log(selectedAnswers);
+    console.log(questions);
   }, [selectedAnswers]);
 
   const fetchQuestions = async (year: number) => {
