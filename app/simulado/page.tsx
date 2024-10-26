@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
@@ -166,7 +166,7 @@ export default function SimuladoPage() {
           <Loader />
         ) : (
           <div className="p-4 border rounded shadow w-full flex flex-col gap-3">
-            <h2 className="text-xl font-semibold">Questão {question.index}</h2>
+            <h2 className="text-xl font-semibold">Questão {currentQuestionIndex}</h2>
             <p>Ano: {question.year}</p>
             <p>Disciplina: {question.discipline}</p>
             <p>{question.description}</p>
