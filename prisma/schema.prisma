@@ -39,4 +39,5 @@ model Alternative {
   questionId String
   isCorrect  Boolean
   letter String
+  text String
 }
