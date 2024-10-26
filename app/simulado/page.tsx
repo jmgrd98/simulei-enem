@@ -46,6 +46,8 @@ export default function SimuladoPage() {
 
       const savedAnswer = selectedAnswers.find(answer => answer.index === index)?.answer;
       setSelectedAnswer(savedAnswer || null);
+
+      setPrevAnswers(prevAnswers => [...prevAnswers, { index, answer: savedAnswer || '' }]);
     } catch (error) {
       console.error(error);
     } finally {
