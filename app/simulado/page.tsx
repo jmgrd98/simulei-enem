@@ -25,7 +25,14 @@ export default function SimuladoPage() {
   const router = useRouter();
   const { isSignedIn } = useUser();
 
-  const [question, setQuestion] = useState<Question>(null);
+  const [question, setQuestion] = useState<Question>({
+    alternatives: [],
+    description: '',
+    context: '',
+    discipline: '',
+    index: 0,
+    year: 0
+  });
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
@@ -67,7 +74,7 @@ export default function SimuladoPage() {
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
     
-    const correctAnswer = question?.alternatives?.find((alt: Alternative) => alt.isCorrect);
+    const correctAnswer: Alternative = question?.alternatives?.find((alt: any) => alt.isCorrect);
     if (correctAnswer && correctAnswer.letter === letter) {
       incrementScore();
     } else {
@@ -75,7 +82,7 @@ export default function SimuladoPage() {
     }
   
     setSelectedAnswers(
-      prevAnswers.map((answer, index) =>
+      prevAnswers.map((answer) =>
         answer.index === currentQuestionIndex ? { ...answer, answer: letter } : answer
       )
     );

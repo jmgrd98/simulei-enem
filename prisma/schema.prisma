@@ -14,21 +14,28 @@ datasource db {
 }
 
 model Simulado {
-  id String @id @default (cuid())
-  userId String @unique
-  totalQuestions String[]
-  correctedAnswers String[]
-  incorrectedAnswers String[]
-  score Int
+  id                String      @id @default(cuid())
+  userId            String      @unique
+  totalQuestions    Int
+  correctedAnswers  Question[]  @relation("CorrectedAnswers")
+  incorrectAnswers  Question[]  @relation("IncorrectAnswers") 
+  score             Int
 }
 
 model Question {
-  id String @id @default(cuid())
+  id                 String        @id @default(cuid())
+  description        String
+  discipline         String
+  year               String
   correctAlternative String
-  alternatives String[]
+  alternatives       Alternative[] @relation("QuestionAlternatives")
+  correctedIn        Simulado[]    @relation("CorrectedAnswers")
+  incorrectedIn      Simulado[]    @relation("IncorrectAnswers")
 }
 
 model Alternative {
-  id String @id @default(cuid())
-  isCorrected Boolean
+  id         String    @id @default(cuid())
+  question   Question  @relation(fields: [questionId], references: [id], name: "QuestionAlternatives")
+  questionId String
+  isCorrect  Boolean
 }
