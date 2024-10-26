@@ -27,3 +27,8 @@ model Question {
   correctAlternative String
   alternatives String[]
 }
+
+model Alternative {
+  id String @id @default(cuid())
+  isCorrected Boolean
+}

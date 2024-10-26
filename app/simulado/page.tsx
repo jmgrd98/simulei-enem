@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import Loader from "@/components/Loader/Loader";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { useExamTime } from "@/context/ExameTimeContext";
+import { Question, Alternative } from "@prisma/client";
 
 export default function SimuladoPage() {
   const searchParams = useSearchParams();
@@ -24,7 +25,7 @@ export default function SimuladoPage() {
   const router = useRouter();
   const { isSignedIn } = useUser();
 
-  const [question, setQuestion] = useState<any>(null);
+  const [question, setQuestion] = useState<Question>(null);
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
@@ -66,7 +67,7 @@ export default function SimuladoPage() {
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
     
-    const correctAnswer = question?.alternatives?.find((alt: any) => alt.isCorrect);
+    const correctAnswer = question?.alternatives?.find((alt: Alternative) => alt.isCorrect);
     if (correctAnswer && correctAnswer.letter === letter) {
       incrementScore();
     } else {
