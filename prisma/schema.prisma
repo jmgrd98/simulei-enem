@@ -38,4 +38,5 @@ model Alternative {
   question   Question  @relation(fields: [questionId], references: [id], name: "QuestionAlternatives")
   questionId String
   isCorrect  Boolean
+  letter String
 }
