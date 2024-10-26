@@ -53,13 +53,13 @@ export default function SimuladoPage() {
     }
   };
 
-  // useEffect(() => {
-  //   if (timeLeft > 0) {
-  //     startTimer();
-  //   } else if (timeLeft === 0) {
-  //     alert("Time's up!");
-  //   }
-  // }, [timeLeft, startTimer]);
+  useEffect(() => {
+    if (timeLeft > 0) {
+      startTimer();
+    } else if (timeLeft === 0) {
+      alert("Time's up!");
+    }
+  }, [timeLeft, startTimer]);
 
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);

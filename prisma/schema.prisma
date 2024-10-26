@@ -21,3 +21,9 @@ model Simulado {
   incorrectedAnswers String[]
   score Int
 }
+
+model Question {
+  id String @id @default(cuid())
+  correctAlternative String
+  alternatives String[]
+}

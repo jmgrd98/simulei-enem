@@ -11,6 +11,7 @@ import { Pie, PieChart, Label } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSearchParams } from 'next/navigation';
 import { useExamTime } from "@/context/ExameTimeContext";
+import { Question } from '@prisma/client';
 
 export default function ResultadoPage() {
   const { score, selectedAnswers, resetScore } = useUserScore();
@@ -18,7 +19,7 @@ export default function ResultadoPage() {
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [loading, setLoading] = useState(true);
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
   const searchParams = useSearchParams();
   const timeLeftParam = searchParams.get('timeLeft');
@@ -39,28 +40,33 @@ export default function ResultadoPage() {
 
   useEffect(() => {
     fetchQuestions(2023);
-    console.log(selectedAnswers);
-    console.log(questions);
   }, [selectedAnswers]);
-
+  
   const fetchQuestions = async (year: number) => {
     try {
-      let allQuestions: any[] = [];
+      let allQuestions: Question[] = [];
       const limit = 50;
       const totalRequests = Math.ceil(totalQuestions / limit);
-
+  
       for (let i = 0; i < totalRequests; i++) {
         const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions?limit=${limit}&offset=${i * limit}`);
         allQuestions = [...allQuestions, ...response.data.questions];
       }
-
+  
       setQuestions(allQuestions.slice(0, totalQuestions));
+      console.log("Fetched questions:", allQuestions);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
   };
+  
+  useEffect(() => {
+    console.log("Selected answers:", selectedAnswers);
+    console.log("Questions:", questions);
+    console.log('Score', score);
+  }, [selectedAnswers, questions, score]);
 
   const handleBackToHome = () => {
     resetScore();
