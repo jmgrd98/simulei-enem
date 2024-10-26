@@ -19,7 +19,7 @@ export default function SimuladoPage() {
   const selectedTime = Number(searchParams.get('time')) || 0;
 
   const { selectedAnswers, setSelectedAnswers, incrementScore, decrementScore } = useUserScore();
-  const { timeLeft, setTimeLeft, startTimer, resetTimer, isAnimating, setIsAnimating } = useExamTime();
+  const { timeLeft, setTimeLeft, startTimer, resetTimer, isAnimating } = useExamTime();
 
   const router = useRouter();
   const { isSignedIn } = useUser();
