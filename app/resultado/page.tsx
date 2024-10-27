@@ -16,7 +16,7 @@ import { useEffect, useMemo } from "react";
 
 export default function ResultadoPage() {
   const { score, selectedAnswers, resetScore } = useUserScore();
-  const { selectedTime, timeLeft, stopTimer, isTimerRunning } = useExamTime();
+  const { selectedTime, timeLeft, stopTimer } = useExamTime();
   const router = useRouter();
   const { isSignedIn } = useUser();
   const searchParams = useSearchParams();
