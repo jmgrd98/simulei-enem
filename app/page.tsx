@@ -28,17 +28,17 @@ export default function Home() {
   };
 
   const generateExam = (selectedYear: number, selectedTime: number) => {
-
     if (!isSignedIn) {
       toast({
-        description: 'Por favor, faca login para gerar um simulado',
+        description: 'Por favor, faça login para gerar um simulado',
         variant: 'destructive'
       });
       return;
     }
-
+  
     if (selectedTime > 0) {
-      setTimeLeft(selectedTime * 60);
+      const timeInSeconds = selectedTime * 60;
+      setTimeLeft(timeInSeconds);
       startTimer();
       router.push(`/simulado?year=${selectedYear}&time=${selectedTime}`);
     } else {
@@ -47,7 +47,7 @@ export default function Home() {
         variant: 'destructive'
       });
     }
-  };
+  };  
 
   return (
     <>

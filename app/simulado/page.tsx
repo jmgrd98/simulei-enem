@@ -79,10 +79,9 @@ export default function SimuladoPage() {
     setSelectedAnswer(letter);
 
     const correctAnswer = question.alternatives.find((alt: Alternative) => alt.isCorrect);
+    console.log(correctAnswer?.letter, letter)
     if (correctAnswer?.letter === letter) {
       incrementScore();
-    } else {
-      decrementScore();
     }
 
     setSelectedAnswers(

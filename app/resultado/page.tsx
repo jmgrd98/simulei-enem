@@ -40,7 +40,7 @@ export default function ResultadoPage() {
 
   useEffect(() => {
     fetchQuestions(2023);
-  }, [selectedAnswers]);
+  }, [selectedAnswers, score]);
   
   const fetchQuestions = async (year: number) => {
     try {
@@ -77,7 +77,7 @@ export default function ResultadoPage() {
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 onClick={() => router.push('/')} className="text-3xl font-bold mb-10 cursor-pointer">Simulado ENEM</h1>
+          <h1 onClick={() => router.push('/')} className="text-3xl font-bold mb-10 cursor-pointer">Simulei</h1>
           {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
