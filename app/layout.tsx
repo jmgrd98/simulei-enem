@@ -7,6 +7,7 @@ import { ExamTimeProvider } from "@/context/ExamTimeContext";
 import { Toaster } from "@/components/ui/toaster";
 import { Inter } from 'next/font/google'
 import ReactQueryProvider from "@/components/react-query-provider";
+import Header from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,7 +41,8 @@ export default function RootLayout({
           <body
             className={`${inter.className} antialiased`}
           >
-            {children}
+            <Header />
+              {children}
             <Toaster/>
           </body>
         </html>

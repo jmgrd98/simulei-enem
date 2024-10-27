@@ -6,7 +6,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import axios from "axios";
-import Loader from "@/components/Loader/Loader";
+import Loader from "@/components/Loader";
 import { Pie, PieChart, Label } from "recharts";
 import {
   ChartConfig,

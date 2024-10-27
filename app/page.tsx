@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useExamTime } from "@/context/ExamTimeContext";
@@ -17,10 +17,6 @@ export default function Home() {
   const [selectedYear, setSelectedYear] = useState<number>(2023);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<number>(0);
-
-  const handleLoginClick = () => {
-    router.push('/sign-in');
-  };
 
   const handleTimeSelection = (value: string) => {
     const selectedMinutes = Number(value);
@@ -54,7 +50,6 @@ export default function Home() {
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
           <h1 className="text-6xl font-bold mb-10 w-2/3">Gere simulados do ENEM gratuitos e meça seus resultados!</h1>
-          {isSignedIn ? <UserButton /> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={handleLoginClick}>Login</Button>}
         </div>
         
         <h2 className="text-2xl text-center font-semibold w-full my-2">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>

@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
-import Loader from "@/components/Loader/Loader";
+import Loader from "@/components/Loader";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { useExamTime } from "@/context/ExamTimeContext";
 import { Question, Alternative } from "@prisma/client";
@@ -119,7 +119,6 @@ export default function SimuladoPage() {
     <QueryClientProvider client={queryClient}>
       <main className="flex flex-col items-center p-12 w-full">
         <div className="w-full flex items-center justify-between">
-          <h1 onClick={() => router.push('/')} className="text-6xl font-bold mb-10 cursor-pointer">Simulado ENEM</h1>
           {isSignedIn ? (
             <div className="w-20 h-20"><UserButton /></div>
           ) : (
