@@ -5,9 +5,11 @@ import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useExamTime } from "@/context/ExameTimeContext";
+import { useExamTime } from "@/context/ExamTimeContext";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Home() {
+  const { toast } = useToast();
   const { startTimer } = useExamTime();
   const router = useRouter();
   const { isSignedIn } = useUser();
@@ -15,7 +17,6 @@ export default function Home() {
   const [selectedYear, setSelectedYear] = useState<number>(2023);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<number>(0);
-
 
   const handleLoginClick = () => {
     router.push('/sign-in');
@@ -32,10 +33,12 @@ export default function Home() {
       startTimer();
       router.push(`/simulado?year=${selectedYear}&time=${selectedTime}`);
     } else {
-      alert("Please select a valid exam time");
+      toast({
+        description: 'Por favor, selecione um tempo de prova válido',
+        variant: 'destructive'
+      });
     }
   };
-  
 
   return (
     <>
@@ -53,8 +56,8 @@ export default function Home() {
               <SelectValue placeholder="Selecione o ano" />
             </SelectTrigger>
             <SelectContent>
-              {[...Array(2024 - 2009 + 1)].map((_, i) => {
-                const year = 2024 - i;
+              {[...Array(2023 - 2009 + 1)].map((_, i) => {
+                const year = 2023 - i; // Generates years from 2023 to 2009
                 return (
                   <SelectItem key={year} value={year.toString()}>
                     {year}

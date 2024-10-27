@@ -10,7 +10,7 @@ import Loader from "@/components/Loader/Loader";
 import { Pie, PieChart, Label } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSearchParams } from 'next/navigation';
-import { useExamTime } from "@/context/ExameTimeContext";
+import { useExamTime } from "@/context/ExamTimeContext";
 import { Question } from '@prisma/client';
 
 export default function ResultadoPage() {

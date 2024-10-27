@@ -1,6 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from 'next/navigation';
 
 interface ExamTimeContextProps {
     selectedTime: number;
@@ -16,6 +18,8 @@ interface ExamTimeContextProps {
 const ExamTimeContext = createContext<ExamTimeContextProps | undefined>(undefined);
 
 export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) => {
+  const { toast } = useToast();
+  const router = useRouter();
   const [selectedTime, setSelectedTime] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
@@ -23,14 +27,17 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (isTimerRunning && timeLeft > 0) {
+    if (timeLeft > 0) {
       timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    } else if (timeLeft === 0 && isTimerRunning) {
+      setIsTimerRunning(false);
+      toast({
+        description: 'O tempo chegou ao fim!',
+        variant: 'destructive'
+    });
+    router.push('/resultado');
     }
-    else if (timeLeft === 0 && isTimerRunning) {
-      alert('Time\'s up!');
-      resetTimer();
-    }
-
+  
     return () => clearTimeout(timer);
   }, [isTimerRunning, timeLeft]);
 

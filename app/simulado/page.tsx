@@ -11,12 +11,15 @@ import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import Loader from "@/components/Loader/Loader";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
-import { useExamTime } from "@/context/ExameTimeContext";
+import { useExamTime } from "@/context/ExamTimeContext";
 import { Question, Alternative } from "@prisma/client";
+import { useToast } from "@/hooks/use-toast";
+
 
 type QuestionWithAlternatives = Question & { alternatives: Alternative[] };
 
 export default function SimuladoPage() {
+  const { toast } = useToast();
   const searchParams = useSearchParams();
   const selectedYear = Number(searchParams.get('year')) || 2023;
   const selectedTime = Number(searchParams.get('time')) || 0;
@@ -69,8 +72,6 @@ export default function SimuladoPage() {
   useEffect(() => {
     if (timeLeft > 0) {
       startTimer();
-    } else if (timeLeft === 0) {
-      alert("Time's up!");
     }
   }, [timeLeft, startTimer]);
 
@@ -105,10 +106,20 @@ export default function SimuladoPage() {
 
   const finishExam = () => {
     router.push(`/resultado?timeLeft=${timeLeft}`);
+    toast({
+      description: 'Você finalizou o simulado',
+    })
   };
 
+  const capitalizeWords = (string: string) => {
+    return string
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join('-');
+  };  
+
   return (
-    <main className="flex flex-col items-center p-12">
+    <main className="flex flex-col items-center p-12 w-full">
       <div className="w-full flex items-center justify-between">
         <h1 onClick={() => router.push('/')} className="text-6xl font-bold mb-10 cursor-pointer">Simulado ENEM</h1>
         {isSignedIn ? (
@@ -118,10 +129,10 @@ export default function SimuladoPage() {
         )}
       </div>
 
-      <div className="flex flex-col gap-5 items-center">
+      <div className="flex flex-col gap-5 items-center w-full">
         {!loading && (
           <div className="w-full flex gap-2 items-center justify-between">
-            <Button onClick={handlePreviousQuestion} disabled={loading || currentQuestionIndex === 1}>
+            <Button variant='secondary' onClick={handlePreviousQuestion} disabled={loading || currentQuestionIndex === 1}>
               <FaArrowLeft />
             </Button>
             <Select onValueChange={handleQuestionSelect} defaultValue={currentQuestionIndex.toString()}>
@@ -136,7 +147,7 @@ export default function SimuladoPage() {
                 ))}
               </SelectContent>
             </Select>
-            <Button onClick={handleNextQuestion} disabled={loading}>
+            <Button variant='secondary' onClick={handleNextQuestion} disabled={loading}>
               <FaArrowRight />
             </Button>
           </div>
@@ -156,7 +167,7 @@ export default function SimuladoPage() {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button onClick={finishExam} className="font-semibold text-lg">Finalizar prova</Button>
+              <Button variant='secondary' onClick={finishExam} className="font-semibold text-lg place-self-end">Finalizar prova</Button>
             </TooltipTrigger>
             <TooltipContent>Revise todas as questões antes de finalizar!</TooltipContent>
           </Tooltip>
@@ -168,7 +179,7 @@ export default function SimuladoPage() {
           <div className="p-4 border rounded shadow w-full flex flex-col gap-3">
             <h2 className="text-xl font-semibold">Questão {currentQuestionIndex}</h2>
             <p>Ano: {question.year}</p>
-            <p>Disciplina: {question.discipline}</p>
+            <p>Disciplina: {capitalizeWords(question.discipline)}</p>
             <p>{question.description}</p>
             <div className="flex flex-col gap-3 w-full">
               {question.alternatives.map((alt) => (
