@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useUserScore } from "@/context/UserScoreContext";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import axios from "axios";
 import Loader from "@/components/Loader/Loader";
 import { Pie, PieChart, Label } from "recharts";
@@ -12,55 +12,56 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSearchParams } from 'next/navigation';
 import { useExamTime } from "@/context/ExamTimeContext";
 import { Question } from '@prisma/client';
+import { useEffect, useMemo } from "react";
 
 export default function ResultadoPage() {
   const { score, selectedAnswers, resetScore } = useUserScore();
-  const { selectedTime } = useExamTime();
+  const { selectedTime, timeLeft, stopTimer, isTimerRunning } = useExamTime();
   const router = useRouter();
   const { isSignedIn } = useUser();
-  const [loading, setLoading] = useState(true);
-  const [questions, setQuestions] = useState<Question[]>([]);
-
   const searchParams = useSearchParams();
   const timeParam = searchParams.get('time');
   
-  const time = Number(timeParam) || 0;
-  const timeSpent = Math.max(selectedTime - time, 0); 
-  
+  const totalQuestions = 180;
+
+
+  const timeSpent = useMemo(() => {
+    const totalExamTime = Number(timeParam) || selectedTime;
+    return totalExamTime ? Math.max(totalExamTime * 60 - timeLeft, 0) : 0;
+  }, [selectedTime, timeLeft, timeParam]);
+
   const hoursSpent = Math.floor(timeSpent / 3600);
   const minutesSpent = Math.floor((timeSpent % 3600) / 60);
   const secondsSpent = timeSpent % 60;
 
-  const totalQuestions = 180;
+  useEffect(() => {
+    stopTimer();
+    console.log(secondsSpent)
+  }, [secondsSpent]);
 
   const chartData = [
     { label: "Corretas", value: score, fill: "#22C55E" },
     { label: "Erradas", value: totalQuestions - score, fill: "#EF4444" }
   ];
 
-  useEffect(() => {
-    fetchQuestions(2023);
-    console.log(selectedTime);
-  }, [selectedAnswers, score, selectedTime]);
-  
-  const fetchQuestions = async (year: number) => {
-    try {
-      let allQuestions: Question[] = [];
-      const limit = 50;
-      const totalRequests = Math.ceil(totalQuestions / limit);
-  
-      for (let i = 0; i < totalRequests; i++) {
-        const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions?limit=${limit}&offset=${i * limit}`);
-        allQuestions = [...allQuestions, ...response.data.questions];
-      }
-  
-      setQuestions(allQuestions.slice(0, totalQuestions));
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+  const fetchQuestions = async (): Promise<Question[]> => {
+    const year = 2023;
+    const limit = 50;
+    const totalRequests = Math.ceil(totalQuestions / limit);
+    let allQuestions: Question[] = [];
+
+    for (let i = 0; i < totalRequests; i++) {
+      const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions?limit=${limit}&offset=${i * limit}`);
+      allQuestions = [...allQuestions, ...response.data.questions];
     }
+
+    return allQuestions.slice(0, totalQuestions);
   };
+
+  const { data: questions, isLoading, isError } = useQuery<Question[]>({
+    queryKey: ['questions', 2023],
+    queryFn: fetchQuestions,
+  });
 
   const handleBackToHome = () => {
     resetScore();
@@ -89,12 +90,14 @@ export default function ResultadoPage() {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap pl-5">
-            {loading ? (
+            {isLoading ? (
               <div className="flex justify-center items-center h-[50vh] w-full m-auto">
                 <Loader />
               </div>
+            ) : isError ? (
+              <p>Erro ao carregar as questões. Tente novamente mais tarde.</p>
             ) : (
-              questions.map((question, index) => {
+              questions!.map((question, index) => {
                 const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
                 
                 let colorClass = 'bg-gray-400';
@@ -110,15 +113,14 @@ export default function ResultadoPage() {
             )}
           </div>
 
-
           <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">
-                <CardTitle>Respostas - Corretas vs Erradas</CardTitle>
+              <CardTitle>Respostas - Corretas vs Erradas</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
-                <div className="mx-auto max-h-[250px]">
+              <div className="mx-auto max-h-[250px]">
                 <PieChart width={250} height={250}>
-                    <Pie
+                  <Pie
                     data={chartData}
                     dataKey="value"
                     nameKey="label"
@@ -126,42 +128,41 @@ export default function ResultadoPage() {
                     outerRadius={80}
                     fill="#8884d8"
                     strokeWidth={5}
-                    >
+                  >
                     <Label
-                        content={({ viewBox }) => {
+                      content={({ viewBox }) => {
                         if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                            return (
+                          return (
                             <text
-                                x={viewBox.cx}
-                                y={viewBox.cy}
-                                textAnchor="middle"
-                                dominantBaseline="middle"
+                              x={viewBox.cx}
+                              y={viewBox.cy}
+                              textAnchor="middle"
+                              dominantBaseline="middle"
                             >
-                                <tspan
+                              <tspan
                                 x={viewBox.cx}
                                 y={viewBox.cy}
                                 className="fill-foreground text-3xl font-bold"
-                                >
+                              >
                                 {totalQuestions}
-                                </tspan>
-                                <tspan
+                              </tspan>
+                              <tspan
                                 x={viewBox.cx}
                                 y={(viewBox.cy || 0) + 24}
                                 className="fill-muted-foreground"
-                                >
+                              >
                                 Total
-                                </tspan>
+                              </tspan>
                             </text>
-                            );
+                          );
                         }
-                        }}
+                      }}
                     />
-                    </Pie>
+                  </Pie>
                 </PieChart>
-                </div>
+              </div>
             </CardContent>
-            </Card>
-
+          </Card>
 
           <Button variant={'secondary'} size={'xl'} onClick={handleBackToHome}>Voltar ao Início</Button>
         </div>

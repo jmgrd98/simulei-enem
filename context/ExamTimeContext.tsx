@@ -10,7 +10,9 @@ interface ExamTimeContextProps {
     timeLeft: number;
     setTimeLeft: (time: number) => void;
     startTimer: () => void;
+    stopTimer: () => void;
     resetTimer: () => void;
+    isTimerRunning: boolean;
     isAnimating: boolean;
     setIsAnimating: (isAnimating: boolean) => void;
 }
@@ -27,24 +29,30 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (timeLeft > 0) {
-      timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    if (isTimerRunning && timeLeft > 0) {
+        timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
     } else if (timeLeft === 0 && isTimerRunning) {
-      setIsTimerRunning(false);
-      toast({
-        description: 'O tempo chegou ao fim!',
-        variant: 'destructive'
-    });
-    router.push('/resultado');
+        setIsTimerRunning(false);
+        toast({
+            description: 'O tempo chegou ao fim!',
+            variant: 'destructive'
+        });
+        router.push('/resultado');
     }
   
     return () => clearTimeout(timer);
-  }, [isTimerRunning, timeLeft]);
+}, [isTimerRunning, timeLeft]);
+
 
   const startTimer = () => {
     if (timeLeft > 0) {
       setIsTimerRunning(true);
     }
+  };
+
+  const stopTimer = () => {
+    console.log("Timer stopped");
+    setIsTimerRunning(false);
   };
 
   const resetTimer = () => {
@@ -65,7 +73,9 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
         timeLeft,
         setTimeLeft,
         startTimer,
+        stopTimer,
         resetTimer,
+        isTimerRunning,
         isAnimating,
         setIsAnimating,
       }}
