@@ -35,6 +35,7 @@ model Question {
 
 model Alternative {
   id         String    @id @default(cuid())
+  index Int
   question   Question  @relation(fields: [questionId], references: [id], name: "QuestionAlternatives")
   questionId String
   isCorrect  Boolean

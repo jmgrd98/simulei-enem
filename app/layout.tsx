@@ -6,8 +6,11 @@ import { UserScoreProvider } from "@/context/UserScoreContext";
 import { ExamTimeProvider } from "@/context/ExamTimeContext";
 import { Toaster } from "@/components/ui/toaster";
 import { Inter } from 'next/font/google'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const inter = Inter({ subsets: ["latin"] });
+
+const queryClient = new QueryClient();
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -32,18 +35,20 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <UserScoreProvider>
-        <ExamTimeProvider>
-      <html lang="en">
-        <body
-          className={`${inter.className} antialiased`}
-        >
-          {children}
-          <Toaster/>
-        </body>
-      </html>
-        </ExamTimeProvider>
-      </UserScoreProvider>
+      <QueryClientProvider client={queryClient}>
+        <UserScoreProvider>
+          <ExamTimeProvider>
+        <html lang="en">
+          <body
+            className={`${inter.className} antialiased`}
+          >
+            {children}
+            <Toaster/>
+          </body>
+        </html>
+          </ExamTimeProvider>
+        </UserScoreProvider>
+      </QueryClientProvider>
     </ClerkProvider>
   );
 }

@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { UserButton, useUser } from "@clerk/nextjs";
 import axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
-import { FaArrowRight, FaArrowLeft, FaRedo } from 'react-icons/fa';
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import Loader from "@/components/Loader/Loader";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
@@ -25,7 +25,7 @@ export default function SimuladoPage() {
   const selectedTime = Number(searchParams.get('time')) || 0;
 
   const { selectedAnswers, setSelectedAnswers, incrementScore, decrementScore } = useUserScore();
-  const { timeLeft, setTimeLeft, startTimer, resetTimer, isAnimating } = useExamTime();
+  const { timeLeft, setTimeLeft, startTimer } = useExamTime();
 
   const router = useRouter();
   const { isSignedIn } = useUser();
@@ -41,7 +41,7 @@ export default function SimuladoPage() {
   const [loading, setLoading] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
-  const [prevAnswers, setPrevAnswers] = useState<{ index: number, answer: string }[]>([]);
+  const [prevAnswers, setPrevAnswers] = useState<any[]>([]);
 
   useEffect(() => {
     setTimeLeft(selectedTime * 60);
@@ -66,6 +66,7 @@ export default function SimuladoPage() {
   }, [selectedAnswers]);
 
   useEffect(() => {
+    console.log(question)
     fetchQuestion(currentQuestionIndex, selectedYear);
   }, [currentQuestionIndex, selectedYear, fetchQuestion]);
 
@@ -77,20 +78,21 @@ export default function SimuladoPage() {
 
   const handleAnswerClick = (letter: string) => {
     setSelectedAnswer(letter);
-
+  
     const correctAnswer = question.alternatives.find((alt: Alternative) => alt.isCorrect);
-    console.log(correctAnswer?.letter, letter)
+  
     if (correctAnswer?.letter === letter) {
       incrementScore();
+    } else if (correctAnswer && selectedAnswer === correctAnswer.letter) {
+      decrementScore();
     }
-
-    setSelectedAnswers(
-      prevAnswers.map((answer) =>
-        answer.index === currentQuestionIndex ? { ...answer, answer: letter } : answer
-      )
-    );
+  
+    setSelectedAnswers((prevAnswers: any[]) => {
+      const updatedAnswers = prevAnswers.filter(answer => answer.index !== currentQuestionIndex);
+      return [...updatedAnswers, { index: currentQuestionIndex, answer: letter }];
+    });
   };
-
+  
   const handleQuestionSelect = (value: string) => {
     setCurrentQuestionIndex(Number(value));
   };
@@ -104,7 +106,7 @@ export default function SimuladoPage() {
   };
 
   const finishExam = () => {
-    router.push(`/resultado?timeLeft=${timeLeft}`);
+    router.push(`/resultado?time=${selectedTime}`);
     toast({
       description: 'Você finalizou o simulado',
     })
@@ -160,7 +162,7 @@ export default function SimuladoPage() {
               {(timeLeft % 60).toString().padStart(2, '0')}
             </div>
           )}
-          <FaRedo className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`} onClick={resetTimer} />
+          {/* <FaRedo className={`cursor-pointer ${isAnimating ? 'animate-spin' : ''}`} onClick={resetTimer} /> */}
         </div>
 
         <TooltipProvider>

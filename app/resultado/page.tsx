@@ -15,7 +15,7 @@ import { Question } from '@prisma/client';
 
 export default function ResultadoPage() {
   const { score, selectedAnswers, resetScore } = useUserScore();
-  const { selectedTime } = useExamTime()
+  const { selectedTime } = useExamTime();
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [loading, setLoading] = useState(true);
@@ -40,7 +40,8 @@ export default function ResultadoPage() {
 
   useEffect(() => {
     fetchQuestions(2023);
-  }, [selectedAnswers, score]);
+    console.log(selectedTime);
+  }, [selectedAnswers, score, selectedTime]);
   
   const fetchQuestions = async (year: number) => {
     try {
@@ -54,19 +55,12 @@ export default function ResultadoPage() {
       }
   
       setQuestions(allQuestions.slice(0, totalQuestions));
-      console.log("Fetched questions:", allQuestions);
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
   };
-  
-  useEffect(() => {
-    console.log("Selected answers:", selectedAnswers);
-    console.log("Questions:", questions);
-    console.log('Score', score);
-  }, [selectedAnswers, questions, score]);
 
   const handleBackToHome = () => {
     resetScore();
@@ -77,7 +71,7 @@ export default function ResultadoPage() {
     <>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 onClick={() => router.push('/')} className="text-3xl font-bold mb-10 cursor-pointer">Simulei</h1>
+          <h1 onClick={() => handleBackToHome()} className="text-3xl font-bold mb-10 cursor-pointer">Simulei</h1>
           {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
