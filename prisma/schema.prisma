@@ -24,7 +24,8 @@ model Simulado {
 
 model Question {
   id                 String        @id @default(cuid())
-  description        String
+  context String
+  alternativesIntroduction        String
   discipline         String
   year               String
   correctAlternative String

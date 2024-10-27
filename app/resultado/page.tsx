@@ -22,10 +22,10 @@ export default function ResultadoPage() {
   const [questions, setQuestions] = useState<Question[]>([]);
 
   const searchParams = useSearchParams();
-  const timeLeftParam = searchParams.get('timeLeft');
+  const timeParam = searchParams.get('time');
   
-  const timeLeft = Number(timeLeftParam) || 0;
-  const timeSpent = Math.max(selectedTime - timeLeft, 0); 
+  const time = Number(timeParam) || 0;
+  const timeSpent = Math.max(selectedTime - time, 0); 
   
   const hoursSpent = Math.floor(timeSpent / 3600);
   const minutesSpent = Math.floor((timeSpent % 3600) / 60);
