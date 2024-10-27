@@ -36,8 +36,7 @@ export default function ResultadoPage() {
 
   useEffect(() => {
     stopTimer();
-    console.log(secondsSpent)
-  }, [secondsSpent]);
+  }, []);
 
   const chartData = [
     { label: "Corretas", value: score, fill: "#22C55E" },
