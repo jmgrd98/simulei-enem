@@ -2,13 +2,15 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
+type Answer = { index: number; answer: string };
+
 type UserScoreContextType = {
   score: number;
-  selectedAnswers: { index: number, answer: string }[];
+  selectedAnswers: Answer[];
   incrementScore: () => void;
   decrementScore: () => void;
   resetScore: () => void;
-  setSelectedAnswers: (selectedAnswers: { index: number, answer: string }[]) => void;
+  setSelectedAnswers: (selectedAnswers: Answer[] | ((prevAnswers: Answer[]) => Answer[])) => void;
 };
 
 const UserScoreContext = createContext<UserScoreContextType | undefined>(undefined);
@@ -23,8 +25,8 @@ export const useUserScore = () => {
 
 export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
   const [score, setScore] = useState<number>(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<{ index: number, answer: string }[]>([]);
-  
+  const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
+
   const incrementScore = () => setScore((prevScore) => prevScore + 1);
   const decrementScore = () => setScore((prevScore) => prevScore - 1);
   const resetScore = () => {

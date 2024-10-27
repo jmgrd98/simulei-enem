@@ -17,7 +17,11 @@ import { useToast } from "@/hooks/use-toast";
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-type QuestionWithAlternatives = Question & { alternatives: Alternative[] };
+type QuestionWithAlternatives = Question & { 
+  alternatives: Alternative[],
+  onSuccess: () => void,
+  onError: () => void,
+};
 
 const queryClient = new QueryClient();
 
@@ -41,27 +45,27 @@ export default function SimuladoPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);
 
-  // Set initial timer
   useEffect(() => {
     setTimeLeft(selectedTime * 60);
   }, [selectedTime, setTimeLeft]);
 
-  // Start timer if there's time left
   useEffect(() => {
     if (timeLeft > 0) {
       startTimer();
     }
   }, [timeLeft, startTimer]);
 
+  useEffect(() => {
+    setSelectedAnswer(selectedAnswers.find(answer => answer.index === currentQuestionIndex)?.answer || null);
+  }, [currentQuestionIndex, selectedAnswers]);
+
   const { data: question, isLoading, isError } = useQuery<QuestionWithAlternatives>({
     queryKey: ['question', currentQuestionIndex, selectedYear],
-    queryFn: () => fetchQuestion(currentQuestionIndex, selectedYear),
-    onSuccess: (data: any) => {
+    queryFn: async () => {
+      const response = await fetchQuestion(currentQuestionIndex, selectedYear);
       const savedAnswer = selectedAnswers.find(answer => answer.index === currentQuestionIndex)?.answer;
       setSelectedAnswer(savedAnswer || null);
-    },
-    onError: (error: any) => {
-      console.error("Error fetching question:", error);
+      return response;
     },
   });
 
@@ -76,8 +80,10 @@ export default function SimuladoPage() {
       decrementScore();
     }
 
-    setSelectedAnswers((prevAnswers: any[]) => {
-      const updatedAnswers = prevAnswers.filter(answer => answer.index !== currentQuestionIndex);
+    setSelectedAnswers((prevAnswers) => {
+      const updatedAnswers = prevAnswers
+        .filter((answer) => answer.index !== currentQuestionIndex)
+        .map((answer) => ({ index: answer.index, answer: answer.answer }));
       return [...updatedAnswers, { index: currentQuestionIndex, answer: letter }];
     });
   };
@@ -96,9 +102,10 @@ export default function SimuladoPage() {
 
   const finishExam = () => {
     router.push(`/resultado?time=${selectedTime}`);
-    toast({
-      description: 'Você finalizou o simulado',
-    });
+    // toast({
+    //   description: 'Você finalizou o simulado',
+    //   variant: 'defailt',
+    // });
   };
 
   const capitalizeWords = (string: string) => {
@@ -126,7 +133,7 @@ export default function SimuladoPage() {
               <Button variant='secondary' onClick={handlePreviousQuestion} disabled={isLoading || currentQuestionIndex === 1}>
                 <FaArrowLeft />
               </Button>
-              <Select onValueChange={handleQuestionSelect} defaultValue={currentQuestionIndex.toString()}>
+              <Select onValueChange={handleQuestionSelect} value={currentQuestionIndex.toString()}>
                 <SelectTrigger className="w-48">
                   <SelectValue placeholder="Selecione a questão" />
                 </SelectTrigger>
@@ -170,17 +177,21 @@ export default function SimuladoPage() {
           ) : (
             <div className="p-4 border rounded shadow w-full flex flex-col gap-3">
               <h2 className="text-xl font-semibold">Questão {currentQuestionIndex}</h2>
-              <p>Ano: {question.year}</p>
-              <p>Disciplina: {capitalizeWords(question.discipline)}</p>
-              <p>{question.context}</p>
-              <p>{question.alternativesIntroduction}</p>
-              <div className="flex flex-col gap-3 w-full">
-                {question.alternatives.map((alt) => (
-                  <Button key={alt.id} variant={selectedAnswer === alt.letter ? 'secondary' : 'outline'} onClick={() => handleAnswerClick(alt.letter)}>
-                    {alt.letter}: {alt.text}
-                  </Button>
+              <p>Ano: {question!.year}</p>
+              <p>Disciplina: {capitalizeWords(question!.discipline)}</p>
+              <p>{question!.context}</p>
+              <p>{question!.alternativesIntroduction}</p>
+              <ul className="grid gap-2">
+                {question!.alternatives.map((alt) => (
+                  <li key={alt.letter} className="list-none">
+                    <Button 
+                      variant={selectedAnswer === alt.letter ? 'default' : 'secondary'} 
+                      onClick={() => handleAnswerClick(alt.letter)}>
+                      {alt.letter}. {alt.text}
+                    </Button>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           )}
         </div>
