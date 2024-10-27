@@ -28,6 +28,15 @@ export default function Home() {
   };
 
   const generateExam = (selectedYear: number, selectedTime: number) => {
+
+    if (!isSignedIn) {
+      toast({
+        description: 'Por favor, faca login para gerar um simulado',
+        variant: 'destructive'
+      });
+      return;
+    }
+
     if (selectedTime > 0) {
       setTimeLeft(selectedTime * 60);
       startTimer();
@@ -57,7 +66,7 @@ export default function Home() {
             </SelectTrigger>
             <SelectContent>
               {[...Array(2023 - 2009 + 1)].map((_, i) => {
-                const year = 2023 - i; // Generates years from 2023 to 2009
+                const year = 2023 - i;
                 return (
                   <SelectItem key={year} value={year.toString()}>
                     {year}
@@ -92,15 +101,14 @@ export default function Home() {
               </div>
             )}
           </div>
-
-          <Button
-            className="text-xl font-semibold w-72 mt-5"
-            variant="secondary" 
-            size="xxl"
-            onClick={() => generateExam(selectedYear, selectedTime)}
-          >
-            Gerar Simulado
-          </Button>
+            <Button
+              className="text-xl font-semibold w-72 mt-5"
+              variant="secondary" 
+              size="xxl"
+              onClick={() => generateExam(selectedYear, selectedTime)}
+            >
+              Gerar Simulado
+            </Button>
         </div>
         <a className="mt-48 text-white text-center font-extralight hover:text-blue-500 cursor-pointer" href="https://github.com/jmgrd98" target="_blank">Desenvolvido por João Marcelo Dantas</a>
       </main>
