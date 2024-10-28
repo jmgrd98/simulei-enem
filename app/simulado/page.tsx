@@ -102,10 +102,6 @@ export default function SimuladoPage() {
 
   const finishExam = () => {
     router.push(`/resultado?time=${selectedTime}`);
-    // toast({
-    //   description: 'Você finalizou o simulado',
-    //   variant: 'defailt',
-    // });
   };
 
   const capitalizeWords = (string: string) => {
@@ -118,13 +114,6 @@ export default function SimuladoPage() {
   return (
     <QueryClientProvider client={queryClient}>
       <main className="flex flex-col items-center p-12 w-full">
-        <div className="w-full flex items-center justify-between">
-          {isSignedIn ? (
-            <div className="w-20 h-20"><UserButton /></div>
-          ) : (
-            <Button variant={'secondary'} onClick={() => router.push('/sign-in')}>Login</Button>
-          )}
-        </div>
 
         <div className="flex flex-col gap-5 items-center w-full">
           {!isLoading && (
