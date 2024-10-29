@@ -52,9 +52,9 @@ export default function Home() {
           <h1 className="text-6xl font-bold mb-10 w-2/3">Gere simulados do ENEM gratuitos e meça seus resultados!</h1>
         </div>
         
-        <h2 className="text-2xl text-center font-semibold w-full my-2">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>
+        <h2 className="text-2xl text-center font-semibold w-full">Selecione o ano da prova e o tempo para gerar um simulado e começar a estudar!</h2>
 
-        <div className="flex flex-col gap-5 items-center mt-20">
+        <div className="flex flex-col gap-5 items-center mt-5">
           <Select onValueChange={(value) => setSelectedYear(Number(value))} defaultValue={selectedYear.toString()}>
             <SelectTrigger className="w-48">
               <SelectValue placeholder="Selecione o ano" />
@@ -97,7 +97,7 @@ export default function Home() {
             )}
           </div>
             <Button
-              className="text-xl font-semibold w-72 mt-5"
+              className="text-xl font-semibold w-72 mt-2"
               variant="secondary" 
               size="xxl"
               onClick={() => generateExam(selectedYear, selectedTime)}
@@ -105,7 +105,7 @@ export default function Home() {
               Gerar Simulado
             </Button>
         </div>
-        <a className="mt-48 text-white text-center font-extralight hover:text-blue-500 cursor-pointer" href="https://github.com/jmgrd98" target="_blank">Desenvolvido por João Marcelo Dantas</a>
+        <a className="mt-4 text-white text-center font-extralight hover:text-blue-500 cursor-pointer" href="https://github.com/jmgrd98" target="_blank">Desenvolvido por João Marcelo Dantas</a>
       </main>
     </>
   );

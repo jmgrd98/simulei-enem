@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useUserScore } from "@/context/UserScoreContext";
 import { useSearchParams } from 'next/navigation';
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
@@ -13,7 +13,6 @@ import Loader from "@/components/Loader";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { useExamTime } from "@/context/ExamTimeContext";
 import { Question, Alternative } from "@prisma/client";
-// import { useToast } from "@/hooks/use-toast";
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -31,7 +30,6 @@ const fetchQuestion = async (index: number, year: number): Promise<QuestionWithA
 };
 
 export default function SimuladoPage() {
-  // const { toast } = useToast();
   const searchParams = useSearchParams();
   const selectedYear = Number(searchParams.get('year')) || 2023;
   const selectedTime = Number(searchParams.get('time')) || 0;
