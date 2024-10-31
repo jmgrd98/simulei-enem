@@ -98,7 +98,7 @@ export default function Home() {
           </div>
             <Button
               className="text-xl font-semibold w-72 mt-2"
-              variant="secondary" 
+              variant="default" 
               size="xxl"
               onClick={() => generateExam(selectedYear, selectedTime)}
             >
