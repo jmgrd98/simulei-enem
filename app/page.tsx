@@ -78,12 +78,12 @@ export default function Home() {
                   <SelectValue placeholder="Selecione o tempo" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="15">15 minutes</SelectItem>
-                  <SelectItem value="30">30 minutes</SelectItem>
-                  <SelectItem value="45">45 minutes</SelectItem>
-                  <SelectItem value="60">1 hour</SelectItem>
-                  <SelectItem value="120">2 hours</SelectItem>
-                  <SelectItem value="480">4 hours</SelectItem>
+                  <SelectItem value="15">15 minutos</SelectItem>
+                  <SelectItem value="30">30 minutos</SelectItem>
+                  <SelectItem value="45">45 minutos</SelectItem>
+                  <SelectItem value="60">1 horas</SelectItem>
+                  <SelectItem value="120">2 horas</SelectItem>
+                  <SelectItem value="480">4 horas</SelectItem>
                 </SelectContent>
               </Select>
             ) : (

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useUserScore } from "@/context/UserScoreContext";
 import { useSearchParams } from 'next/navigation';
-import { useUser } from "@clerk/nextjs";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
@@ -38,7 +37,6 @@ export default function SimuladoPage() {
   const { timeLeft, setTimeLeft, startTimer } = useExamTime();
 
   const router = useRouter();
-  const { isSignedIn } = useUser();
 
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(1);

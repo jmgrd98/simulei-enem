@@ -42,13 +42,11 @@ export default function ResultadoPage() {
 
   useEffect(() => {
     stopTimer();
-  }, []);
+  }, [stopTimer]);
 
-  // Calculate non-answered questions
   const answeredQuestionsCount = selectedAnswers.length;
   const unansweredQuestionsCount = totalQuestions - answeredQuestionsCount;
 
-  // Update chart data to include non-answered questions
   const chartData = [
     { label: "Corretas", value: score, fill: "#22C55E" },
     { label: "Erradas", value: totalQuestions - score - unansweredQuestionsCount, fill: "#EF4444" },
