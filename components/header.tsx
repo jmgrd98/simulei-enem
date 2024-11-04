@@ -5,13 +5,11 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useUserScore } from "@/context/UserScoreContext";
 import { ModeToggle } from "./mode-toggle";
-import { useTheme } from 'next-themes';
 
 const Header = () => {
     const { isSignedIn } = useUser();
     const router = useRouter();
     const { resetScore } = useUserScore();
-    const { theme } = useTheme();
 
     return (
       <div className={`w-full h-16 p-4 flex items-center justify-between 
