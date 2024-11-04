@@ -15,15 +15,16 @@ import { Question, Alternative } from "@prisma/client";
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-type QuestionWithAlternatives = Question & { 
+type QuestionWithAlternatives = Question & {
   alternatives: Alternative[],
+  files?: string[],
   onSuccess: () => void,
   onError: () => void,
 };
 
 const queryClient = new QueryClient();
 
-const fetchQuestion = async (index: number, year: number): Promise<QuestionWithAlternatives> => {
+const fetchQuestion = async (index: number, year: number, discipline?: string): Promise<QuestionWithAlternatives> => {
   const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions/${index}`);
   return response.data;
 };
@@ -164,6 +165,17 @@ export default function SimuladoPage() {
               <p>Ano: {question!.year}</p>
               <p>Disciplina: {capitalizeWords(question!.discipline)}</p>
               <p>{question!.context}</p>
+              
+              {question!.files && question!.files.length > 0 && (
+                <div className="flex justify-center my-4">
+                  <img
+                    src={question!.files[0]}
+                    alt={`Image for Question ${currentQuestionIndex}`}
+                    className="max-w-full h-auto rounded-md"
+                  />
+                </div>
+              )}
+              
               <p>{question!.alternativesIntroduction}</p>
               <ul className="grid gap-2">
                 {question!.alternatives.map((alt) => (
