@@ -15,7 +15,8 @@ const Header = () => {
 
     return (
       <div className={`w-full h-16 p-4 flex items-center justify-between 
-                       ${theme === 'dark' ? 'bg-[#0A0A0A] text-white' : 'bg-white text-[#0A0A0A]'}`}>
+                       
+                       `}>
         <p 
           onClick={() => {
             resetScore();
