@@ -24,7 +24,7 @@ type QuestionWithAlternatives = Question & {
 
 const queryClient = new QueryClient();
 
-const fetchQuestion = async (index: number, year: number, discipline?: string): Promise<QuestionWithAlternatives> => {
+const fetchQuestion = async (index: number, year: number): Promise<QuestionWithAlternatives> => {
   const response = await axios.get(`https://api.enem.dev/v1/exams/${year}/questions/${index}`);
   return response.data;
 };
