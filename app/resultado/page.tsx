@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import axios from "axios";
 import Loader from "@/components/Loader";
-import { Pie, PieChart, Label } from "recharts";
+import { Pie, PieChart, Label, Bar, BarChart, XAxis, YAxis } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -20,6 +20,7 @@ import { useSearchParams } from 'next/navigation';
 import { useExamTime } from "@/context/ExamTimeContext";
 import { Question } from '@prisma/client';
 import { useEffect, useMemo } from "react";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 
 export default function ResultadoPage() {
   const { score, selectedAnswers, resetScore } = useUserScore();
@@ -47,13 +48,13 @@ export default function ResultadoPage() {
   const answeredQuestionsCount = selectedAnswers.length;
   const unansweredQuestionsCount = totalQuestions - answeredQuestionsCount;
 
-  const chartData = [
+  const pieChartData = [
     { label: "Corretas", value: score, fill: "#22C55E" },
     { label: "Erradas", value: totalQuestions - score - unansweredQuestionsCount, fill: "#EF4444" },
     { label: "Não respondidas", value: unansweredQuestionsCount, fill: "grey" }
   ];
 
-  const chartConfig = {
+  const pieChartConfig = {
     corretasVsErradas: {
       label: "Corretas x Erradas",
     },
@@ -65,6 +66,40 @@ export default function ResultadoPage() {
       label: "Erradas",
       color: "hsl(var(--chart-2))",
     }
+  } satisfies ChartConfig;
+
+  const barChartData = [
+    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+    { browser: "other", visitors: 90, fill: "var(--color-other)" },
+  ];
+
+  const barChartConfig = {
+    visitors: {
+      label: "Visitors",
+    },
+    chrome: {
+      label: "Chrome",
+      color: "hsl(var(--chart-1))",
+    },
+    safari: {
+      label: "Safari",
+      color: "hsl(var(--chart-2))",
+    },
+    firefox: {
+      label: "Firefox",
+      color: "hsl(var(--chart-3))",
+    },
+    edge: {
+      label: "Edge",
+      color: "hsl(var(--chart-4))",
+    },
+    other: {
+      label: "Other",
+      color: "hsl(var(--chart-5))",
+    },
   } satisfies ChartConfig
 
   const fetchQuestions = async (): Promise<Question[]> => {
@@ -92,10 +127,10 @@ export default function ResultadoPage() {
   };
 
   return (
-    <>
+    <TooltipProvider>
       <main className="flex flex-col items-center p-12">
         <div className="w-full flex items-center justify-between">
-          <h1 onClick={() => handleBackToHome()} className="text-3xl font-bold mb-10 cursor-pointer">Simulei</h1>
+          <h1 onClick={() => handleBackToHome()} className="text-6xl font-bold mb-10 cursor-pointer">Resultado</h1>
           {isSignedIn ? <div className="w-20 h-20"><UserButton /></div> : <Button variant={'secondary'} className="w-24 self-start font-semibold text-lg" size={'xl'} onClick={() => router.push('/sign-in')}>Login</Button>}
         </div>
 
@@ -139,15 +174,28 @@ export default function ResultadoPage() {
                 ) : (
                   questions!.map((question, index) => {
                     const selectedAnswer = selectedAnswers.find(answer => answer.index === index + 1)?.answer;
-
+                    const correctAnswer = question.correctAlternative;
+                    
                     let colorClass = 'bg-gray-400';
                     if (selectedAnswer) {
-                      colorClass = selectedAnswer === question.correctAlternative ? 'bg-green-500' : 'bg-red-500';
+                      colorClass = selectedAnswer === correctAnswer ? 'bg-green-500' : 'bg-red-500';
                     }
+                  
                     return (
-                      <div key={index} className={`w-10 h-10 flex items-center justify-center ${colorClass} text-white`}>
-                        {index + 1}
-                      </div>
+                      <Tooltip key={index}>
+                        <TooltipTrigger asChild>
+                          <div
+                            className={`w-10 h-10 flex items-center justify-center ${colorClass} text-white 
+                                        transition-transform duration-300 ease-in-out transform hover:scale-110 cursor-pointer`}
+                          >
+                            {index + 1}
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Seu Resposta: {selectedAnswer || "Não respondida"}</p>
+                          <p>Resposta Correta: {correctAnswer}</p>
+                        </TooltipContent>
+                      </Tooltip>
                     );
                   })
                 )}
@@ -156,14 +204,14 @@ export default function ResultadoPage() {
           </TabsContent>
 
           <TabsContent value="statistics">
-            <div className="flex flex-col gap-5 items-center">
+            <div className="flex gap-5 items-center">
               <Card className="flex flex-col">
                 <CardHeader className="items-center pb-0">
                   <CardTitle>Respostas</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 pb-0">
                   <ChartContainer
-                    config={chartConfig}
+                    config={pieChartConfig}
                     className="mx-auto aspect-square max-h-[250px]"
                   >
                     <div className="mx-auto max-h-[250px]">
@@ -173,7 +221,7 @@ export default function ResultadoPage() {
                           content={<ChartTooltipContent hideLabel />}
                         />
                         <Pie
-                          data={chartData}
+                          data={pieChartData}
                           dataKey="value"
                           nameKey="label"
                           innerRadius={60}
@@ -216,12 +264,48 @@ export default function ResultadoPage() {
                   </ChartContainer>
                 </CardContent>
               </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Questões corretas por matéria</CardTitle>
+                  {/* <CardDescription>January - June 2024</CardDescription> */}
+                </CardHeader>
+                <CardContent>
+                  <ChartContainer config={barChartConfig}>
+                    <BarChart
+                      accessibilityLayer
+                      data={barChartData}
+                      layout="vertical"
+                      margin={{
+                        left: 0,
+                      }}
+                    >
+                      <YAxis
+                        dataKey="browser"
+                        type="category"
+                        tickLine={false}
+                        tickMargin={10}
+                        axisLine={false}
+                        tickFormatter={(value) =>
+                          barChartConfig[value as keyof typeof barChartConfig]?.label
+                        }
+                      />
+                      <XAxis dataKey="visitors" type="number" hide />
+                      <ChartTooltip
+                        cursor={false}
+                        content={<ChartTooltipContent hideLabel />}
+                      />
+                      <Bar dataKey="visitors" layout="vertical" radius={5} />
+                    </BarChart>
+                  </ChartContainer>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
         </Tabs>
 
         <Button variant={'secondary'} size={'xl'} onClick={handleBackToHome} className="mt-5">Voltar ao Início</Button>
       </main>
-    </>
+    </TooltipProvider>
   );
 }
