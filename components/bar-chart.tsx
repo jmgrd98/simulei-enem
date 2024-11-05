@@ -1,14 +1,14 @@
-import { Label, Bar, BarChart, XAxis, YAxis, Cell, Text } from "recharts";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Label, Bar, BarChart, XAxis, YAxis } from "recharts";
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { useQuery } from "@tanstack/react-query";
 import { Question } from "@prisma/client";
 import axios from "axios";
 import { useMemo } from "react";
 import { useUserScore } from "@/context/UserScoreContext";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const BarChartComponent = () => {
-  const { selectedAnswers } = useUserScore();
+  const { score, selectedAnswers } = useUserScore();
   const totalQuestions = 180;
 
   const fetchQuestions = async (): Promise<Question[]> => {
@@ -53,12 +53,31 @@ const BarChartComponent = () => {
 
   const barChartData = correctAnswersByDiscipline;
 
-  // Generate colors dynamically or specify a color map for each discipline
-  const barChartConfig = barChartData.reduce((config, { discipline }, index) => {
-    const color = `hsl(${(index * 70) % 360}, 70%, 60%)`; // Rotate colors for each discipline
-    config[discipline] = { label: discipline, color };
-    return config;
-  }, {} as Record<string, { label: string; color: string }>);
+  const barChartConfig = {
+    visitors: {
+      label: "Visitors",
+    },
+    chrome: {
+      label: "Chrome",
+      color: "hsl(var(--chart-1))",
+    },
+    safari: {
+      label: "Safari",
+      color: "hsl(var(--chart-2))",
+    },
+    firefox: {
+      label: "Firefox",
+      color: "hsl(var(--chart-3))",
+    },
+    edge: {
+      label: "Edge",
+      color: "hsl(var(--chart-4))",
+    },
+    other: {
+      label: "Other",
+      color: "hsl(var(--chart-5))",
+    },
+  } satisfies ChartConfig;
 
   return (
     <Card>
@@ -75,29 +94,16 @@ const BarChartComponent = () => {
             margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
           >
             <XAxis type="number" dataKey="count" />
-            <YAxis
-              type="category"
-              dataKey="discipline"
-              tickFormatter={(discipline) =>
-                barChartConfig[discipline]?.label || discipline
-              }
-            />
+            <YAxis type="category" dataKey="discipline" />
             <ChartTooltip
               cursor={{ fill: "transparent" }}
               content={<ChartTooltipContent />}
             />
             <Bar
               dataKey="count"
+              fill="hsl(var(--chart-1))"
               radius={[5, 5, 0, 0]}
-              label={({ discipline }) => <Text>{barChartConfig[discipline]?.label}</Text>}
-            >
-              {barChartData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={barChartConfig[entry.discipline]?.color || "#8884d8"}
-                />
-              ))}
-            </Bar>
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>

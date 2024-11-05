@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import axios from "axios";
 import Loader from "@/components/Loader";
-import { Pie, PieChart, Label, Bar, BarChart, XAxis, YAxis } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -21,6 +20,8 @@ import { useExamTime } from "@/context/ExamTimeContext";
 import { Question } from '@prisma/client';
 import { useEffect, useMemo } from "react";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import PieChartComponent from "@/components/pie-chart";
+import BarChartComponent from "@/components/bar-chart";
 
 export default function ResultadoPage() {
   const { score, selectedAnswers, resetScore } = useUserScore();
@@ -41,67 +42,6 @@ export default function ResultadoPage() {
   const minutesSpent = Math.floor((timeSpent % 3600) / 60);
   const secondsSpent = timeSpent % 60;
 
-  useEffect(() => {
-    stopTimer();
-  }, [stopTimer]);
-
-  const answeredQuestionsCount = selectedAnswers.length;
-  const unansweredQuestionsCount = totalQuestions - answeredQuestionsCount;
-
-  const pieChartData = [
-    { label: "Corretas", value: score, fill: "#22C55E" },
-    { label: "Erradas", value: totalQuestions - score - unansweredQuestionsCount, fill: "#EF4444" },
-    { label: "Não respondidas", value: unansweredQuestionsCount, fill: "grey" }
-  ];
-
-  const pieChartConfig = {
-    corretasVsErradas: {
-      label: "Corretas x Erradas",
-    },
-    corretas: {
-      label: "Corretas",
-      color: "hsl(var(--chart-1))",
-    },
-    erradas: {
-      label: "Erradas",
-      color: "hsl(var(--chart-2))",
-    }
-  } satisfies ChartConfig;
-
-  const barChartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-  ];
-
-  const barChartConfig = {
-    visitors: {
-      label: "Visitors",
-    },
-    chrome: {
-      label: "Chrome",
-      color: "hsl(var(--chart-1))",
-    },
-    safari: {
-      label: "Safari",
-      color: "hsl(var(--chart-2))",
-    },
-    firefox: {
-      label: "Firefox",
-      color: "hsl(var(--chart-3))",
-    },
-    edge: {
-      label: "Edge",
-      color: "hsl(var(--chart-4))",
-    },
-    other: {
-      label: "Other",
-      color: "hsl(var(--chart-5))",
-    },
-  } satisfies ChartConfig
-
   const fetchQuestions = async (): Promise<Question[]> => {
     const year = 2023;
     const limit = 50;
@@ -120,6 +60,15 @@ export default function ResultadoPage() {
     queryKey: ['questions', 2023],
     queryFn: fetchQuestions,
   });
+
+  const answeredQuestionsCount = selectedAnswers.length;
+  const unansweredQuestionsCount = totalQuestions - answeredQuestionsCount;
+
+  useEffect(() => {
+    stopTimer();
+  }, [stopTimer]);
+
+
 
   const handleBackToHome = () => {
     resetScore();
@@ -205,101 +154,8 @@ export default function ResultadoPage() {
 
           <TabsContent value="statistics">
             <div className="flex gap-5 items-center">
-              <Card className="flex flex-col">
-                <CardHeader className="items-center pb-0">
-                  <CardTitle>Respostas</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1 pb-0">
-                  <ChartContainer
-                    config={pieChartConfig}
-                    className="mx-auto aspect-square max-h-[250px]"
-                  >
-                    <div className="mx-auto max-h-[250px]">
-                      <PieChart width={250} height={250}>
-                        <ChartTooltip
-                          cursor={false}
-                          content={<ChartTooltipContent hideLabel />}
-                        />
-                        <Pie
-                          data={pieChartData}
-                          dataKey="value"
-                          nameKey="label"
-                          innerRadius={60}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          strokeWidth={5}
-                        >
-                          <Label
-                            content={({ viewBox }) => {
-                              if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                                return (
-                                  <text
-                                    x={viewBox.cx}
-                                    y={viewBox.cy}
-                                    textAnchor="middle"
-                                    dominantBaseline="middle"
-                                  >
-                                    <tspan
-                                      x={viewBox.cx}
-                                      y={viewBox.cy}
-                                      className="fill-foreground text-3xl font-bold"
-                                    >
-                                      {totalQuestions}
-                                    </tspan>
-                                    <tspan
-                                      x={viewBox.cx}
-                                      y={(viewBox.cy || 0) + 24}
-                                      className="fill-muted-foreground"
-                                    >
-                                      Questões
-                                    </tspan>
-                                  </text>
-                                );
-                              }
-                            }}
-                          />
-                        </Pie>
-                      </PieChart>
-                    </div>
-                  </ChartContainer>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Questões corretas por matéria</CardTitle>
-                  {/* <CardDescription>January - June 2024</CardDescription> */}
-                </CardHeader>
-                <CardContent>
-                  <ChartContainer config={barChartConfig}>
-                    <BarChart
-                      accessibilityLayer
-                      data={barChartData}
-                      layout="vertical"
-                      margin={{
-                        left: 0,
-                      }}
-                    >
-                      <YAxis
-                        dataKey="browser"
-                        type="category"
-                        tickLine={false}
-                        tickMargin={10}
-                        axisLine={false}
-                        tickFormatter={(value) =>
-                          barChartConfig[value as keyof typeof barChartConfig]?.label
-                        }
-                      />
-                      <XAxis dataKey="visitors" type="number" hide />
-                      <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent hideLabel />}
-                      />
-                      <Bar dataKey="visitors" layout="vertical" radius={5} />
-                    </BarChart>
-                  </ChartContainer>
-                </CardContent>
-              </Card>
+              <PieChartComponent />
+              <BarChartComponent />
             </div>
           </TabsContent>
         </Tabs>
