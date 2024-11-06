@@ -43,3 +43,10 @@ model Alternative {
   letter String
   text String
 }
+
+model Answer {
+  id String @id @default(cuid())
+  index Int
+  questionId String
+  letter String
+}

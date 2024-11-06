@@ -51,7 +51,6 @@ export const ExamTimeProvider = ({ children }: { children: React.ReactNode }) =>
   };
 
   const stopTimer = () => {
-    console.log("Timer stopped");
     setIsTimerRunning(false);
   };
 

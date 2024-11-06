@@ -6,9 +6,10 @@ type Answer = { index: number; answer: string };
 
 type UserScoreContextType = {
   score: number;
+  disciplineScores: Record<string, number>;
   selectedAnswers: Answer[];
-  incrementScore: () => void;
-  decrementScore: () => void;
+  incrementScore: (discipline: string) => void;
+  decrementScore: (discipline: string) => void;
   resetScore: () => void;
   setSelectedAnswers: (selectedAnswers: Answer[] | ((prevAnswers: Answer[]) => Answer[])) => void;
 };
@@ -25,12 +26,34 @@ export const useUserScore = () => {
 
 export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
   const [score, setScore] = useState<number>(0);
+  const [disciplineScores, setDisciplineScores] = useState<Record<string, number>>({});
   const [selectedAnswers, setSelectedAnswers] = useState<Answer[]>([]);
 
-  const incrementScore = () => setScore((prevScore) => prevScore + 1);
-  const decrementScore = () => setScore((prevScore) => prevScore - 1);
+  const incrementScore = (discipline: string) => {
+    setDisciplineScores((prevScores) => {
+      const updatedScores = {
+        ...prevScores,
+        [discipline]: (prevScores[discipline] || 0) + 1,
+      };
+      setScore(Object.values(updatedScores).reduce((acc, val) => acc + val, 0));
+      return updatedScores;
+    });
+  };
+  
+  const decrementScore = (discipline: string) => {
+    setDisciplineScores((prevScores) => {
+      const updatedScores = {
+        ...prevScores,
+        [discipline]: Math.max((prevScores[discipline] || 0) - 1, 0),
+      };
+      setScore(Object.values(updatedScores).reduce((acc, val) => acc + val, 0));
+      return updatedScores;
+    });
+  };  
+
   const resetScore = () => {
     setScore(0);
+    setDisciplineScores({});
     setSelectedAnswers([]);
   };
 
@@ -38,6 +61,7 @@ export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
     <UserScoreContext.Provider 
       value={{ 
         score,
+        disciplineScores,
         incrementScore,
         decrementScore,
         resetScore,
@@ -48,3 +72,5 @@ export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
     </UserScoreContext.Provider>
   );
 };
+
+

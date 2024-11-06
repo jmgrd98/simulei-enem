@@ -1,15 +1,24 @@
-import { Label, Bar, BarChart, XAxis, YAxis } from "recharts";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
+import { Label, Bar, BarChart, XAxis, YAxis, Cell } from "recharts";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { useQuery } from "@tanstack/react-query";
 import { Question } from "@prisma/client";
 import axios from "axios";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useUserScore } from "@/context/UserScoreContext";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const BarChartComponent = () => {
-  const { score, selectedAnswers } = useUserScore();
+  const { disciplineScores, selectedAnswers } = useUserScore();
   const totalQuestions = 180;
+
+  const disciplinesMap: { [key: string]: string } = {
+    "ciencias-humanas": "Ciências Humanas e suas Tecnologias",
+    "ciencias-natureza": "Ciências da Natureza e suas Tecnologias",
+    "linguagens": "Linguagens, Códigos e suas Tecnologias",
+    "matematica": "Matemática e suas Tecnologias",
+    "espanhol": "Espanhol",
+    "ingles": "Inglês"
+  };
 
   const fetchQuestions = async (): Promise<Question[]> => {
     const year = 2023;
@@ -32,52 +41,23 @@ const BarChartComponent = () => {
     queryFn: fetchQuestions,
   });
 
-  const correctAnswersByDiscipline = useMemo(() => {
-    const aggregation: Record<string, number> = {};
-
-    questions?.forEach((question) => {
-      const userAnswer = selectedAnswers.find(
-        (answer) => answer.index.toString() === question.id
-      )?.answer;
-      if (userAnswer && userAnswer === question.correctAlternative) {
-        aggregation[question.discipline] =
-          (aggregation[question.discipline] || 0) + 1;
-      }
-    });
-
-    return Object.entries(aggregation).map(([discipline, count]) => ({
-      discipline,
+  const barChartData = useMemo(() => 
+    Object.entries(disciplineScores).map(([discipline, count]) => ({
+      discipline: disciplinesMap[discipline] || discipline,
       count,
-    }));
-  }, [questions, selectedAnswers]);
+    })),
+    [disciplineScores]
+  );
 
-  const barChartData = correctAnswersByDiscipline;
+  useEffect(() => {
+    console.log(barChartData)
+  }, [])
 
-  const barChartConfig = {
-    visitors: {
-      label: "Visitors",
-    },
-    chrome: {
-      label: "Chrome",
-      color: "hsl(var(--chart-1))",
-    },
-    safari: {
-      label: "Safari",
-      color: "hsl(var(--chart-2))",
-    },
-    firefox: {
-      label: "Firefox",
-      color: "hsl(var(--chart-3))",
-    },
-    edge: {
-      label: "Edge",
-      color: "hsl(var(--chart-4))",
-    },
-    other: {
-      label: "Other",
-      color: "hsl(var(--chart-5))",
-    },
-  } satisfies ChartConfig;
+  const barChartConfig = barChartData.reduce((config, { discipline }, index) => {
+    const color = `hsl(${(index * 70) % 360}, 70%, 60%)`;
+    config[discipline] = { label: discipline, color };
+    return config;
+  }, {} as Record<string, { label: string; color: string }>);
 
   return (
     <Card>
@@ -94,16 +74,25 @@ const BarChartComponent = () => {
             margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
           >
             <XAxis type="number" dataKey="count" />
-            <YAxis type="category" dataKey="discipline" />
+            <YAxis
+              type="category"
+              dataKey="discipline"
+              tickFormatter={(discipline) =>
+                barChartConfig[discipline]?.label || discipline
+              }
+            />
             <ChartTooltip
               cursor={{ fill: "transparent" }}
               content={<ChartTooltipContent />}
             />
-            <Bar
-              dataKey="count"
-              fill="hsl(var(--chart-1))"
-              radius={[5, 5, 0, 0]}
-            />
+            <Bar dataKey="count" radius={[5, 5, 0, 0]}>
+              {barChartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={barChartConfig[entry.discipline]?.color || "#8884d8"}
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
