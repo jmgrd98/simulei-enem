@@ -35,9 +35,10 @@ export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
         ...prevScores,
         [discipline]: (prevScores[discipline] || 0) + 1,
       };
-      setScore(Object.values(updatedScores).reduce((acc, val) => acc + val, 0));
       return updatedScores;
     });
+  
+    setScore((prevScore) => prevScore + 1); // Ensure `score` is updated separately
   };
   
   const decrementScore = (discipline: string) => {
@@ -46,10 +47,12 @@ export const UserScoreProvider = ({ children }: { children: ReactNode }) => {
         ...prevScores,
         [discipline]: Math.max((prevScores[discipline] || 0) - 1, 0),
       };
-      setScore(Object.values(updatedScores).reduce((acc, val) => acc + val, 0));
       return updatedScores;
     });
-  };  
+  
+    setScore((prevScore) => Math.max(prevScore - 1, 0)); // Prevent negative scores
+  };
+  
 
   const resetScore = () => {
     setScore(0);

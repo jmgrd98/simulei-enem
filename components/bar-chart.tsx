@@ -1,4 +1,4 @@
-import { Label, Bar, BarChart, XAxis, YAxis, Cell } from "recharts";
+import { Bar, BarChart, XAxis, YAxis, Cell } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { useQuery } from "@tanstack/react-query";
 import { Question } from "@prisma/client";
@@ -8,7 +8,7 @@ import { useUserScore } from "@/context/UserScoreContext";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const BarChartComponent = () => {
-  const { disciplineScores, selectedAnswers } = useUserScore();
+  const { disciplineScores } = useUserScore();
   const totalQuestions = 180;
 
   const disciplinesMap: { [key: string]: string } = {
@@ -36,31 +36,28 @@ const BarChartComponent = () => {
     return allQuestions.slice(0, totalQuestions);
   };
 
-  const { data: questions } = useQuery<Question[]>({
+  const { data } = useQuery<Question[]>({
     queryKey: ["questions", 2023],
     queryFn: fetchQuestions,
   });
 
-  const barChartData = useMemo(() => 
-    Object.entries(disciplineScores).map(([discipline, count]) => ({
+  const barChartData = useMemo(() => {
+    return Object.keys(disciplinesMap).map((discipline) => ({
       discipline: disciplinesMap[discipline] || discipline,
-      count,
-    })),
-    [disciplineScores]
-  );
+      count: disciplineScores[discipline] || 0,
+    }));
+  }, [disciplineScores]);  
 
-  useEffect(() => {
-    console.log(barChartData)
-  }, [])
-
-  const barChartConfig = barChartData.reduce((config, { discipline }, index) => {
-    const color = `hsl(${(index * 70) % 360}, 70%, 60%)`;
-    config[discipline] = { label: discipline, color };
-    return config;
-  }, {} as Record<string, { label: string; color: string }>);
+  const barChartConfig = useMemo(() => {
+    return barChartData.reduce((config, { discipline }, index) => {
+      const color = `hsl(${(index * 60) % 360}, 70%, 60%)`;
+      config[discipline] = { label: discipline, color };
+      return config;
+    }, {} as Record<string, { label: string; color: string }>);
+  }, [barChartData]);
 
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle>Questões corretas por matéria</CardTitle>
       </CardHeader>

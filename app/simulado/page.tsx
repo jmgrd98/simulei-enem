@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import Loader from "@/components/Loader";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { useExamTime } from "@/context/ExamTimeContext";
-import { Question, Alternative, Answer } from "@prisma/client";
+import { Question, Alternative } from "@prisma/client";
 import { useQuery } from '@tanstack/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
