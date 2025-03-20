@@ -1,0 +1,561 @@
+[
+    {
+      "id": 1,
+      "question": "Under the AWS shared responsibility model, which is an example of security in the AWS Cloud?",
+      "options": {
+        "A": "Managing edge locations",
+        "B": "Physical security",
+        "C": "Firewall configuration",
+        "D": "Global infrastructure"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 2,
+      "question": "How can a user with AWS Basic Support obtain technical assistance?",
+      "options": {
+        "A": "AWS Senior Support Engineers",
+        "B": "AWS Technical Account Managers",
+        "C": "AWS Trusted Advisor",
+        "D": "AWS Discussion Forums"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 3,
+      "question": "Which are pillars of the AWS Well-Architected Framework? (Choose two.)",
+      "options": {
+        "A": "Multiple Availability Zones",
+        "B": "Performance efficiency",
+        "C": "Security",
+        "D": "Encryption usage",
+        "E": "High availability"
+      },
+      "correctAnswer": ["B", "C"]
+    },
+    {
+      "id": 4,
+      "question": "Which EC2 Dedicated Host pricing offers the largest discount?",
+      "options": {
+        "A": "No upfront payment",
+        "B": "Hourly on-demand",
+        "C": "Partial upfront payment",
+        "D": "All upfront payment"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 5,
+      "question": "Advantage of deploying across multiple AZs?",
+      "options": {
+        "A": "Lower regional disaster risk",
+        "B": "Higher availability",
+        "C": "Geographic coverage",
+        "D": "Reduced latency"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 6,
+      "question": "How to estimate new AWS application costs?",
+      "options": {
+        "A": "Use on-demand pricing",
+        "B": "AWS Simple Monthly Calculator",
+        "C": "Amazon QuickSight",
+        "D": "AppStream 2.0"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 7,
+      "question": "Migrate apps to VPC needing on-premises access? (Choose two.)",
+      "options": {
+        "A": "Service Catalog",
+        "B": "VPN to VPC gateway",
+        "C": "Amazon Athena",
+        "D": "AWS Direct Connect",
+        "E": "CloudFront"
+      },
+      "correctAnswer": ["B", "D"]
+    },
+    {
+      "id": 8,
+      "question": "Service to block malicious web traffic?",
+      "options": {
+        "A": "IAM",
+        "B": "GuardDuty",
+        "C": "SNS",
+        "D": "WAF"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 9,
+      "question": "Infrastructure as code benefit?",
+      "options": {
+        "A": "Automate hardware migration",
+        "B": "Third-party audits",
+        "C": "AWS runs application code",
+        "D": "Automate provisioning"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 10,
+      "question": "Dedicated on-premises-to-AWS connection?",
+      "options": {
+        "A": "VPN",
+        "B": "Direct Connect",
+        "C": "API Gateway",
+        "D": "Connect"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 11,
+      "question": "Query S3 datasets with SQL?",
+      "options": {
+        "A": "Glue",
+        "B": "Data Pipeline",
+        "C": "CloudSearch",
+        "D": "Athena"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 12,
+      "question": "AWS CloudFormation purpose?",
+      "options": {
+        "A": "Model/provision resources",
+        "B": "Update code",
+        "C": "Create data lakes",
+        "D": "Billing reports"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 13,
+      "question": "AWS database service?",
+      "options": {
+        "A": "Redshift",
+        "B": "EBS",
+        "C": "Glacier",
+        "D": "Snowball"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 14,
+      "question": "Simplest way to check open security groups?",
+      "options": {
+        "A": "Manual EC2 console review",
+        "B": "Trusted Advisor",
+        "C": "IAM console filters",
+        "D": "AWS Config custom rule"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 15,
+      "question": "AWS vs on-prem benefits? (Choose two.)",
+      "options": {
+        "A": "Global data distribution",
+        "B": "AWS operates apps",
+        "C": "Easier HA architecture",
+        "D": "Handle demand changes",
+        "E": "AWS handles patching"
+      },
+      "correctAnswer": ["C", "D"]
+    },
+    {
+      "id": 16,
+      "question": "Automated security assessment service?",
+      "options": {
+        "A": "EC2 security groups",
+        "B": "AWS Config",
+        "C": "Macie",
+        "D": "Inspector"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 17,
+      "question": "Isolate prod/non-prod costs?",
+      "options": {
+        "A": "IAM roles",
+        "B": "Separate accounts",
+        "C": "EC2 vs other services",
+        "D": "CloudWatch"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 18,
+      "question": "Catalog of third-party security solutions?",
+      "options": {
+        "A": "Service Catalog",
+        "B": "Marketplace",
+        "C": "Quick Start",
+        "D": "CodeDeploy"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 19,
+      "question": "Lowest-cost storage for 7-year retention?",
+      "options": {
+        "A": "S3",
+        "B": "Snowball",
+        "C": "Redshift",
+        "D": "S3 Glacier"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 20,
+      "question": "Immediate AWS Cloud benefits? (Choose two.)",
+      "options": {
+        "A": "More IT staff",
+        "B": "CapEx to variable",
+        "C": "Infrastructure control",
+        "D": "Increased agility",
+        "E": "AWS handles security"
+      },
+      "correctAnswer": ["C", "D"]
+    },
+    {
+      "id": 21,
+      "question": "Service classifying sensitive data?",
+      "options": {
+        "A": "GuardDuty",
+        "B": "Macie",
+        "C": "Inspector",
+        "D": "Shield"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 22,
+      "question": "AWS Storage Gateway purpose?",
+      "options": {
+        "A": "99.999999999% durability",
+        "B": "Petabyte data transport",
+        "C": "Multi-EC2 connections",
+        "D": "On-prem to cloud storage"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 23,
+      "question": "Install apps in isolated locations?",
+      "options": {
+        "A": "Multiple internet gateways",
+        "B": "Deploy to VPC",
+        "C": "Multi-region deployment",
+        "D": "Multiple NAT gateways"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 24,
+      "question": "System withstands component failure?",
+      "options": {
+        "A": "Elasticity",
+        "B": "High Availability",
+        "C": "Scalability",
+        "D": "Agility"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 25,
+      "question": "Dedicated AWS/on-prem connection?",
+      "options": {
+        "A": "Direct Connect",
+        "B": "VPN",
+        "C": "Connect",
+        "D": "Data Pipeline"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 26,
+      "question": "Security compliance responsibility?",
+      "options": {
+        "A": "Customer",
+        "B": "AWS",
+        "C": "Shared",
+        "D": "Governing body"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 27,
+      "question": "AWS CLI requirement?",
+      "options": {
+        "A": "Password policy",
+        "B": "Access/secret key",
+        "C": "Managed policy",
+        "D": "API key"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 28,
+      "question": "EBS encryption service?",
+      "options": {
+        "A": "Certificate Manager",
+        "B": "Systems Manager",
+        "C": "KMS",
+        "D": "Config"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 29,
+      "question": "Lambda pricing factors? (Choose two.)",
+      "options": {
+        "A": "Execution time",
+        "B": "Function versions",
+        "C": "Request count",
+        "D": "Programming language",
+        "E": "Total functions"
+      },
+      "correctAnswer": ["A", "C"]
+    },
+    {
+      "id": 30,
+      "question": "AWS Regions/AZs/edge locations? (Choose two.)",
+      "options": {
+        "A": "More Regions than AZs",
+        "B": "More edge than Regions",
+        "C": "Edge is AZ",
+        "D": "More Regions than edge",
+        "E": "More AZs than Regions"
+      },
+      "correctAnswer": ["B", "E"]
+    },
+    {
+      "id": 31,
+      "question": "AWS Shield Standard provides?",
+      "options": {
+        "A": "WAF rules",
+        "B": "DDoS protection",
+        "C": "IAM permissions",
+        "D": "Data encryption"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 32,
+      "question": "Reduced cloud cost vs on-prem?",
+      "options": {
+        "A": "Custom code cost",
+        "B": "Penetration testing",
+        "C": "Hardware costs",
+        "D": "Test case writing"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 33,
+      "question": "AWS Marketplace functions? (Choose two.)",
+      "options": {
+        "A": "Sell Spot Instances",
+        "B": "Sell solutions",
+        "C": "Buy third-party software",
+        "D": "Purchase compliance docs",
+        "E": "Order Snowball"
+      },
+      "correctAnswer": ["B", "C"]
+    },
+    {
+      "id": 34,
+      "question": "Hybrid cloud definition?",
+      "options": {
+        "A": "All on-prem",
+        "B": "On-prem + colocation",
+        "C": "All cloud",
+        "D": "On-prem + cloud"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 35,
+      "question": "Track resource changes over time?",
+      "options": {
+        "A": "Inspector",
+        "B": "AWS Config",
+        "C": "Service Catalog",
+        "D": "IAM"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 36,
+      "question": "Reduce TCO with AWS?",
+      "options": {
+        "A": "Minimize CapEx",
+        "B": "No third-party licenses",
+        "C": "No OpEx",
+        "D": "AWS manages apps"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 37,
+      "question": "Customer responsibility under SRM?",
+      "options": {
+        "A": "Network connectivity",
+        "B": "AWS patching",
+        "C": "Data center security",
+        "D": "EBS backups"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 38,
+      "question": "AWS advantages? (Choose two.)",
+      "options": {
+        "A": "Fixed monthly cost",
+        "B": "No capacity guessing",
+        "C": "Faster time-to-market",
+        "D": "Higher CapEx",
+        "E": "Data center access"
+      },
+      "correctAnswer": ["B", "C"]
+    },
+    {
+      "id": 39,
+      "question": "TCO considerations? (Choose two.)",
+      "options": {
+        "A": "Credit card fees",
+        "B": "Server hardware costs",
+        "C": "Infra admin costs",
+        "D": "Pen testing costs",
+        "E": "Advertising costs"
+      },
+      "correctAnswer": ["B", "C"]
+    },
+    {
+      "id": 40,
+      "question": "Usage tiers across accounts?",
+      "options": {
+        "A": "SCPs",
+        "B": "Consolidated billing",
+        "C": "All Upfront RIs",
+        "D": "Cost Explorer"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 41,
+      "question": "Customer responsibility under SRM?",
+      "options": {
+        "A": "Virtualization",
+        "B": "Network infra",
+        "C": "App security",
+        "D": "Hardware security"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 42,
+      "question": "Reduce global latency?",
+      "options": {
+        "A": "Central Region",
+        "B": "Second AZ",
+        "C": "Regional caching",
+        "D": "Edge locations"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 43,
+      "question": "Increased workforce productivity?",
+      "options": {
+        "A": "No provisioning waits",
+        "B": "Faster infra",
+        "C": "AWS config management",
+        "D": "No security work"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 44,
+      "question": "Automated AWS account management?",
+      "options": {
+        "A": "QuickSight",
+        "B": "Lightsail",
+        "C": "Organizations",
+        "D": "Connect"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 45,
+      "question": "RDS high availability feature?",
+      "options": {
+        "A": "Multi-AZ",
+        "B": "Reserved Instances",
+        "C": "Provisioned IOPS",
+        "D": "Enhanced monitoring"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 46,
+      "question": "Report malicious AWS resource use?",
+      "options": {
+        "A": "Abuse team",
+        "B": "Shield",
+        "C": "Support",
+        "D": "Forums"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 47,
+      "question": "Track console user changes?",
+      "options": {
+        "A": "CloudTrail",
+        "B": "SNS",
+        "C": "VPC Flow Logs",
+        "D": "CloudHSM"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 48,
+      "question": "AWS design best practice?",
+      "options": {
+        "A": "Tight coupling",
+        "B": "Single failure point",
+        "C": "High availability",
+        "D": "Overprovisioning"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 49,
+      "question": "Why AWS economical for variable workloads?",
+      "options": {
+        "A": "Monthly EC2 billing",
+        "B": "Full admin access",
+        "C": "On-demand instances",
+        "D": "Permanent peak instances"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 50,
+      "question": "Simplify database migration?",
+      "options": {
+        "A": "Storage Gateway",
+        "B": "DMS",
+        "C": "EC2",
+        "D": "AppStream 2.0"
+      },
+      "correctAnswer": ["B"]
+    }
+  ]

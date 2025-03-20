@@ -1,0 +1,566 @@
+[
+    {
+      "id": 1,
+      "question": "Which AWS offering enables customers to find, buy, and immediately start using software solutions in their AWS environment?",
+      "options": {
+        "A": "AWS Config",
+        "B": "AWS OpsWorks",
+        "C": "AWS SDK",
+        "D": "AWS Marketplace"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 2,
+      "question": "Which AWS networking service enables a company to create a virtual network within AWS?",
+      "options": {
+        "A": "AWS Config",
+        "B": "Amazon Route 53",
+        "C": "AWS Direct Connect",
+        "D": "Amazon Virtual Private Cloud (Amazon VPC)"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 3,
+      "question": "Which of the following is AWS's responsibility under the AWS shared responsibility model?",
+      "options": {
+        "A": "Configuring third-party applications",
+        "B": "Maintaining physical hardware",
+        "C": "Securing application access and data",
+        "D": "Managing custom Amazon Machine Images (AMIs)"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 4,
+      "question": "Which component of AWS global infrastructure does Amazon CloudFront use to ensure low-latency delivery?",
+      "options": {
+        "A": "AWS Regions",
+        "B": "AWS edge locations",
+        "C": "AWS Availability Zones",
+        "D": "Amazon Virtual Private Cloud (Amazon VPC)"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 5,
+      "question": "How would a system administrator add an additional layer of login security to a user's AWS Management Console?",
+      "options": {
+        "A": "Use AWS Cloud Directory",
+        "B": "Audit IAM roles",
+        "C": "Enable Multi-Factor Authentication",
+        "D": "Enable AWS CloudTrail"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 6,
+      "question": "Which service can identify the user that made the API call when an EC2 instance is terminated?",
+      "options": {
+        "A": "Amazon CloudWatch",
+        "B": "AWS CloudTrail",
+        "C": "AWS X-Ray",
+        "D": "AWS IAM"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 7,
+      "question": "Which service sends alerts based on CloudWatch alarms?",
+      "options": {
+        "A": "Amazon SNS",
+        "B": "AWS CloudTrail",
+        "C": "AWS Trusted Advisor",
+        "D": "Amazon Route 53"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 8,
+      "question": "Where can a customer find prohibited actions on AWS infrastructure?",
+      "options": {
+        "A": "AWS Trusted Advisor",
+        "B": "AWS IAM",
+        "C": "AWS Billing Console",
+        "D": "AWS Acceptable Use Policy"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 9,
+      "question": "How does moving to AWS reduce upfront cost?",
+      "options": {
+        "A": "Replace variable costs with CapEx",
+        "B": "Replace CapEx with variable costs",
+        "C": "Provision fixed compute/storage",
+        "D": "Replace scaling with fixed model"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 10,
+      "question": "Which improve availability in a three-tier app? (Choose two.)",
+      "options": {
+        "A": "Auto Scaling",
+        "B": "VPC subnet ACLs",
+        "C": "Multi-AZ deployment",
+        "D": "AWS SMS migration",
+        "E": "Multi-points of presence"
+      },
+      "correctAnswer": ["A", "C"]
+    },
+    {
+      "id": 11,
+      "question": "Which aligns with AWS Cloud best practices?",
+      "options": {
+        "A": "Fixed component dependencies",
+        "B": "Aggregate services on one instance",
+        "C": "Single AZ deployment",
+        "D": "Distribute compute load"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 12,
+      "question": "Recommended IAM practices? (Choose two.)",
+      "options": {
+        "A": "Require password rotation",
+        "B": "Prevent password reuse",
+        "C": "Reuse passwords",
+        "D": "Store raw text passwords",
+        "E": "Disable MFA"
+      },
+      "correctAnswer": ["A", "B"]
+    },
+    {
+      "id": 13,
+      "question": "Migration support options? (Choose two.)",
+      "options": {
+        "A": "AWS Marketplace quote",
+        "B": "AWS Support case",
+        "C": "AWS Professional Services",
+        "D": "APN Partner",
+        "E": "Amazon Connect RFP"
+      },
+      "correctAnswer": ["C", "D"]
+    },
+    {
+      "id": 14,
+      "question": "Enterprise Support Concierge helps with?",
+      "options": {
+        "A": "App development",
+        "B": "Architecture guidance",
+        "C": "Billing inquiries",
+        "D": "Technical case updates"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 15,
+      "question": "Multi-AZ application is described as:",
+      "options": {
+        "A": "Highly available",
+        "B": "Global reach",
+        "C": "Economy of scale",
+        "D": "Elastic"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 16,
+      "question": "Regulatory HA requires instances in:",
+      "options": {
+        "A": "Multiple Regions",
+        "B": "Multiple AZs",
+        "C": "Multiple subnets",
+        "D": "Placement groups"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 17,
+      "question": "Compare on-prem to AWS costs?",
+      "options": {
+        "A": "Trusted Advisor",
+        "B": "Simple Monthly Calculator",
+        "C": "Pricing Calculator",
+        "D": "Cost Explorer"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 18,
+      "question": "Apply RIs to single account?",
+      "options": {
+        "A": "Purchase in master, disable sharing",
+        "B": "Enable billing alerts",
+        "C": "Purchase in linked accounts",
+        "D": "Enable RI sharing"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 19,
+      "question": "Report AWS Abuse for:",
+      "options": {
+        "A": "AZ disruption",
+        "B": "AWS IP intrusion",
+        "C": "S3 access issue",
+        "D": "Payment compromise"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 20,
+      "question": "Low latency worldwide? (Choose two.)",
+      "options": {
+        "A": "ALB",
+        "B": "Global Accelerator",
+        "C": "Direct Connect",
+        "D": "CloudFront",
+        "E": "Lambda"
+      },
+      "correctAnswer": ["B", "D"]
+    },
+    {
+      "id": 21,
+      "question": "Serverless service?",
+      "options": {
+        "A": "Lambda",
+        "B": "EC2",
+        "C": "Lightsail",
+        "D": "ElastiCache"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 22,
+      "question": "VPC components? (Choose two.)",
+      "options": {
+        "A": "Objects",
+        "B": "Subnets",
+        "C": "Buckets",
+        "D": "Internet gateways",
+        "E": "Access key"
+      },
+      "correctAnswer": ["B", "D"]
+    },
+    {
+      "id": 23,
+      "question": "AWS Budgets can:",
+      "options": {
+        "A": "Prevent resource creation",
+        "B": "Alert on RI utilization",
+        "C": "Set resource limits",
+        "D": "Split payment methods"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 24,
+      "question": "Enhance console security? (Choose two.)",
+      "options": {
+        "A": "Secrets Manager",
+        "B": "Certificate Manager",
+        "C": "MFA",
+        "D": "Security groups",
+        "E": "Password policies"
+      },
+      "correctAnswer": ["C", "E"]
+    },
+    {
+      "id": 25,
+      "question": "Trusted Advisor checks? (Choose two.)",
+      "options": {
+        "A": "S3 permissions",
+        "B": "Service outages",
+        "C": "Root MFA",
+        "D": "Software patches",
+        "E": "User count"
+      },
+      "correctAnswer": ["A", "C"]
+    },
+    {
+      "id": 26,
+      "question": "KMS functions?",
+      "options": {
+        "A": "Root user keys",
+        "B": "IAM user keys",
+        "C": "Encryption keys",
+        "D": "MFA keys"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 27,
+      "question": "Trusted Advisor provides? (Choose two.)",
+      "options": {
+        "A": "Vulnerability scans",
+        "B": "Cost optimization",
+        "C": "Permission checks",
+        "D": "Auto-fix security",
+        "E": "EC2 compromise alerts"
+      },
+      "correctAnswer": ["B", "C"]
+    },
+    {
+      "id": 28,
+      "question": "AWS advantages? (Choose two.)",
+      "options": {
+        "A": "AWS manages infra",
+        "B": "AWS secures apps",
+        "C": "AWS plans capacity",
+        "D": "AWS develops apps",
+        "E": "AWS plans server costs"
+      },
+      "correctAnswer": ["A", "C"]
+    },
+    {
+      "id": 29,
+      "question": "RDS Multi-AZ aligns with:",
+      "options": {
+        "A": "Performance",
+        "B": "Reliability",
+        "C": "Cost optimization",
+        "D": "Security"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 30,
+      "question": "On-prem connectivity? (Choose two.)",
+      "options": {
+        "A": "VPN",
+        "B": "Amazon Connect",
+        "C": "Cognito",
+        "D": "Direct Connect",
+        "E": "Managed Services"
+      },
+      "correctAnswer": ["A", "D"]
+    },
+    {
+      "id": 31,
+      "question": "Pay bills and monitor costs?",
+      "options": {
+        "A": "Billing Management",
+        "B": "Consolidated billing",
+        "C": "CloudWatch",
+        "D": "QuickSight"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 32,
+      "question": "AZs are:",
+      "options": {
+        "A": "Regions",
+        "B": "Discrete data centers",
+        "C": "Edge locations",
+        "D": "CloudFront"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 33,
+      "question": "VPC traffic logging?",
+      "options": {
+        "A": "Security groups",
+        "B": "Network interfaces",
+        "C": "Network ACLs",
+        "D": "Flow Logs"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 34,
+      "question": "Auto-scale without capacity planning?",
+      "options": {
+        "A": "AutoScaling",
+        "B": "Redshift",
+        "C": "CloudTrail",
+        "D": "Lambda"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 35,
+      "question": "Enterprise Support exclusive feature?",
+      "options": {
+        "A": "Trusted Advisor",
+        "B": "Support case",
+        "C": "Concierge",
+        "D": "Amazon Connect"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 36,
+      "question": "Managed MySQL service?",
+      "options": {
+        "A": "RDS",
+        "B": "DynamoDB",
+        "C": "DocumentDB",
+        "D": "ElastiCache"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 37,
+      "question": "Expand to new Region?",
+      "options": {
+        "A": "New contract",
+        "B": "Move AZ",
+        "C": "Deploy resources",
+        "D": "Download console"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 38,
+      "question": "Physical server requirement?",
+      "options": {
+        "A": "Dedicated Hosts",
+        "B": "Dedicated Instances",
+        "C": "Spot Instances",
+        "D": "Reserved Instances"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 39,
+      "question": "Generate encryption keys? (Choose two.)",
+      "options": {
+        "A": "Macie",
+        "B": "Certificate Manager",
+        "C": "KMS",
+        "D": "Secrets Manager",
+        "E": "CloudHSM"
+      },
+      "correctAnswer": ["C", "E"]
+    },
+    {
+      "id": 40,
+      "question": "Post-migration cost report?",
+      "options": {
+        "A": "TCO Calculator",
+        "B": "Cost Explorer",
+        "C": "Budgets",
+        "D": "Migration Hub"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 41,
+      "question": "Migration evaluation help? (Choose two.)",
+      "options": {
+        "A": "Trusted Advisor",
+        "B": "Professional Services",
+        "C": "Systems Manager",
+        "D": "APN Partner",
+        "E": "Secrets Manager"
+      },
+      "correctAnswer": ["B", "D"]
+    },
+    {
+      "id": 42,
+      "question": "Compliance with dedicated HSMs?",
+      "options": {
+        "A": "Secrets Manager",
+        "B": "CloudHSM",
+        "C": "KMS",
+        "D": "Directory Service"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 43,
+      "question": "Customer responsibilities? (Choose two.)",
+      "options": {
+        "A": "Decommission storage",
+        "B": "Security groups",
+        "C": "RDS OS patches",
+        "D": "Data center access",
+        "E": "EC2 OS patches"
+      },
+      "correctAnswer": ["B", "E"]
+    },
+    {
+      "id": 44,
+      "question": "Event-driven workload?",
+      "options": {
+        "A": "EC2",
+        "B": "Elastic Beanstalk",
+        "C": "Lambda",
+        "D": "Lumberyard"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 45,
+      "question": "AWS value proposition?",
+      "options": {
+        "A": "AWS handles security",
+        "B": "No long-term contracts",
+        "C": "Provision in days",
+        "D": "AWS manages apps"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 46,
+      "question": "S3 cross-region replication?",
+      "options": {
+        "A": "Versioning disabled",
+        "B": "Same Region",
+        "C": "Cross-account allowed",
+        "D": "Regions disabled"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 47,
+      "question": "User responsibility in cloud?",
+      "options": {
+        "A": "Physical hardware",
+        "B": "Hypervisor updates",
+        "C": "Data center access list",
+        "D": "App updates"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 48,
+      "question": "Quick feature releases?",
+      "options": {
+        "A": "Elasticity",
+        "B": "High availability",
+        "C": "Agility",
+        "D": "Reliability"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 49,
+      "question": "Monitor costs? (Choose two.)",
+      "options": {
+        "A": "Cost report",
+        "B": "Product pages",
+        "C": "Monthly Calculator",
+        "D": "CloudWatch alarms",
+        "E": "Price API"
+      },
+      "correctAnswer": ["A", "D"]
+    },
+    {
+      "id": 50,
+      "question": "Route 53 function?",
+      "options": {
+        "A": "Encrypt data",
+        "B": "Register domains",
+        "C": "Manage SSL",
+        "D": "Dedicated connection"
+      },
+      "correctAnswer": ["B"]
+    }
+  ]
