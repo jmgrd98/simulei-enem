@@ -1,0 +1,566 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "question": "Which of the following can an AWS customer use to launch a new Amazon Relational Database Service (Amazon RDS) cluster? (Select TWO)",
+        "options": {
+          "A": "AWS Concierge",
+          "B": "AWS CloudFormation",
+          "C": "Amazon Simple Storage Service (Amazon S3)",
+          "D": "Amazon EC2 Auto Scaling",
+          "E": "AWS Management Console"
+        },
+        "correctAnswer": ["B", "E"]
+      },
+      {
+        "id": 2,
+        "question": "Which of the following Reserved Instance (RI) pricing models provides the highest average savings compared to On-Demand pricing?",
+        "options": {
+          "A": "One-year, No Upfront, Standard RI pricing",
+          "B": "One-year, All Upfront, Convertible RI pricing",
+          "C": "Three-year, All Upfront, Standard RI pricing",
+          "D": "Three-year, No Upfront, Convertible RI pricing"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 3,
+        "question": "Which of the following are features of Amazon CloudWatch Logs? (Select TWO)",
+        "options": {
+          "A": "Summaries by Amazon Simple Notification Service (Amazon SNS)",
+          "B": "Free Amazon Elasticsearch Service analytics",
+          "C": "Provided at no charge",
+          "D": "Real-time monitoring",
+          "E": "Adjustable retention"
+        },
+        "correctAnswer": ["D", "E"]
+      },
+      {
+        "id": 4,
+        "question": "Which of the following is an AWS-managed compute service?",
+        "options": {
+          "A": "Amazon SWF",
+          "B": "Amazon EC2",
+          "C": "AWS Lambda",
+          "D": "Amazon Aurora"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 5,
+        "question": "A company wants to reduce the physical compute footprint that developers use to run code. Which service would meet that need by enabling serverless architectures?",
+        "options": {
+          "A": "Amazon Elastic Compute Cloud (Amazon EC2)",
+          "B": "AWS Lambda",
+          "C": "Amazon DynamoDB",
+          "D": "AWS CodeCommit"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 6,
+        "question": "Which of the following is the customer’s responsibility under the AWS shared responsibility model?",
+        "options": {
+          "A": "Patching underlying infrastructure",
+          "B": "Physical security",
+          "C": "Patching Amazon EC2 instances",
+          "D": "Patching network infrastructure"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 7,
+        "question": "According to the AWS shared responsibility model who is responsible for configuration management?",
+        "options": {
+          "A": "It is solely the responsibility of the customer",
+          "B": "It is solely the responsibility of AWS",
+          "C": "It is shared between AWS and the customer",
+          "D": "It is not part of the AWS shared responsibility model"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 8,
+        "question": "Which security service automatically recognizes and classifies sensitive data or intellectual property on AWS?",
+        "options": {
+          "A": "Amazon GuardDuty",
+          "B": "Amazon Macie",
+          "C": "Amazon Inspector",
+          "D": "AWS Shield"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 9,
+        "question": "Which of the following BEST describe the AWS pricing model? (Select TWO)",
+        "options": {
+          "A": "Fixed-term",
+          "B": "Pay-as-you-go",
+          "C": "Colocation",
+          "D": "Planned",
+          "E": "Variable cost"
+        },
+        "correctAnswer": ["B", "E"]
+      },
+      {
+        "id": 10,
+        "question": "Under the shared responsibility model, which of the following tasks are the responsibility of the AWS customer? (Select TWO)",
+        "options": {
+          "A": "Ensuring that application data is encrypted at rest",
+          "B": "Ensuring that AWS NTP servers are set to the correct time",
+          "C": "Ensuring that users have received security training in the use of AWS services",
+          "D": "Ensuring that access to data centers is restricted",
+          "E": "Ensuring that hardware is disposed of properly"
+        },
+        "correctAnswer": ["A", "C"]
+      },
+      {
+        "id": 11,
+        "question": "A customer is using multiple AWS accounts with separate billing. How can the customer take advantage of volume discounts with minimal impact to the AWS resources?",
+        "options": {
+          "A": "Create one global AWS account and move all AWS resources to that account",
+          "B": "Sign up for three years of Reserved Instance pricing up front",
+          "C": "Use the consolidated billing feature from AWS Organizations",
+          "D": "Sign up for the AWS Enterprise support plan to get volume discounts"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 12,
+        "question": "Which Amazon EC2 pricing model offers the MOST significant discount when compared to OnDemand Instances?",
+        "options": {
+          "A": "A Partial Upfront Reserved Instances for a 1-year term",
+          "B": "All Upfront Reserved instances for a 1 year term",
+          "C": "All Upfront Reserved Instances for a 3 year term",
+          "D": "No Upfront Reserved Instances for a 3 year term"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 13,
+        "question": "Which AWS services should be used for read/write of constantly changing data? (Select TWO)",
+        "options": {
+          "A": "Amazon Glacier",
+          "B": "Amazon RDS",
+          "C": "AWS Snowball",
+          "D": "Amazon Redshift",
+          "E": "Amazon EFS"
+        },
+        "correctAnswer": ["B", "E"]
+      },
+      {
+        "id": 14,
+        "question": "Which AWS service allows users to identify the changes made to a resource over time?",
+        "options": {
+          "A": "Amazon Inspector",
+          "B": "AWS Config",
+          "C": "AWS Service Catalog",
+          "D": "AWS IAM"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 15,
+        "question": "According to best practices, how should an application be designed to run in the AWS Cloud?",
+        "options": {
+          "A": "Use tightly coupled components",
+          "B": "Use loosely coupled components",
+          "C": "Use infrequently coupled components",
+          "D": "Use frequently coupled components"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 16,
+        "question": "Which benefits are included with the AWS Business Support plan? (Select TWO)",
+        "options": {
+          "A": "24/7 assistance by way of live chat or a telephone call",
+          "B": "Support from a dedicated AWS Technical Account Manager",
+          "C": "An unlimited number of cases and contacts",
+          "D": "15-minute response time for production system interruption cases",
+          "E": "Annual operational reviews with AWS Solutions Architects"
+        },
+        "correctAnswer": ["A", "C"]
+      },
+      {
+        "id": 17,
+        "question": "Which of the following is an AWS managed Domain Name System (DNS) web service?",
+        "options": {
+          "A": "Amazon Route 53",
+          "B": "Amazon Neptune",
+          "C": "Amazon SageMaker",
+          "D": "Amazon Lightsail"
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 18,
+        "question": "A user must meet compliance and software licensing requirements that state a workload must be hosted on a physical server. Which Amazon EC2 instance pricing option will meet these requirements?",
+        "options": {
+          "A": "Dedicated Hosts",
+          "B": "Dedicated Instances",
+          "C": "Spot Instances",
+          "D": "Reserved Instances"
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 19,
+        "question": "Which of the Reserved Instance (RI) pricing models can change the attributes of the RI as long as the exchange results in the creation of RIs of equal or greater value?",
+        "options": {
+          "A": "Dedicated RIs",
+          "B": "Scheduled RIs",
+          "C": "Convertible RIs",
+          "D": "Standard RIs"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 20,
+        "question": "Which service is best for storing common database query results, which helps to alleviate database access load?",
+        "options": {
+          "A": "Amazon Machine Learning",
+          "B": "Amazon SQS",
+          "C": "Amazon ElastiCache",
+          "D": "Amazon EC2 Instance Store"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 21,
+        "question": "When should a company consider using Amazon EC2 Spot Instances? (Select TWO)",
+        "options": {
+          "A": "For non-production applications",
+          "B": "For stateful workloads",
+          "C": "For applications that cannot have interruptions",
+          "D": "For fault-tolerant flexible applications",
+          "E": "For sensitive database applications"
+        },
+        "correctAnswer": ["A", "D"]
+      },
+      {
+        "id": 22,
+        "question": "Which AWS tools assist with estimating costs? (Select three)",
+        "options": {
+          "A": "Detailed billing report",
+          "B": "Cost allocation tags",
+          "C": "AWS Simple Monthly Calculator",
+          "D": "AWS Total Cost of Ownership (TCO) Calculator",
+          "E": "Cost Estimator"
+        },
+        "correctAnswer": ["B", "C", "D"]
+      },
+      {
+        "id": 23,
+        "question": "A company wants to focus on business activities instead of managing compute and capacity. Which AWS service can be used to automatically add or remove Amazon EC2 instances based on demand?",
+        "options": {
+          "A": "Elastic Load Balancer",
+          "B": "Amazon EC2 Auto Scaling",
+          "C": "Amazon Route 53",
+          "D": "Amazon CloudFront"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 24,
+        "question": "Which is the minimum AWS Support plan that includes Infrastructure Event Management without additional costs?",
+        "options": {
+          "A": "Enterprise",
+          "B": "Business",
+          "C": "Developer",
+          "D": "Basic"
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 25,
+        "question": "Access keys in AWS Identity and Access Management (IAM) are used to:",
+        "options": {
+          "A": "Log in to the AWS Management Console",
+          "B": "Make programmatic calls to AWS from AWS APIs",
+          "C": "Log in to Amazon EC2 instances",
+          "D": "Authenticate to AWS CodeCommit repositories"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 26,
+        "question": "Which AWS service can be used to query stored datasets directly from Amazon S3 using standard SQL?",
+        "options": {
+          "A": "AWS Glue",
+          "B": "AWS Data Pipeline",
+          "C": "Amazon CloudSearch",
+          "D": "Amazon Athena"
+        },
+        "correctAnswer": ["D"]
+      },
+      {
+        "id": 27,
+        "question": "How does AWS shorten the time to provision IT resources?",
+        "options": {
+          "A": "It supplies an online IT ticketing platform for resource requests",
+          "B": "It supports automatic code validation services",
+          "C": "It provides the ability to programmatically provision existing resources",
+          "D": "It automates the resource request process from a company’s IT vendor list"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 28,
+        "question": "Which AWS services can be used to gather information about AWS account activity? (Select TWO)",
+        "options": {
+          "A": "Amazon CloudFront",
+          "B": "AWS Cloud9",
+          "C": "AWS CloudTrail",
+          "D": "AWS CloudHSM",
+          "E": "Amazon CloudWatch"
+        },
+        "correctAnswer": ["C", "E"]
+      },
+      {
+        "id": 29,
+        "question": "Which of the following are characteristics of Amazon S3? (Select TWO)",
+        "options": {
+          "A": "A global file system",
+          "B": "An object store",
+          "C": "A local file store",
+          "D": "A network file system",
+          "E": "A durable storage system"
+        },
+        "correctAnswer": ["B", "E"]
+      },
+      {
+        "id": 30,
+        "question": "A user wants guidance on possible savings when migrating from on-premises to AWS. Which tool is suitable for this scenario?",
+        "options": {
+          "A": "AWS Budgets",
+          "B": "Cost Explorer",
+          "C": "AWS Total Cost of Ownership (TCO) Calculator",
+          "D": "AWS Well-Architected Tool"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 31,
+        "question": "Which of the following services is in the category of AWS serverless platform?",
+        "options": {
+          "A": "Amazon EMR",
+          "B": "Elastic Load Balancing",
+          "C": "AWS Lambda",
+          "D": "AWS Mobile Hub"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 32,
+        "question": "The use of what AWS feature or service allows companies to track and categorize spending on a detailed level?",
+        "options": {
+          "A": "Cost allocation tags",
+          "B": "Consolidated billing",
+          "C": "AWS Budgets",
+          "D": "AWS Marketplace"
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 33,
+        "question": "Which of the following inspects AWS environments to find opportunities that can save money for users and also improve system performance?",
+        "options": {
+          "A": "AWS Cost Explorer",
+          "B": "AWS Trusted Advisor",
+          "C": "Consolidated billing",
+          "D": "Detailed billing"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 34,
+        "question": "Web servers running on Amazon EC2 access a legacy application running in a corporate data center. What term would describe this model?",
+        "options": {
+          "A": "Cloud-native",
+          "B": "Partner network",
+          "C": "Hybrid architecture",
+          "D": "Infrastructure as a service"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 35,
+        "question": "What technology enables compute capacity to adjust as loads change?",
+        "options": {
+          "A": "Load balancing",
+          "B": "Automatic failover",
+          "C": "Round robin",
+          "D": "Auto Scaling"
+        },
+        "correctAnswer": ["D"]
+      },
+      {
+        "id": 36,
+        "question": "Which AWS service is a managed NoSQL database?",
+        "options": {
+          "A": "Amazon Redshift",
+          "B": "Amazon DynamoDB",
+          "C": "Amazon Aurora",
+          "D": "Amazon RDS for ManaDB"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 37,
+        "question": "Which of the following is a correct relationship between regions, Availability Zones, and edge locations?",
+        "options": {
+          "A": "Data centers contain regions",
+          "B": "Regions contain Availability Zones",
+          "C": "Availability Zones contain edge locations",
+          "D": "Edge locations contain regions"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 38,
+        "question": "What approach to transcoding a large number of individual video files adheres to AWS architecture principles?",
+        "options": {
+          "A": "Using many instances in parallel",
+          "B": "Using a single large instance during off-peak hours",
+          "C": "Using dedicated hardware",
+          "D": "Using a large GPU instance type"
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 39,
+        "question": "Which AWS services can host a Microsoft SQL Server database? (Select TWO)",
+        "options": {
+          "A": "Amazon EC2",
+          "B": "Amazon Relational Database Service (Amazon RDS)",
+          "C": "Amazon Aurora",
+          "D": "Amazon Redshift",
+          "E": "Amazon S3"
+        },
+        "correctAnswer": ["A", "B"]
+      },
+      {
+        "id": 40,
+        "question": "Which AWS IAM feature allows developers to access AWS services through the AWS CLI?",
+        "options": {
+          "A": "API keys",
+          "B": "Access keys",
+          "C": "User names/Passwords",
+          "D": "SSH keys"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 41,
+        "question": "The user is fully responsible for which action when running workloads on AWS?",
+        "options": {
+          "A": "Patching the infrastructure components",
+          "B": "Maintaining the underlying infrastructure components",
+          "C": "Maintaining physical and environmental controls",
+          "D": "Implementing controls to route application traffic"
+        },
+        "correctAnswer": ["D"]
+      },
+      {
+        "id": 42,
+        "question": "Which AWS support plan includes a dedicated Technical Account Manager?",
+        "options": {
+          "A": "Developer",
+          "B": "Enterprise",
+          "C": "Business",
+          "D": "Basic"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 43,
+        "question": "What time-savings advantage is offered with the use of Amazon Rekognition?",
+        "options": {
+          "A": "Amazon Rekognition provides automatic watermarking of images",
+          "B": "Amazon Rekognition provides automatic detection of objects appearing in pictures",
+          "C": "Amazon Recognition provides the ability to resize millions of images automatically",
+          "D": "Amazon Rekognition uses Amazon Mechanical Turk to allow humans to bid on object detection jobs"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 44,
+        "question": "Which AWS service can be used to automatically scale an application up and down without making capacity planning decisions?",
+        "options": {
+          "A": "Amazon AutoScaling",
+          "B": "Amazon Redshift",
+          "C": "AWS CloudTrail",
+          "D": "AWS Lambda"
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 45,
+        "question": "Amazon Relational Database Service (Amazon RDS) offers which of the following benefits over traditional database management?",
+        "options": {
+          "A": "AWS manages the data stored in Amazon RDS tables",
+          "B": "AWS manages the maintenance of the operating system",
+          "C": "AWS automatically scales up instance types on demand",
+          "D": "AWS manages the database type"
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 46,
+        "question": "A company’s web application currently has light dependencies on underlying components so when one component fails the entire web application fails. Applying which AWS Cloud design principle will address the current design issue?",
+        "options": {
+          "A": "Implementing elasticity enabling the application to scale up or scale down as demand changes",
+          "B": "Enabling several EC2 instances to run in parallel to achieve better performance",
+          "C": "Focusing on decoupling components by isolating them and ensuring individual components can function when other components fail",
+          "D": "Doubling EC2 computing resources to increase system fault tolerance"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 47,
+        "question": "A customer would like to design and build a new workload on AWS Cloud but does not have the AWS-related software technical expertise in-house. Which of the following AWS programs can a customer take advantage of to achieve that outcome?",
+        "options": {
+          "A": "AWS Partner Network Technology Partners",
+          "B": "AWS Marketplace",
+          "C": "AWS Partner Network Consulting Partners",
+          "D": "AWS Service Catalog"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 48,
+        "question": "Which service stores objects, provides real-time access to those objects, and offers versioning and lifecycle capabilities?",
+        "options": {
+          "A": "Amazon Glacier",
+          "B": "AWS Storage Gateway",
+          "C": "Amazon S3",
+          "D": "Amazon EBS"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 49,
+        "question": "Distributing workloads across multiple Availability Zones supports which cloud architecture design principle?",
+        "options": {
+          "A": "Implement automation",
+          "B": "Design for agility",
+          "C": "Design for failure",
+          "D": "Implement elasticity"
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 50,
+        "question": "Which service should a customer use to consolidate and centrally manage multiple AWS accounts?",
+        "options": {
+          "A": "AWS IAM",
+          "B": "AWS Organizations",
+          "C": "AWS Schema Conversion Tool",
+          "D": "AWS Config"
+        },
+        "correctAnswer": ["B"]
+      }
+    ]
+  }
+  

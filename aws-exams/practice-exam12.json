@@ -1,0 +1,561 @@
+[
+    {
+      "id": 1,
+      "question": "A global company with a large number of AWS accounts is seeking a way in which they can centrally manage billing and security policies across all accounts. Which AWS Service will assist them in meeting these goals?",
+      "options": {
+        "A": "AWS Organizations.",
+        "B": "AWS Trusted Advisor.",
+        "C": "IAM User Groups.",
+        "D": "AWS Config."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 2,
+      "question": "Which service provides object-level storage in AWS?",
+      "options": {
+        "A": "Amazon EBS.",
+        "B": "Amazon Instance Store.",
+        "C": "Amazon EFS.",
+        "D": "Amazon S3."
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 3,
+      "question": "A company is concerned that they are spending money on underutilized compute resources in AWS. Which AWS feature will help ensure that their applications are automatically adding/removing EC2 compute capacity to closely match the required demand?",
+      "options": {
+        "A": "AWS Elastic Load Balancer.",
+        "B": "AWS Budgets.",
+        "C": "AWS Auto Scaling.",
+        "D": "AWS Cost Explorer."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 4,
+      "question": "Which S3 storage class is best for data with unpredictable access patterns?",
+      "options": {
+        "A": "Amazon S3 Intelligent-Tiering.",
+        "B": "Amazon S3 Glacier Flexible Retrieval.",
+        "C": "Amazon S3 Standard.",
+        "D": "Amazon S3 Standard-Infrequent Access."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 5,
+      "question": "What is the AWS database service that allows you to upload data structured in key-value format?",
+      "options": {
+        "A": "Amazon DynamoDB.",
+        "B": "Amazon Aurora.",
+        "C": "Amazon Redshift.",
+        "D": "Amazon RDS."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 6,
+      "question": "Which of the following is NOT correct regarding Amazon EC2 On-demand instances?",
+      "options": {
+        "A": "You have to pay a start-up fee when launching a new instance for the first time.",
+        "B": "The on-demand instances follow the AWS pay-as-you-go pricing model.",
+        "C": "With on-demand instances, no longer-term commitments or upfront payments are needed.",
+        "D": "When using on-demand Linux instances, you are charged per second based on an hourly rate."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 7,
+      "question": "A company has moved to AWS recently. Which of the following AWS Services will help ensure that they have the proper security settings? (Choose TWO)",
+      "options": {
+        "A": "AWS Trusted Advisor.",
+        "B": "Amazon Inspector.",
+        "C": "Amazon SNS.",
+        "D": "Amazon CloudWatch.",
+        "E": "Concierge Support Team."
+      },
+      "correctAnswer": ["A", "B"]
+    },
+    {
+      "id": 8,
+      "question": "What is the AWS feature that provides an additional level of security above the default authentication mechanism of usernames and passwords?",
+      "options": {
+        "A": "Encrypted keys.",
+        "B": "Email verification.",
+        "C": "AWS KMS.",
+        "D": "AWS MFA."
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 9,
+      "question": "A company is introducing a new product to their customers, and is expecting a surge in traffic to their web application. As part of their Enterprise Support plan, which of the following provides the company with architectural and scaling guidance?",
+      "options": {
+        "A": "AWS Knowledge Center.",
+        "B": "AWS Health Dashboard.",
+        "C": "Infrastructure Event Management.",
+        "D": "AWS Support Concierge Service."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 10,
+      "question": "You work as an on-premises MySQL DBA. The work of database configuration, backups, patching, and DR can be time-consuming and repetitive. Your company has decided to migrate to the AWS Cloud. Which of the following can help save time on database maintenance so you can focus on data architecture and performance?",
+      "options": {
+        "A": "Amazon RDS.",
+        "B": "Amazon Redshift.",
+        "C": "Amazon DynamoDB.",
+        "D": "Amazon CloudWatch."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 11,
+      "question": "Which of the below is a best-practice when designing solutions on AWS?",
+      "options": {
+        "A": "Invest heavily in architecting your environment, as it is not easy to change your design later.",
+        "B": "Use AWS reservations to reduce costs when testing your production environment.",
+        "C": "Automate wherever possible to make architectural (© ) experimentation easier.",
+        "D": "Provision a large compute capacity to handle any spikes in load"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 12,
+      "question": "According to the AWS Acceptable Use Policy, which of the following statements is true regarding penetration testing of EC2 instances?",
+      "options": {
+        "A": "Penetration testing is not allowed in AWS.",
+        "B": "Penetration testing is performed automatically by AWS to determine vulnerabilities in your AWS infrastructure.",
+        "C": "Penetration testing can be performed by the customer on their own instances without prior authorization from AWS.",
+        "D": "The AWS customers are only allowed to perform penetration testing on services managed by AWS."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 13,
+      "question": "Which service is used to ensure that messages between software components are not lost if one or more components fail?",
+      "options": {
+        "A": "Amazon SQS.",
+        "B": "Amazon SES.",
+        "C": "AWS Direct Connect.",
+        "D": "Amazon Connect."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 14,
+      "question": "The principle “design for failure and nothing will fail” is very important when designing your AWS Cloud architecture. Which of the following would help adhere to this principle? (Choose TWO)",
+      "options": {
+        "A": "Multi-factor authentication.",
+        "B": "Availability Zones.",
+        "C": "Elastic Load Balancing.",
+        "D": "Penetration testing.",
+        "E": "Vertical Scaling."
+      },
+      "correctAnswer": ["B", "C"]
+    },
+    {
+      "id": 15,
+      "question": "What is the AWS service that provides a virtual network dedicated to your AWS account?",
+      "options": {
+        "A": "AWS VPN.",
+        "B": "AWS Subnets.",
+        "C": "AWS Dedicated Hosts.",
+        "D": "Amazon VPC."
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 16,
+      "question": "According to the AWS Shared responsibility model, which of the following are the responsibility of the customer? (Choose TWO)",
+      "options": {
+        "A": "Managing environmental events of AWS data centers.",
+        "B": "Protecting the confidentiality of data in transit in Amazon S3.",
+        "C": "Controlling physical access to AWS Regions.",
+        "D": "Ensuring that the underlying EC2 host is configured properly.",
+        "E": "Patching applications installed on Amazon EC2."
+      },
+      "correctAnswer": ["B", "E"]
+    },
+    {
+      "id": 17,
+      "question": "Which of the following AWS services can be used as a compute resource? (Choose TWO)",
+      "options": {
+        "A": "Amazon VPC.",
+        "B": "Amazon CloudWatch.",
+        "C": "Amazon S3.",
+        "D": "Amazon EC2.",
+        "E": "AWS Lambda."
+      },
+      "correctAnswer": ["D", "E"]
+    },
+    {
+      "id": 18,
+      "question": "Your company is designing a new application that will store and retrieve photos and videos. Which of the following services should you recommend as the underlying storage mechanism?",
+      "options": {
+        "A": "Amazon EBS.",
+        "B": "Amazon SQS.",
+        "C": "Amazon S3.",
+        "D": "Amazon Instance store."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 19,
+      "question": "Which of the following is equivalent to a user name and password and is used to authenticate your programmatic access to AWS services and APIs?",
+      "options": {
+        "A": "Instance Password.",
+        "B": "Key pairs.",
+        "C": "Access Keys.",
+        "D": "MFA."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 20,
+      "question": "What does Amazon ElastiCache provide?",
+      "options": {
+        "A": "In-memory caching for read-heavy applications.",
+        "B": "An Ehcache compatible in-memory data store.",
+        "C": "An online software store that allows Customers to launch pre-configured software with just few clicks.",
+        "D": "A domain name system in the cloud."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 21,
+      "question": "What is the AWS service that enables you to manage all of your AWS accounts from a single master account?",
+      "options": {
+        "A": "AWS WAF.",
+        "B": "AWS Trusted Advisor.",
+        "C": "AWS Organizations.",
+        "D": "Amazon Config."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 22,
+      "question": "Which of the following EC2 instance purchasing options supports the Bring Your Own License (BYOL) model for almost every BYOL scenario?",
+      "options": {
+        "A": "Dedicated Instances.",
+        "B": "Dedicated Hosts.",
+        "C": "On-demand Instances.",
+        "D": "Reserved Instances."
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 23,
+      "question": "Which of the following is one of the benefits of moving infrastructure from an on-premises data center to AWS?",
+      "options": {
+        "A": "Free support for all enterprise customers.",
+        "B": "Automatic data protection.",
+        "C": "Reduced Capital Expenditure (CapEx).",
+        "D": "AWS holds responsibility for managing customer applications."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 24,
+      "question": "Which of the following are important design principles you should adopt when designing systems on AWS? (Choose TWO)",
+      "options": {
+        "A": "Always use Global Services in your architecture rather than Regional Services.",
+        "B": "Always choose to pay as you go.",
+        "C": "Treat servers as fixed resources.",
+        "D": "Automate wherever possible.",
+        "E": "Remove single points of failure."
+      },
+      "correctAnswer": ["D", "E"]
+    },
+    {
+      "id": 25,
+      "question": "Which AWS Service can be used to establish a dedicated, private network connection between AWS and your datacenter?",
+      "options": {
+        "A": "AWS Direct Connect.",
+        "B": "Amazon CloudFront.",
+        "C": "AWS Snowball.",
+        "D": "Amazon Route 53."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 26,
+      "question": "You are working on two projects that require completely different network configurations. Which AWS service or feature will allow you to isolate resources and network configurations?",
+      "options": {
+        "A": "Internet gateways.",
+        "B": "Virtual Private Cloud.",
+        "C": "Security Groups.",
+        "D": "Amazon CloudFront."
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 27,
+      "question": "Which of the following services can help protect your web applications from SQL injection and other vulnerabilities in your application code?",
+      "options": {
+        "A": "Amazon Cognito.",
+        "B": "AWS IAM.",
+        "C": "Amazon Aurora.",
+        "D": "AWS WAF."
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 28,
+      "question": "An organization needs to analyze and process a large number of data sets. Which AWS service should they use?",
+      "options": {
+        "A": "Amazon EMR.",
+        "B": "Amazon MQ.",
+        "C": "Amazon SNS.",
+        "D": "Amazon SQS."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 29,
+      "question": "Based on the AWS Shared Responsibility Model, which of the following are the sole responsibility of AWS? (Choose TWO)",
+      "options": {
+        "A": "Monitoring network performance.",
+        "B": "Installing software on EC2 instances.",
+        "C": "Creating hypervisors.",
+        "D": "Configuring Access Control Lists (ACLs).",
+        "E": "Hardware maintenance."
+      },
+      "correctAnswer": ["C", "E"]
+    },
+    {
+      "id": 30,
+      "question": "What is the AWS service that provides you the highest level of control over the underlying virtual infrastructure?",
+      "options": {
+        "A": "Amazon Redshift.",
+        "B": "Amazon DynamoDB.",
+        "C": "Amazon EC2.",
+        "D": "Amazon RDS."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 31,
+      "question": "What are the default security credentials that are required to access the AWS management console for an IAM user account?",
+      "options": {
+        "A": "MFA.",
+        "B": "Security tokens.",
+        "C": "A user name and password.",
+        "D": "Access keys."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 32,
+      "question": "In your on-premises environment, you can create as many virtual servers as you need from a single template. What can you use to perform the same in AWS?",
+      "options": {
+        "A": "IAM.",
+        "B": "An internet gateway.",
+        "C": "EBS Snapshot.",
+        "D": "AMI."
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 33,
+      "question": "What are two advantages of using Cloud Computing over using traditional data centers? (Choose TWO)",
+      "options": {
+        "A": "Reserved Compute capacity.",
+        "B": "Eliminating Single Points of Failure (SPOFs).",
+        "C": "Distributed infrastructure.",
+        "D": "Virtualized compute resources.",
+        "E": "Dedicated hosting."
+      },
+      "correctAnswer": ["B", "C"]
+    },
+    {
+      "id": 34,
+      "question": "Which of the following aspects of security are managed by AWS? (Choose TWO)",
+      "options": {
+        "A": "Encryption of EBS volumes.",
+        "B": "VPC security.",
+        "C": "Access permissions.",
+        "D": "Hardware patching.",
+        "E": "Securing global physical infrastructure."
+      },
+      "correctAnswer": ["D", "E"]
+    },
+    {
+      "id": 35,
+      "question": "Which statement best describes the operational excellence pillar of the AWS Well-Architected Framework?",
+      "options": {
+        "A": "The ability of a system to recover gracefully from failure.",
+        "B": "The efficient use of computing resources to meet requirements.",
+        "C": "The ability to monitor systems and improve supporting processes and procedures.",
+        "D": "The ability to manage datacenter operations more efficiently."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 36,
+      "question": "AWS has created a large number of Edge Locations as part of its Global Infrastructure. Which of the following is NOT a benefit of using Edge Locations?",
+      "options": {
+        "A": "Edge locations are used by CloudFront to cache the most recent responses.",
+        "B": "Edge locations are used by CloudFront to improve your end users’ experience when uploading files.",
+        "C": "Edge locations are used by CloudFront to distribute traffic across multiple instances to reduce latency.",
+        "D": "Edge locations are used by CloudFront to distribute content to global users with low latency."
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 37,
+      "question": "What are the change management tools that helps AWS customers audit and monitor all resource changes in their AWS environment? (Choose TWO)",
+      "options": {
+        "A": "AWS CloudTrail.",
+        "B": "Amazon Comprehend.",
+        "C": "AWS Transit Gateway.",
+        "D": "AWS X-Ray.",
+        "E": "AWS Config."
+      },
+      "correctAnswer": ["A", "E"]
+    },
+    {
+      "id": 38,
+      "question": "Which of the following services allows you to run containerized applications on a cluster of EC2 instances?",
+      "options": {
+        "A": "Amazon ECS.",
+        "B": "AWS Data Pipeline.",
+        "C": "AWS Cloud9.",
+        "D": "AWS Personal Health Dashboard."
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 39,
+      "question": "Which of the following services will help businesses ensure compliance in AWS?",
+      "options": {
+        "A": "CloudFront.",
+        "B": "CloudEndure Migration.",
+        "C": "CloudWatch.",
+        "D": "CloudTrail."
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+        "id": 40,
+        "question": "Which of the following procedures will help reduce your Amazon S3 costs?",
+        "options": {
+          "A": "Enable versioning on all S3 buckets.",
+          "B": "Use the S3 Standard storage class for all data.",
+          "C": "Configure lifecycle policies to transition objects to lower-cost storage tiers.",
+          "D": "Increase the number of S3 buckets."
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 41,
+        "question": "Which AWS service allows you to run code without provisioning or managing servers?",
+        "options": {
+          "A": "AWS Lambda.",
+          "B": "Amazon EC2.",
+          "C": "AWS Fargate.",
+          "D": "Amazon Lightsail."
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 42,
+        "question": "Which of the following is a fully managed service for real-time messaging between applications?",
+        "options": {
+          "A": "Amazon SQS.",
+          "B": "Amazon SNS.",
+          "C": "Amazon MQ.",
+          "D": "Amazon Kinesis."
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 43,
+        "question": "What AWS service is used to manage encryption keys for data-at-rest protection?",
+        "options": {
+          "A": "AWS KMS.",
+          "B": "AWS Certificate Manager.",
+          "C": "AWS Secrets Manager.",
+          "D": "AWS IAM."
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 44,
+        "question": "Which AWS service provides a fully managed relational database with automated backups?",
+        "options": {
+          "A": "Amazon DynamoDB.",
+          "B": "Amazon RDS.",
+          "C": "Amazon Redshift.",
+          "D": "Amazon ElastiCache."
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 45,
+        "question": "Which AWS service allows you to define infrastructure as code?",
+        "options": {
+          "A": "AWS CloudFormation.",
+          "B": "AWS OpsWorks.",
+          "C": "AWS Config.",
+          "D": "AWS CloudTrail."
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 46,
+        "question": "Which of the following is a stateless virtual firewall for controlling traffic at the instance level?",
+        "options": {
+          "A": "Network ACLs.",
+          "B": "Security Groups.",
+          "C": "AWS WAF.",
+          "D": "AWS Shield."
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 47,
+        "question": "Which pillar of the AWS Well-Architected Framework focuses on systems that self-heal after failures?",
+        "options": {
+          "A": "Performance Efficiency.",
+          "B": "Reliability.",
+          "C": "Operational Excellence.",
+          "D": "Cost Optimization."
+        },
+        "correctAnswer": ["B"]
+      },
+      {
+        "id": 48,
+        "question": "Which AWS service provides notifications when AWS resources are created, modified, or deleted?",
+        "options": {
+          "A": "Amazon CloudWatch.",
+          "B": "AWS CloudTrail.",
+          "C": "Amazon EventBridge.",
+          "D": "AWS Config."
+        },
+        "correctAnswer": ["C"]
+      },
+      {
+        "id": 49,
+        "question": "What is the primary purpose of an AWS Transit Gateway?",
+        "options": {
+          "A": "To connect VPCs and on-premises networks through a central hub.",
+          "B": "To cache frequently accessed content globally.",
+          "C": "To monitor network traffic for security threats.",
+          "D": "To automate scaling of EC2 instances."
+        },
+        "correctAnswer": ["A"]
+      },
+      {
+        "id": 50,
+        "question": "Which AWS service helps analyze and visualize cost and usage data?",
+        "options": {
+          "A": "AWS Budgets.",
+          "B": "AWS Cost Explorer.",
+          "C": "AWS Trusted Advisor.",
+          "D": "AWS Compute Optimizer."
+        },
+        "correctAnswer": ["B"]
+      }
+]

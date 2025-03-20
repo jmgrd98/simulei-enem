@@ -1,0 +1,563 @@
+[
+    {
+      "id": 1,
+      "question": "What time-savings advantage is offered with the use of Amazon Rekognition?",
+      "options": {
+        "A": "Amazon Rekognition provides automatic watermarking of images",
+        "B": "Amazon Rekognition provides automatic detection of objects appearing in pictures",
+        "C": "Amazon Rekognition provides the ability to resize millions of images automatically",
+        "D": "Amazon Rekognition uses Amazon Mechanical Turk to allow humans to bid on object detection jobs"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 2,
+      "question": "When comparing AWS with on-premises Total Cost of Ownership (TCO), what costs are included?",
+      "options": {
+        "A": "Data center security",
+        "B": "Business analysis",
+        "C": "Project management",
+        "D": "Operating system administration"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 3,
+      "question": "According to the AWS shared responsibility model, what is AWS responsible for?",
+      "options": {
+        "A": "Configuring Amazon VPC",
+        "B": "Managing application code",
+        "C": "Maintaining application traffic",
+        "D": "Managing the network infrastructure"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 4,
+      "question": "Which service should be used to estimate the costs of running a new project on AWS?",
+      "options": {
+        "A": "AWS TCO Calculator",
+        "B": "AWS Simple Monthly Calculator",
+        "C": "AWS Cost Explorer API",
+        "D": "AWS Budgets"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 5,
+      "question": "Which AWS tool will identify security groups that grant unrestricted Internet access?",
+      "options": {
+        "A": "AWS Organizations",
+        "B": "AWS Trusted Advisor",
+        "C": "AWS Usage Report",
+        "D": "Amazon EC2 dashboard"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 6,
+      "question": "Which service generates alerts based on estimated monthly bills?",
+      "options": {
+        "A": "AWS Config",
+        "B": "Amazon CloudWatch",
+        "C": "AWS X-Ray",
+        "D": "AWS CloudTrail"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 7,
+      "question": "Which EC2 pricing offers the MOST significant discount?",
+      "options": {
+        "A": "Partial Upfront 1-year",
+        "B": "All Upfront 1-year",
+        "C": "All Upfront 3-year",
+        "D": "No Upfront 3-year"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 8,
+      "question": "Which is AWS's responsibility?",
+      "options": {
+        "A": "Setting up IAM users",
+        "B": "Destroying storage media",
+        "C": "Patching guest OS",
+        "D": "Configuring EC2 security"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 9,
+      "question": "Which is an advantage of AWS?",
+      "options": {
+        "A": "AWS audits user data",
+        "B": "Data is automatically secure",
+        "C": "No guessing on capacity needs",
+        "D": "AWS manages compliance"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 10,
+      "question": "Which service improves latency for static websites?",
+      "options": {
+        "A": "AWS Lambda",
+        "B": "DynamoDB Accelerator",
+        "C": "Route 53",
+        "D": "CloudFront"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 11,
+      "question": "Which services automate deployments? (Choose two.)",
+      "options": {
+        "A": "Elastic Beanstalk",
+        "B": "CodeCommit",
+        "C": "Data Pipeline",
+        "D": "CloudFormation",
+        "E": "Config"
+      },
+      "correctAnswer": ["A", "D"]
+    },
+    {
+      "id": 12,
+      "question": "Which tool shows savings for migration?",
+      "options": {
+        "A": "AWS Budgets",
+        "B": "Cost Explorer",
+        "C": "TCO Calculator",
+        "D": "Well-Architected Tool"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 13,
+      "question": "Reliability principles? (Choose two.)",
+      "options": {
+        "A": "Automated failure recovery",
+        "B": "Multiple AZs",
+        "C": "Documented change processes",
+        "D": "Test moderate demand",
+        "E": "Backup to on-premises"
+      },
+      "correctAnswer": ["A", "B"]
+    },
+    {
+      "id": 14,
+      "question": "Actions for compromised account? (Choose two.)",
+      "options": {
+        "A": "Rotate credentials",
+        "B": "Remove MFA",
+        "C": "Move regions",
+        "D": "Delete CloudTrail",
+        "E": "Contact AWS Support"
+      },
+      "correctAnswer": ["A", "E"]
+    },
+    {
+      "id": 15,
+      "question": "Example of high availability?",
+      "options": {
+        "A": "24/7 support",
+        "B": "App remains accessible",
+        "C": "Pay-as-you-go",
+        "D": "Global regions"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 16,
+      "question": "Service protecting from DDoS?",
+      "options": {
+        "A": "Inspector",
+        "B": "WAF",
+        "C": "ELB",
+        "D": "Shield"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 17,
+      "question": "Monitor EC2 CPU usage?",
+      "options": {
+        "A": "CloudTrail",
+        "B": "CloudWatch",
+        "C": "Cost Report",
+        "D": "SNS"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 18,
+      "question": "What is an IAM role?",
+      "options": {
+        "A": "User association",
+        "B": "Group association",
+        "C": "Permission entity",
+        "D": "MFA credential"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 19,
+      "question": "Reserved Instance benefits? (Choose two.)",
+      "options": {
+        "A": "Discounts",
+        "B": "Extra instance types",
+        "C": "Networking capability",
+        "D": "Upgradeable instances",
+        "E": "AZ capacity reservation"
+      },
+      "correctAnswer": ["A", "E"]
+    },
+    {
+      "id": 20,
+      "question": "How Auto Scaling aids HA?",
+      "options": {
+        "A": "Multi-region scaling",
+        "B": "Multi-AZ scaling",
+        "C": "CloudFront caching",
+        "D": "ELB distribution"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 21,
+      "question": "Share Reserved Instances?",
+      "options": {
+        "A": "Dedicated Instances",
+        "B": "Consolidated billing",
+        "C": "Cost Explorer",
+        "D": "Budgets"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 22,
+      "question": "Billing for 3h5m6s usage?",
+      "options": {
+        "A": "3h5m",
+        "B": "3h5m6s",
+        "C": "3h6m",
+        "D": "4h"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 23,
+      "question": "Compute services? (Choose two.)",
+      "options": {
+        "A": "Lambda",
+        "B": "ECS",
+        "C": "CodeDeploy",
+        "D": "Glacier",
+        "E": "Organizations"
+      },
+      "correctAnswer": ["A", "B"]
+    },
+    {
+      "id": 24,
+      "question": "Infrastructure as code?",
+      "options": {
+        "A": "GameLift",
+        "B": "CloudFormation",
+        "C": "Data Pipeline",
+        "D": "Glue"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 25,
+      "question": "Hybrid services? (Choose two.)",
+      "options": {
+        "A": "EBS",
+        "B": "Direct Connect",
+        "C": "CloudFront",
+        "D": "Storage Gateway",
+        "E": "Connect"
+      },
+      "correctAnswer": ["B", "D"]
+    },
+    {
+      "id": 26,
+      "question": "Dedicated network connection?",
+      "options": {
+        "A": "CloudHSM",
+        "B": "Direct Connect",
+        "C": "VPN",
+        "D": "Connect"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 27,
+      "question": "Edge location services? (Choose two.)",
+      "options": {
+        "A": "CloudFront",
+        "B": "Shield",
+        "C": "EC2",
+        "D": "RDS",
+        "E": "ElastiCache"
+      },
+      "correctAnswer": ["A", "B"]
+    },
+    {
+      "id": 28,
+      "question": "Hybrid network connectivity?",
+      "options": {
+        "A": "VPC",
+        "B": "Direct Connect",
+        "C": "Directory Service",
+        "D": "API Gateway"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 29,
+      "question": "Compare hosting costs?",
+      "options": {
+        "A": "Cost Explorer",
+        "B": "Budgets",
+        "C": "Cost Report",
+        "D": "TCO Calculator"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 30,
+      "question": "AWS Marketplace benefits? (Choose two.)",
+      "options": {
+        "A": "Pay-as-you-go licensing",
+        "B": "1-Click deployment",
+        "C": "Third-party encryption",
+        "D": "No upgrades needed",
+        "E": "No testing required"
+      },
+      "correctAnswer": ["A", "B"]
+    },
+    {
+      "id": 31,
+      "question": "Cloud design principle?",
+      "options": {
+        "A": "Scale up",
+        "B": "Loose coupling",
+        "C": "Monolithic systems",
+        "D": "Commercial databases"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 32,
+      "question": "Customer responsibilities? (Choose two.)",
+      "options": {
+        "A": "Firmware upgrades",
+        "B": "OS patching",
+        "C": "Hypervisor patching",
+        "D": "Data center security",
+        "E": "Security groups"
+      },
+      "correctAnswer": ["B", "E"]
+    },
+    {
+      "id": 33,
+      "question": "Audit resource changes?",
+      "options": {
+        "A": "Trusted Advisor",
+        "B": "GuardDuty",
+        "C": "Inspector",
+        "D": "AWS Config"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 34,
+      "question": "Identify open security groups?",
+      "options": {
+        "A": "CloudTrail",
+        "B": "Trusted Advisor",
+        "C": "CloudWatch",
+        "D": "Inspector"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 35,
+      "question": "Configuration management responsibility?",
+      "options": {
+        "A": "Customer",
+        "B": "AWS",
+        "C": "Shared",
+        "D": "Not applicable"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 36,
+      "question": "Global content delivery?",
+      "options": {
+        "A": "CloudFormation",
+        "B": "Direct Connect",
+        "C": "CloudFront",
+        "D": "Pinpoint"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 37,
+      "question": "Matching resource supply/demand?",
+      "options": {
+        "A": "Security",
+        "B": "Reliability",
+        "C": "Elasticity",
+        "D": "HA"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 38,
+      "question": "Report AWS IP in DDoS?",
+      "options": {
+        "A": "Support",
+        "B": "TAM",
+        "C": "SA",
+        "D": "Abuse team"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 39,
+      "question": "AWS benefits? (Choose two.)",
+      "options": {
+        "A": "No upfront costs",
+        "B": "AWS manages security",
+        "C": "On-demand resources",
+        "D": "Unlimited storage",
+        "E": "Physical control"
+      },
+      "correctAnswer": ["A", "C"]
+    },
+    {
+      "id": 40,
+      "question": "Central policy management?",
+      "options": {
+        "A": "Service Catalog",
+        "B": "Config",
+        "C": "Trusted Advisor",
+        "D": "Organizations"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 41,
+      "question": "What is Trusted Advisor?",
+      "options": {
+        "A": "AWS staff",
+        "B": "Partner network",
+        "C": "Automated checks",
+        "D": "TAMs"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 42,
+      "question": "Visualize AWS costs?",
+      "options": {
+        "A": "Budgets",
+        "B": "Cost Explorer",
+        "C": "Organizations",
+        "D": "Consolidated billing"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 43,
+      "question": "On-demand compliance reports?",
+      "options": {
+        "A": "CloudTrail",
+        "B": "Artifact",
+        "C": "Health",
+        "D": "CloudWatch"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 44,
+      "question": "Global deployment benefits? (Choose two.)",
+      "options": {
+        "A": "Multi-region latency",
+        "B": "Translate interfaces",
+        "C": "CloudFront edge",
+        "D": "Comprehend languages",
+        "E": "ELB multi-region"
+      },
+      "correctAnswer": ["A", "C"]
+    },
+    {
+      "id": 45,
+      "question": "Handles deployment details?",
+      "options": {
+        "A": "Config",
+        "B": "Elastic Beanstalk",
+        "C": "Route 53",
+        "D": "CloudFront"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 46,
+      "question": "Network ACL management?",
+      "options": {
+        "A": "IAM",
+        "B": "Connect",
+        "C": "VPC",
+        "D": "API Gateway"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 47,
+      "question": "Multi-region provisioning increases?",
+      "options": {
+        "A": "Coupling",
+        "B": "Availability",
+        "C": "Security",
+        "D": "Durability"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 48,
+      "question": "Pay-as-you-go reduces?",
+      "options": {
+        "A": "CapEx",
+        "B": "Upfront payments",
+        "C": "Relevant to few services",
+        "D": "OpEx"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 49,
+      "question": "AWS security responsibility?",
+      "options": {
+        "A": "IAM lifecycle",
+        "B": "Physical security",
+        "C": "EBS encryption",
+        "D": "Firewall config"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 50,
+      "question": "Consolidate billing?",
+      "options": {
+        "A": "QuickSight",
+        "B": "Organizations",
+        "C": "Budgets",
+        "D": "Forecast"
+      },
+      "correctAnswer": ["B"]
+    }
+  ]

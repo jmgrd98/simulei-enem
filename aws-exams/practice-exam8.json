@@ -1,0 +1,560 @@
+[
+    {
+      "id": 1,
+      "question": "What will help a company perform a cost benefit analysis of migrating to the AWS Cloud?",
+      "options": {
+        "A": "Cost Explorer",
+        "B": "AWS Total Cost of Ownership (TCO) Calculator",
+        "C": "AWS Simple Monthly Calculator",
+        "D": "AWS Trusted Advisor"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 2,
+      "question": "Which of the following provides the ability to share the cost benefits of Reserved Instances across AWS accounts?",
+      "options": {
+        "A": "AWS Cost Explorer between AWS accounts",
+        "B": "Linked accounts and consolidated billing",
+        "C": "Amazon EC2 Reserved Instance Utilization Report",
+        "D": "Amazon EC2 Instance Usage Report between AWS accounts"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 3,
+      "question": "A company has multiple AWS accounts and wants to simplify and consolidate its billing process. Which AWS service will achieve this?",
+      "options": {
+        "A": "AWS Cost and Usage Reports",
+        "B": "AWS Organizations",
+        "C": "AWS Cost Explorer",
+        "D": "AWS Budgets"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 4,
+      "question": "A company is designing an application hosted in a single AWS Region serving end-users spread across the world. The company wants to provide low latency access. Which service will help?",
+      "options": {
+        "A": "Amazon CloudFront",
+        "B": "AWS Direct Connect",
+        "C": "Amazon Route 53 global DNS",
+        "D": "Amazon S3 transfer acceleration"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 5,
+      "question": "Which deployment model enables customers to fully trade capital IT expenses for operational expenses?",
+      "options": {
+        "A": "On-premises",
+        "B": "Hybrid",
+        "C": "Cloud",
+        "D": "Platform as a service"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 6,
+      "question": "How is asset management on AWS easier than in a physical data center?",
+      "options": {
+        "A": "AWS provides a Configuration Management Database",
+        "B": "AWS performs infrastructure discovery scans",
+        "C": "Amazon EC2 automatically generates asset reports",
+        "D": "Users gather asset metadata with API calls"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 7,
+      "question": "What Amazon RDS feature helps create globally redundant databases?",
+      "options": {
+        "A": "Snapshots",
+        "B": "Automatic patching",
+        "C": "Cross-Region read replicas",
+        "D": "Provisioned IOPS"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 8,
+      "question": "Granting access only to required resources is known as:",
+      "options": {
+        "A": "Restricted access",
+        "B": "As-needed access",
+        "C": "Least privilege access",
+        "D": "Token access"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 9,
+      "question": "Which methods identify AWS costs by departments? (Choose two.)",
+      "options": {
+        "A": "Enable MFA for root user",
+        "B": "Create separate accounts",
+        "C": "Use Reserved Instances",
+        "D": "Use tags",
+        "E": "Use purchase orders"
+      },
+      "correctAnswer": ["B", "D"]
+    },
+    {
+      "id": 10,
+      "question": "Under the shared responsibility model, customer responsibilities include:",
+      "options": {
+        "A": "Securing AWS hardware",
+        "B": "Providing certificates to AWS",
+        "C": "Configuring OS/firewall",
+        "D": "Obtaining certifications"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 11,
+      "question": "Which service provides real-time AWS security best practices guidance?",
+      "options": {
+        "A": "AWS X-Ray",
+        "B": "AWS Trusted Advisor",
+        "C": "Amazon CloudWatch",
+        "D": "AWS Systems Manager"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 12,
+      "question": "Which feature adds elasticity to Amazon EC2 instances?",
+      "options": {
+        "A": "Resource groups",
+        "B": "Lifecycle policies",
+        "C": "Application Load Balancer",
+        "D": "EC2 Auto Scaling"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 13,
+      "question": "Under the shared responsibility model, customer responsibilities include: (Choose two.)",
+      "options": {
+        "A": "Visualization management",
+        "B": "Hardware management",
+        "C": "Encryption management",
+        "D": "Facilities management",
+        "E": "Firewall management"
+      },
+      "correctAnswer": ["C", "E"]
+    },
+    {
+      "id": 14,
+      "question": "Which hybrid storage service uses standard file protocols?",
+      "options": {
+        "A": "AWS Direct Connect",
+        "B": "AWS Snowball",
+        "C": "AWS Storage Gateway",
+        "D": "AWS Snowball Edge"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 15,
+      "question": "What is AWS's responsibility in the shared model?",
+      "options": {
+        "A": "Update network ACLs",
+        "B": "Patch EC2 OS",
+        "C": "Update EC2 host firmware",
+        "D": "Update security groups"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 16,
+      "question": "Which principle is used in Amazon RDS Multi-AZ deployments?",
+      "options": {
+        "A": "Loose coupling",
+        "B": "Design for failure",
+        "C": "Automation",
+        "D": "Use services not servers"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 17,
+      "question": "What does granting 'least privilege' mean?",
+      "options": {
+        "A": "Single user access",
+        "B": "IAM policies only",
+        "C": "Admin access to trusted users",
+        "D": "Permissions for specific tasks"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 18,
+      "question": "What is a benefit of loose coupling?",
+      "options": {
+        "A": "Low-latency handling",
+        "B": "Dependent workflows",
+        "C": "Prevent cascading failures",
+        "D": "Focus on physical data centers"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 19,
+      "question": "Which service facilitates private hybrid connectivity?",
+      "options": {
+        "A": "VPC NAT Gateway",
+        "B": "AWS Direct Connect",
+        "C": "S3 Transfer Acceleration",
+        "D": "AWS WAF"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 20,
+      "question": "How to address tight component dependencies?",
+      "options": {
+        "A": "Implement elasticity",
+        "B": "Run parallel EC2 instances",
+        "C": "Decouple components",
+        "D": "Double EC2 resources"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 21,
+      "question": "How to increase AWS logon security? (Choose two.)",
+      "options": {
+        "A": "AWS Certificate Manager",
+        "B": "Enable MFA",
+        "C": "Amazon Cognito",
+        "D": "Strong password policy",
+        "E": "AWS Organizations"
+      },
+      "correctAnswer": ["B", "D"]
+    },
+    {
+      "id": 22,
+      "question": "Which service centrally manages AWS access?",
+      "options": {
+        "A": "AWS Service Catalog",
+        "B": "AWS Config",
+        "C": "AWS Trusted Advisor",
+        "D": "AWS Organizations"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 23,
+      "question": "Which service alerts for billing thresholds?",
+      "options": {
+        "A": "Cost and Usage Reports",
+        "B": "AWS Budgets",
+        "C": "Cost Explorer",
+        "D": "Trusted Advisor"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 24,
+      "question": "What does AWS Artifact provide?",
+      "options": {
+        "A": "Security/compliance docs",
+        "B": "Configuration details",
+        "C": "Training materials",
+        "D": "App security assessments"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 25,
+      "question": "Minimum plan with Technical Account Manager?",
+      "options": {
+        "A": "Enterprise",
+        "B": "Business",
+        "C": "Developer",
+        "D": "Basic"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 26,
+      "question": "AWS Well-Architected reliability principle?",
+      "options": {
+        "A": "Single AZ deployment",
+        "B": "Recover from failure",
+        "C": "Cost optimization",
+        "D": "Operations as code"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 27,
+      "question": "Ephemeral storage deleted on instance stop?",
+      "options": {
+        "A": "Amazon EBS",
+        "B": "EC2 instance store",
+        "C": "Amazon EFS",
+        "D": "Amazon S3"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 28,
+      "question": "AWS Cloud advantage over on-premises?",
+      "options": {
+        "A": "No capacity guessing",
+        "B": "Use existing hardware contracts",
+        "C": "Fixed costs",
+        "D": "Avoid audits"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 29,
+      "question": "AWS-managed compute service?",
+      "options": {
+        "A": "Amazon SWF",
+        "B": "Amazon EC2",
+        "C": "AWS Lambda",
+        "D": "Amazon Aurora"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 30,
+      "question": "Important cloud architecture principle?",
+      "options": {
+        "A": "Store data/backups in same region",
+        "B": "Tightly coupled components",
+        "C": "Avoid multi-threading",
+        "D": "Design for failure"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 31,
+      "question": "Access AWS services from app code?",
+      "options": {
+        "A": "AWS SDK",
+        "B": "AWS Console",
+        "C": "AWS CodePipeline",
+        "D": "AWS Config"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 32,
+      "question": "Most cost-efficient for annual 24h workload?",
+      "options": {
+        "A": "On-Demand",
+        "B": "Reserved",
+        "C": "Spot",
+        "D": "Dedicated"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 33,
+      "question": "MySQL DB with auto-scaling storage?",
+      "options": {
+        "A": "EC2",
+        "B": "RDS MySQL",
+        "C": "Lightsail",
+        "D": "Aurora"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 34,
+      "question": "Connect two VPCs?",
+      "options": {
+        "A": "VPC endpoints",
+        "B": "EC2 ClassicLink",
+        "C": "VPC peering",
+        "D": "Direct Connect"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 35,
+      "question": "Service for version control?",
+      "options": {
+        "A": "CodeStar",
+        "B": "AWS CLI",
+        "C": "Cognito",
+        "D": "CodeCommit"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 36,
+      "question": "Compare on-premises to AWS costs?",
+      "options": {
+        "A": "Simple Monthly Calculator",
+        "B": "TCO Calculator",
+        "C": "Billing console",
+        "D": "Cost Explorer"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 37,
+      "question": "Exabyte-scale data transport?",
+      "options": {
+        "A": "AWS Batch",
+        "B": "Snowball",
+        "C": "Migration Hub",
+        "D": "Snowmobile"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 38,
+      "question": "AWS pricing model? (Choose two.)",
+      "options": {
+        "A": "Fixed-term",
+        "B": "Pay-as-you-go",
+        "C": "Colocation",
+        "D": "Planned",
+        "E": "Variable cost"
+      },
+      "correctAnswer": ["B", "E"]
+    },
+    {
+      "id": 39,
+      "question": "ELB types? (Choose two.)",
+      "options": {
+        "A": "Public with Auto Scaling",
+        "B": "F5/Citrix",
+        "C": "Classic",
+        "D": "Cross-zone",
+        "E": "Application"
+      },
+      "correctAnswer": ["C", "E"]
+    },
+    {
+      "id": 40,
+      "question": "AWS advantage over traditional DC?",
+      "options": {
+        "A": "Full resource control",
+        "B": "No long-term contracts",
+        "C": "Edge locations everywhere",
+        "D": "Unlimited resources"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 41,
+      "question": "Fastest global response times?",
+      "options": {
+        "A": "CloudTrail",
+        "B": "CloudFront",
+        "C": "CloudFormation",
+        "D": "Direct Connect"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 42,
+      "question": "Self-service compliance reports?",
+      "options": {
+        "A": "AWS Config",
+        "B": "Certificate Manager",
+        "C": "Inspector",
+        "D": "AWS Artifact"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 43,
+      "question": "Run self-managed DB?",
+      "options": {
+        "A": "Route 53",
+        "B": "X-Ray",
+        "C": "Snowmobile",
+        "D": "EC2"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 44,
+      "question": "Enterprise Support exclusive benefit?",
+      "options": {
+        "A": "Technical Project Manager",
+        "B": "Technical Account Manager",
+        "C": "Cloud Support Engineer",
+        "D": "Solutions Architect"
+      },
+      "correctAnswer": ["B"]
+    },
+    {
+      "id": 45,
+      "question": "Protect against regional disasters?",
+      "options": {
+        "A": "Multi-AZ",
+        "B": "Hybrid cloud",
+        "C": "Multi-Region",
+        "D": "AWS Artifact replication"
+      },
+      "correctAnswer": ["C"]
+    },
+    {
+      "id": 46,
+      "question": "How AWS reduces startup costs?",
+      "options": {
+        "A": "On-demand peak resources",
+        "B": "Automated provisioning",
+        "C": "CRM automation",
+        "D": "Fixed compute budget"
+      },
+      "correctAnswer": ["A"]
+    },
+    {
+      "id": 47,
+      "question": "Characteristic for fast-changing apps?",
+      "options": {
+        "A": "Elasticity",
+        "B": "Reliability",
+        "C": "Performance",
+        "D": "Agility"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 48,
+      "question": "Plans with full Trusted Advisor checks?",
+      "options": {
+        "A": "Business/Developer",
+        "B": "Business/Basic",
+        "C": "Enterprise/Developer",
+        "D": "Enterprise/Business"
+      },
+      "correctAnswer": ["D"]
+    },
+    {
+      "id": 49,
+      "question": "Services with DDoS mitigation? (Choose two.)",
+      "options": {
+        "A": "AWS WAF",
+        "B": "DynamoDB",
+        "C": "EC2",
+        "D": "CloudFront",
+        "E": "Inspector"
+      },
+      "correctAnswer": ["A", "D"]
+    },
+    {
+      "id": 50,
+      "question": "AWS TCO model considerations? (Choose three.)",
+      "options": {
+        "A": "Compute costs",
+        "B": "Facilities costs",
+        "C": "Storage costs",
+        "D": "Data transfer costs",
+        "E": "Network infrastructure costs",
+        "F": "Hardware lifecycle costs"
+      },
+      "correctAnswer": ["A", "C", "D"]
+    }
+  ]
